@@ -10,7 +10,7 @@ then
     exit 1
 fi
 
-RELEASE_BRANCH="2.x"
+RELEASE_BRANCH="3.x"
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 VERSION=$1
 
@@ -55,7 +55,6 @@ git push origin --tags
 for REMOTE in core \
     cash \
     sber-auth \
-    sber-online \
     sber-qr \
     tinkoff-auth \
     tinkoff-credit \
