@@ -1,6 +1,6 @@
 # BankName Cashier Authorization Driver
 
-<img src="https://preview.dragon-code.pro/cashier-provider/auth-driver-template.svg?brand=laravel" alt="Cashier Authorization Driver Template"/>
+<img src="https://preview.dragon-code.pro/cashier-provider/auth-driver-template.svg?brand=laravel&mode=dark" alt="Cashier Authorization Driver Template"/>
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
