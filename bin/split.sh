@@ -9,6 +9,22 @@ function split()
 {
     SHA1=`./bin/splitsh-lite --prefix=$1`
     git push $2 "$SHA1:refs/heads/$CURRENT_BRANCH" -f
+
+#    TMP_DIR="./tmp/cashier-split"
+#    REMOTE_URL="git@github.com:cashier-provider/$2.git"
+#
+#    rm -rf $TMP_DIR;
+#    mkdir $TMP_DIR;
+#
+#    (
+#        cd $TMP_DIR;
+#
+#        git clone $REMOTE_URL .
+#        git checkout "$RELEASE_BRANCH";
+#
+#        git tag $VERSION
+#        git push origin --tags
+#    )
 }
 
 function remote()
@@ -16,7 +32,7 @@ function remote()
     git remote add $1 $2 || true
 }
 
-git pull origin $CURRENT_BRANCH
+#git pull origin $CURRENT_BRANCH
 
 #remote core git@github.com:cashier-provider/core.git
 remote cash git@github.com:cashier-provider/cash.git
