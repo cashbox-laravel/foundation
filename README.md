@@ -1,6 +1,6 @@
 # Cashier Provider for Laravel
 
-<img src="https://preview.dragon-code.pro/cashier-provider/foundation.svg?brand=laravel&mode=dark" alt="Cashier Provider Foundation"/>
+<img src="https://preview.dragon-code.pro/cashier-provider/payments.svg?brand=laravel&mode=dark" alt="Cashier Provider Foundation"/>
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
