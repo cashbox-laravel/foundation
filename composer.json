@@ -1,0 +1,107 @@
+{
+    "name": "cashier-provider/foundation",
+    "description": "Cashier provides an expressive, fluent interface to manage billing services",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "bank",
+        "billing",
+        "cashier",
+        "payments"
+    ],
+    "authors": [
+        {
+            "name": "Andrey Helldar",
+            "email": "helldar@dragon-code.pro",
+            "homepage": "https://github.com/andrey-helldar"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/cashier-provider/foundation/issues",
+        "source": "https://github.com/cashier-provider/foundation"
+    },
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/TheDragonCode"
+        },
+        {
+            "type": "open_collective",
+            "url": "https://opencollective.com/dragon-code"
+        },
+        {
+            "type": "boosty",
+            "url": "https://boosty.to/dragon-code"
+        },
+        {
+            "type": "yoomoney",
+            "url": "https://yoomoney.ru/to/410012608840929"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-json": "*",
+        "archtechx/enums": "^0.3.2",
+        "dragon-code/laravel-support": "^3.6",
+        "dragon-code/support": "^6.11",
+        "illuminate/console": "^10.14",
+        "illuminate/database": "^10.14",
+        "illuminate/support": "^10.14",
+        "nesbot/carbon": "^2.68",
+        "spatie/laravel-data": "^3.7",
+        "symfony/console": "^6.3"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.5",
+        "pestphp/pest": "^2.8",
+        "symfony/var-dumper": "^6.3"
+    },
+    "replace": {
+        "cashier-provider/cash": "self.version",
+        "cashier-provider/core": "self.version",
+        "cashier-provider/sber-auth": "self.version",
+        "cashier-provider/sber-online": "self.version",
+        "cashier-provider/sber-qr": "self.version",
+        "cashier-provider/tinkoff-auth": "self.version",
+        "cashier-provider/tinkoff-credit": "self.version",
+        "cashier-provider/tinkoff-online": "self.version",
+        "cashier-provider/tinkoff-qr": "self.version"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "CashierProvider\\Cash\\": "src/Cash/src/",
+            "CashierProvider\\Core\\": "src/Core/src/",
+            "CashierProvider\\Sber\\Auth\\": "src/SberAuth/src/",
+            "CashierProvider\\Sber\\Online\\": "src/SberOnline/src/",
+            "CashierProvider\\Sber\\QrCode\\": "src/SberQrCode/src/",
+            "CashierProvider\\Tinkoff\\Auth\\": "src/TinkoffAuth/src/",
+            "CashierProvider\\Tinkoff\\Online\\": "src/TinkoffOnline/src/",
+            "CashierProvider\\Tinkoff\\QrCode\\": "src/TinkoffQrCode/src/",
+            "CashierProvider\\Tinkoff\\Credit\\": "src/TinkoffCredit/src/",
+            "CashierProvider\\BankName\\PaymentType\\": "src/TemplateDriver/src/",
+            "CashierProvider\\BankName\\Auth\\": "src/TemplateDriverAuth/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dragon-code/codestyler": true,
+            "ergebnis/composer-normalize": true,
+            "pestphp/pest-plugin": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "4.x-dev"
+        }
+    }
+}
