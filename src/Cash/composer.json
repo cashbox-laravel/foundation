@@ -4,7 +4,6 @@
     "type": "library",
     "license": "MIT",
     "keywords": [
-        "bank",
         "billing",
         "cashier",
         "cash"
@@ -12,7 +11,8 @@
     "authors": [
         {
             "name": "Andrey Helldar",
-            "email": "helldar@ai-rus.com"
+            "email": "helldar@dragon-code.pro",
+            "homepage": "https://github.com/andrey-helldar"
         }
     ],
     "support": {
