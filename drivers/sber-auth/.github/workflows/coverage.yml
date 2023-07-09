@@ -1,0 +1,55 @@
+name: coverage
+on:
+    push:
+        branches:
+            - main
+            - coverage
+
+jobs:
+    scrutinizer:
+        runs-on: ubuntu-20.04
+
+        name: Coverage
+
+        services:
+            mysql:
+                image: mysql:8.0
+                env:
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_DATABASE: default
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v2
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 7.4
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
+                    coverage: xdebug
+
+            -   name: Store environment variables
+                run: |
+                    echo "CASHIER_SBER_QR_CLIENT_ID=${{ secrets.CASHIER_SBER_QR_CLIENT_ID }}" >> .env
+                    echo "CASHIER_SBER_QR_CLIENT_SECRET=${{ secrets.CASHIER_SBER_QR_CLIENT_SECRET }}" >> .env
+                    echo "CASHIER_SBER_QR_MEMBER_ID=${{ secrets.CASHIER_SBER_QR_MEMBER_ID }}" >> .env
+
+            -   name: Install dependencies
+                run: composer update --prefer-stable --prefer-dist --no-progress --no-interaction
+
+            -   name: Execute tests
+                run: |
+                    mkdir -p build/logs
+                    sudo vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+                env:
+                    MYSQL_HOST: 127.0.0.1
+                    PGSQL_HOST: 127.0.0.1
+
+            -   name: Export
+                run: |
+                    wget https://scrutinizer-ci.com/ocular.phar
+                    sudo php ocular.phar code-coverage:upload --format=php-clover coverage.clover
