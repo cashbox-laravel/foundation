@@ -1,11 +1,13 @@
 name: Release
 
 on:
-    release:
-        types:
-            - created
+    create:
         tags:
             - v4.*
+    
+    delete:
+        tags:
+            - *
     
     workflow_dispatch:
         inputs:
