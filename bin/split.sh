@@ -18,10 +18,7 @@ function remote()
 
 git pull origin $CURRENT_BRANCH
 
-remote auth git@github.com:illuminate/auth.git
-remote broadcasting git@github.com:illuminate/broadcasting.git
-
-remote core git@github.com:cashier-provider/core.git
+#remote core git@github.com:cashier-provider/core.git
 remote cash git@github.com:cashier-provider/cash.git
 remote sber-auth git@github.com:cashier-provider/sber-auth.git
 remote sber-online git@github.com:cashier-provider/sber-online.git
@@ -33,7 +30,7 @@ remote tinkoff-qr git@github.com:cashier-provider/tinkoff-qr.git
 remote driver git@github.com:cashier-provider/driver.git
 remote driver-auth git@github.com:cashier-provider/driver-auth.git
 
-split 'src/Core' core
+#split 'src/Core' core
 split 'src/Cash' cash
 split 'src/SberAuth' sber-auth
 split 'src/SberOnline' sber-online

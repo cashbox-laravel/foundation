@@ -1,0 +1,19 @@
+name: Split
+
+on:
+    push:
+        branches:
+            - main
+            - 4.x
+    workflow_dispatch:
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Components release
+                run: ./bin/split.sh
