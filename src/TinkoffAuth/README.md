@@ -1,6 +1,6 @@
 # Tinkoff Cashier Authorization Driver
 
-<img src="https://preview.dragon-code.pro/cashier-provider/tinkoff-auth-driver.svg?brand=laravel" alt="Tinkoff Cashier Authorization Driver"/>
+<img src="https://preview.dragon-code.pro/cashier-provider/tinkoff-auth-driver.svg?brand=laravel&mode=dark" alt="Tinkoff Cashier Authorization Driver"/>
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
