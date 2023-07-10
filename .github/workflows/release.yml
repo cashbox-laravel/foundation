@@ -39,7 +39,6 @@ jobs:
                 id: ids
                 run: |
                     TAG=${{ github.event.release.tag_name || github.event.inputs.tag }}
-                    HASH
                     
                     echo "tag=${TAG##*v}" >> "$GITHUB_OUTPUT"
     
