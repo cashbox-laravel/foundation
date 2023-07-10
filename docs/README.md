@@ -7,7 +7,9 @@
 [![Total Downloads][badge_downloads]][link_packagist]
 [![License][badge_license]][link_license]
 
-> Coming soon
+> The project is undergoing a global upgrade.
+>
+> We will soon release version 4.0 for all our products 💪
 
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/core.svg?style=flat-square
