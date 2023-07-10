@@ -1,35 +1,18 @@
 <?php
 
-/*
- * This file is part of the "cashier-provider/sber-online" project.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @author Andrey Helldar <helldar@ai-rus.com>
- *
- * @copyright 2021 Andrey Helldar
- *
- * @license MIT
- *
- * @see https://github.com/cashier-provider/sber-online
- */
-
 declare(strict_types=1);
 
-namespace SberOnline\src\Requests;
+namespace CashierProvider\BankName\Technology\Requests;
 
+use CashierProvider\BankName\Auth\Auth;
 use CashierProvider\Core\Facades\Config\Main;
-use CashierProvider\Core\Facades\Helpers\Date;
 use CashierProvider\Core\Http\Request;
-use CashierProvider\Sber\Auth\Auth;
-use Illuminate\Support\Carbon;
 
 abstract class BaseRequest extends Request
 {
-    protected $production_host = 'https://api.sberbank.ru';
+    protected $production_host = 'https://api.example.com';
 
-    protected $dev_host = 'https://dev.api.sberbank.ru';
+    protected $dev_host = 'https://dev.api.example.com';
 
     protected $auth = Auth::class;
 
@@ -50,18 +33,6 @@ abstract class BaseRequest extends Request
         }
 
         return [];
-    }
-
-    protected function uniqueId(): string
-    {
-        return $this->model->getUniqueId();
-    }
-
-    protected function currentTime(): string
-    {
-        $date = Carbon::now();
-
-        return Date::toString($date);
     }
 
     protected function getCertificateData(): array

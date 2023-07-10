@@ -17,9 +17,7 @@
 
 declare(strict_types=1);
 
-namespace TinkoffQr\src\Requests;
-
-use TinkoffQr\src\Requests\BaseRequest;
+namespace CashierProvider\Tinkoff\QrCode\Requests;
 
 class GetQR extends BaseRequest
 {

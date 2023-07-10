@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "andrey-helldar/cashier-tinkoff-auth" project.
+ * This file is part of the "cashier-provider/tinkoff-auth" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,16 +12,16 @@
  *
  * @license MIT
  *
- * @see https://github.com/andrey-helldar/cashier-tinkoff-auth
+ * @see https://github.com/cashier-provider/tinkoff-auth
  */
 
-namespace TinkoffAuth\src\Support;
+namespace CashierProvider\Tinkoff\Auth\Support;
 
-use TinkoffAuth\src\Constants\Keys;
-use TinkoffAuth\src\Resources\AccessToken;
-use Helldar\Contracts\Cashier\Resources\Model;
-use Helldar\Support\Concerns\Makeable;
-use Helldar\Support\Facades\Helpers\Ables\Arrayable;
+use CashierProvider\Tinkoff\Auth\Constants\Keys;
+use CashierProvider\Tinkoff\Auth\Resources\AccessToken;
+use DragonCode\Contracts\Cashier\Resources\Model;
+use DragonCode\Support\Concerns\Makeable;
+use DragonCode\Support\Facades\Helpers\Ables\Arrayable;
 
 class Hash
 {

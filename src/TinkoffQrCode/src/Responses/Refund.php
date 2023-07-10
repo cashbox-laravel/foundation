@@ -17,7 +17,7 @@
 
 declare(strict_types=1);
 
-namespace TinkoffQr\src\Responses;
+namespace CashierProvider\Tinkoff\QrCode\Responses;
 
 use CashierProvider\Core\Http\Response;
 

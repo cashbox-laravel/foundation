@@ -15,7 +15,7 @@
  * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
-namespace TinkoffQr\src\Helpers;
+namespace CashierProvider\Tinkoff\QrCode\Helpers;
 
 use CashierProvider\Core\Services\Statuses as BaseStatus;
 

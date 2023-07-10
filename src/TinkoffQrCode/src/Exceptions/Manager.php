@@ -15,7 +15,7 @@
  * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
-namespace TinkoffQr\src\Exceptions;
+namespace CashierProvider\Tinkoff\QrCode\Exceptions;
 
 use CashierProvider\Core\Exceptions\Http\BankInternalErrorException;
 use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
