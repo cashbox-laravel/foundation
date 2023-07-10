@@ -17,6 +17,8 @@ function split()
 
 git pull origin $CURRENT_BRANCH
 
+split 'docs' docs
+
 split 'src/Core' core
 split 'src/Cash' cash
 split 'src/SberAuth' sber-auth
@@ -26,5 +28,6 @@ split 'src/TinkoffAuth' tinkoff-auth
 split 'src/TinkoffCredit' tinkoff-credit
 split 'src/TinkoffOnline' tinkoff-online
 split 'src/TinkoffQrCode' tinkoff-qr
+
 split 'src/TemplateDriver' driver
 split 'src/TemplateDriverAuth' driver-auth

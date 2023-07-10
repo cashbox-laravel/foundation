@@ -52,17 +52,15 @@ git tag $VERSION
 git push origin --tags
 
 # Tag Components
+# sber-online temporairy disabled to release
 for REMOTE in core \
     cash \
     sber-auth \
-    sber-online \
     sber-qr \
     tinkoff-auth \
     tinkoff-credit \
     tinkoff-online \
-    tinkoff-qr \
-    driver \
-    driver-auth
+    tinkoff-qr
 do
     echo ""
     echo ""

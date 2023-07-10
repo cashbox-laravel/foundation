@@ -60,7 +60,6 @@
         "cashier-provider/cash": "self.version",
         "cashier-provider/core": "self.version",
         "cashier-provider/sber-auth": "self.version",
-        "cashier-provider/sber-online": "self.version",
         "cashier-provider/sber-qr": "self.version",
         "cashier-provider/tinkoff-auth": "self.version",
         "cashier-provider/tinkoff-credit": "self.version",
@@ -71,17 +70,17 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
+            "CashierProvider\\BankName\\Auth\\": "src/TemplateDriverAuth/src/",
+            "CashierProvider\\BankName\\PaymentType\\": "src/TemplateDriver/src/",
             "CashierProvider\\Cash\\": "src/Cash/src/",
             "CashierProvider\\Core\\": "src/Core/src/",
             "CashierProvider\\Sber\\Auth\\": "src/SberAuth/src/",
             "CashierProvider\\Sber\\Online\\": "src/SberOnline/src/",
             "CashierProvider\\Sber\\QrCode\\": "src/SberQrCode/src/",
             "CashierProvider\\Tinkoff\\Auth\\": "src/TinkoffAuth/src/",
-            "CashierProvider\\Tinkoff\\Online\\": "src/TinkoffOnline/src/",
-            "CashierProvider\\Tinkoff\\QrCode\\": "src/TinkoffQrCode/src/",
             "CashierProvider\\Tinkoff\\Credit\\": "src/TinkoffCredit/src/",
-            "CashierProvider\\BankName\\PaymentType\\": "src/TemplateDriver/src/",
-            "CashierProvider\\BankName\\Auth\\": "src/TemplateDriverAuth/src/"
+            "CashierProvider\\Tinkoff\\Online\\": "src/TinkoffOnline/src/",
+            "CashierProvider\\Tinkoff\\QrCode\\": "src/TinkoffQrCode/src/"
         }
     },
     "autoload-dev": {

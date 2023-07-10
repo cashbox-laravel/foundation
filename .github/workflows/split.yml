@@ -1,10 +1,10 @@
 name: Split
 
 on:
-#    push:
-#        branches:
-#            - main
-#            - 4.x
+    push:
+        branches:
+            - main
+            - 4.x
     workflow_dispatch:
 
 jobs:
