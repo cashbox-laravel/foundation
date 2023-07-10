@@ -1,24 +1,26 @@
 name: Code Style
 
-on:
-    push:
-    pull_request:
+on: [ push, pull_request ]
 
 permissions: write-all
 
 jobs:
-    check:
-        if: ${{ ! (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
-        
-        uses: TheDragonCode/.github/.github/workflows/code-style.yml@main
-        with:
-            token: ${{ secrets.COMPOSER_TOKEN }}
-            fix: false
-    
-    fix:
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-        
-        uses: TheDragonCode/.github/.github/workflows/code-style.yml@main
-        with:
-            token: ${{ secrets.COMPOSER_TOKEN }}
-            fix: true
+    style:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Detect job name
+                id: detect
+                run: |
+                    [[ ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }} ]] && NAME="Fix" || NAME="Check"
+
+                    echo "name=${NAME}" >> $GITHUB_OUTPUT
+
+            -   name: ${{ steps.detect.outputs.name }} the code style
+                uses: TheDragonCode/codestyler@v3
+                with:
+                    github_token: ${{ secrets.COMPOSER_TOKEN }}
+                    fix: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
