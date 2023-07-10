@@ -46,23 +46,31 @@ jobs:
                     - src/TemplateDriver
                     - src/TemplateDriverAuth
         
-        if: ${{ github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/4.x"]'), github.ref) }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
         
         steps:
+            -   name: Git setup
+                if: success()
+                run: |
+                    git config --local user.email "action@github.com"
+                    git config --local user.name "GitHub Action"
+
             -   name: Install dependency
                 run: composer global require ergebnis/composer-normalize
 
             -   name: Normalize composer.json
+                id: normalizer
                 run: |
-                    composer normalize ${{ matrix.file }}/composer.json
+                    IS_DIRTY=1
 
-            -   name: Create a Pull Request
-                uses: peter-evans/create-pull-request@v4
+                    composer normalize ${{ matrix.file }}/composer.json
+                    
+                    { git add . && git commit -a -m "Normalized \`composer.json\` files"; } || IS_DIRTY_0
+
+                    echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
+
+            -   name: Push changes
+                uses: ad-m/github-push-action@master
+                if: steps.normalizer.outputs.is_dirty == 1
                 with:
-                    branch: projects/patch
-                    branch-suffix: random
-                    delete-branch: true
-                    add-paths: .
-                    title: "Normalized `composer.json` files"
-                    commit-message: Normalized `composer.json` files
-                    body: Normalized `composer.json` files
+                    github_token: ${{ secrets.COMPOSER_TOKEN }}
