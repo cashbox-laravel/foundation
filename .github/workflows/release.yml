@@ -62,7 +62,7 @@ jobs:
             -   name: Show version
                 run: |
                     echo "${{ needs.configure.outputs.tag }}"
-                    echo "${{ contains(toJson(matrix.sub-splits), 'release') && matrix.sub-splits.release != false }}"
+                    echo "${{ contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release }}"
 
             -   name: Component release
                 run: |
