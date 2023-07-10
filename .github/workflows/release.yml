@@ -63,7 +63,7 @@ jobs:
                 run: |
                     echo "${{ needs.configure.outputs.tag }}"
                     echo "${{ contains(matrix.sub-splits, 'release') }}"
-                    echo "${{ contains(matrix, 'release') }}"
+                    echo "${{ contains(toJson(matrix.sub-splits), 'release') }}"
                     echo "${{ toJson(matrix.sub-splits) }}"
 
             -   name: Component release
