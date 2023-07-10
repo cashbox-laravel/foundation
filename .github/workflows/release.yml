@@ -12,8 +12,6 @@ on:
             tag:
                 description: 'Tag version'
                 required: true
-                options:
-                    - v4
 
 jobs:
     configure:
@@ -45,8 +43,7 @@ jobs:
                 run: |
                     TAG=${{ github.event.release.tag_name || github.event.inputs.tag }}
                     
-#                    echo "tag=v${TAG##*v}" >> "$GITHUB_OUTPUT"
-                    echo "tag=v0.0.1" >> "$GITHUB_OUTPUT"
+                    echo "tag=v${TAG##*v}" >> "$GITHUB_OUTPUT"
     
     release:
         runs-on: ubuntu-latest
