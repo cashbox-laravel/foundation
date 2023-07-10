@@ -1,26 +1,35 @@
 name: Split
 
 on:
-    push:
-        branches:
-            - main
-            - 4.x
-    workflow_dispatch:
+  push:
+    branches:
+      - main
+      - 4.x
+  workflow_dispatch:
 
 jobs:
-    components:
-        runs-on: ubuntu-latest
-        
-        steps:
-            -   name: Checkout code
-                uses: actions/checkout@v3
+  components:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+          persist-credentials: 'false'
 
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php }}
-                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
-                    coverage: none
+      - name: Extract branch name
+        id: extract_branch
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
-            -   name: Components release
-                run: sudo ./bin/split.sh
+      - uses: frankdejonge/use-github-token@1.0.1
+        with:
+          authentication: 'username:${{ secrets.COMPOSER_TOKEN }}'
+          user_name: 'Andrey Helldar'
+          user_email: 'helldar@dragon-code.pro'
+
+      - name: Setup PHP
+        uses: frankdejonge/use-subsplit-publish@1.0.0-beta.7
+        with:
+          config-path: split.json
+          source-branch: ${{ steps.extract_branch.outputs.branch }}
