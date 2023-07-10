@@ -1,6 +1,6 @@
 # Cashier Provider
 
-![cashier-provider cash-driver](https://preview.dragon-code.pro/cashier-provider/payments.svg?brand=laravel)
+![cashier-provider](https://preview.dragon-code.pro/cashier-provider/payments.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
