@@ -16,4 +16,4 @@ jobs:
                 uses: actions/checkout@v3
 
             -   name: Components release
-                run: ./bin/split.sh
+                run: sudo ./bin/split.sh
