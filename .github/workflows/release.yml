@@ -55,13 +55,13 @@ jobs:
             matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
         
         name: ${{ matrix.sub-splits.name }}
+        if: ${{ matrix.sub-splits.release != false }}
         
         steps:
             -   name: Show version
                 run: echo "${{ needs.configure.outputs.tag }}"
 
             -   name: Component release
-                if: ${{ matrix.sub-splits.release != false }}
                 run: |
                     echo "${{ matrix.sub-splits.name }}"
                     echo "${{ matrix.sub-splits.target }}"
