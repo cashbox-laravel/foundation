@@ -61,7 +61,7 @@ jobs:
                 run: echo "${{ needs.configure.outputs.tag }}"
 
             -   name: Component release
-                if: ${{ matrix.sub-splits.release !== false }}
+                if: ${{ matrix.sub-splits.release != false }}
                 run: |
                     echo "${{ matrix.sub-splits.name }}"
                     echo "${{ matrix.sub-splits.target }}"
