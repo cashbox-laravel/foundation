@@ -16,7 +16,7 @@ jobs:
         
         name: ${{ matrix.package.name }}
         
-        if: ${{ contains(matrix.package, 'release') }}
+        if: ${{ matrix.package.release != false }}
         
         steps:
             -   name: Show info
