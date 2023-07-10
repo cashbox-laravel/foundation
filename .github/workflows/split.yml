@@ -28,7 +28,7 @@ jobs:
           user_name: 'Andrey Helldar'
           user_email: 'helldar@dragon-code.pro'
 
-      - name: Setup PHP
+      - name: Extract components
         uses: frankdejonge/use-subsplit-publish@1.0.0-beta.7
         with:
           config-path: split.json
