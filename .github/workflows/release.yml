@@ -54,9 +54,8 @@ jobs:
             matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
         
         name: ${{ matrix.sub-splits.name }}
-        
 
-        if: contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release
+        if: ${{ contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release }}
         
         steps:
             -   name: Show version
