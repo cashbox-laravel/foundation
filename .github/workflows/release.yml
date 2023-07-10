@@ -55,7 +55,9 @@ jobs:
             matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
         
         name: ${{ matrix.sub-splits.name }}
-        if: ${{ matrix.sub-splits.release != false }}
+        
+        if: (echo "${{ matrix.sub-splits }}" | jq -r ".release") && \
+            (${{ matrix.sub-splits.release }} != false) || true
         
         steps:
             -   name: Show version
