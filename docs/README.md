@@ -1,4 +1,4 @@
-# Documentation Cashier Provider for Laravel
+# Cashier Provider Documentation
 
 <img src="https://preview.dragon-code.pro/cashier-provider/payments.svg?brand=laravel&mode=dark" alt="Cashier Provider Foundation"/>
 
