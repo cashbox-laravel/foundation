@@ -16,6 +16,8 @@ jobs:
         
         name: ${{ matrix.package.name }}
         
+        if: ${{ contains(matrix.package, 'release') }}
+        
         steps:
             -   name: Show info
                 run: echo "${{ toJson(matrix) }}"
