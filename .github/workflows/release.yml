@@ -47,7 +47,7 @@ jobs:
         needs: configure
         
         strategy:
-            matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
+            matrix: ${{ fromJson(needs.configure.outputs.matrix)['sub-splits'] }}
     
         name: ${{ matrix.name }}
         
