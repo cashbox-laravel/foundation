@@ -1,64 +1,64 @@
 {
-  "sub-splits": [
-    {
-      "name": "docs",
-      "directory": "docs",
-      "target": "git@github.com:cashier-provider/docs.git"
-    },
-    {
-      "name": "core",
-      "directory": "src/Core",
-      "target": "git@github.com:cashier-provider/core.git"
-    },
-    {
-      "name": "cash",
-      "directory": "src/Cash",
-      "target": "git@github.com:cashier-provider/cash.git"
-    },
-    {
-      "name": "sber-auth",
-      "directory": "src/SberAuth",
-      "target": "git@github.com:cashier-provider/sber-auth.git"
-    },
-    {
-      "name": "sber-online",
-      "directory": "src/SberOnline",
-      "target": "git@github.com:cashier-provider/sber-online.git"
-    },
-    {
-      "name": "sber-qr",
-      "directory": "src/SberQrCode",
-      "target": "git@github.com:cashier-provider/sber-qr.git"
-    },
-    {
-      "name": "tinkoff-auth",
-      "directory": "src/TinkoffAuth",
-      "target": "git@github.com:cashier-provider/tinkoff-auth.git"
-    },
-    {
-      "name": "tinkoff-credit",
-      "directory": "src/TinkoffCredit",
-      "target": "git@github.com:cashier-provider/tinkoff-credit.git"
-    },
-    {
-      "name": "tinkoff-online",
-      "directory": "src/TinkoffOnline",
-      "target": "git@github.com:cashier-provider/tinkoff-online.git"
-    },
-    {
-      "name": "tinkoff-qr",
-      "directory": "src/TinkoffQrCode",
-      "target": "git@github.com:cashier-provider/tinkoff-qr.git"
-    },
-    {
-      "name": "driver",
-      "directory": "src/TemplateDriver",
-      "target": "git@github.com:cashier-provider/driver.git"
-    },
-    {
-      "name": "driver-auth",
-      "directory": "src/TemplateDriverAuth",
-      "target": "git@github.com:cashier-provider/driver-auth.git"
-    }
-  ]
+    "sub-splits": [
+        {
+            "name": "docs",
+            "directory": "docs",
+            "target": "git@github.com:cashier-provider/docs.git"
+        },
+        {
+            "name": "core",
+            "directory": "src/Core",
+            "target": "git@github.com:cashier-provider/core.git"
+        },
+        {
+            "name": "cash",
+            "directory": "src/Cash",
+            "target": "git@github.com:cashier-provider/cash.git"
+        },
+        {
+            "name": "sber-auth",
+            "directory": "src/SberAuth",
+            "target": "git@github.com:cashier-provider/sber-auth.git"
+        },
+        {
+            "name": "sber-online",
+            "directory": "src/SberOnline",
+            "target": "git@github.com:cashier-provider/sber-online.git"
+        },
+        {
+            "name": "sber-qr",
+            "directory": "src/SberQrCode",
+            "target": "git@github.com:cashier-provider/sber-qr.git"
+        },
+        {
+            "name": "tinkoff-auth",
+            "directory": "src/TinkoffAuth",
+            "target": "git@github.com:cashier-provider/tinkoff-auth.git"
+        },
+        {
+            "name": "tinkoff-credit",
+            "directory": "src/TinkoffCredit",
+            "target": "git@github.com:cashier-provider/tinkoff-credit.git"
+        },
+        {
+            "name": "tinkoff-online",
+            "directory": "src/TinkoffOnline",
+            "target": "git@github.com:cashier-provider/tinkoff-online.git"
+        },
+        {
+            "name": "tinkoff-qr",
+            "directory": "src/TinkoffQrCode",
+            "target": "git@github.com:cashier-provider/tinkoff-qr.git"
+        },
+        {
+            "name": "driver",
+            "directory": "src/TemplateDriver",
+            "target": "git@github.com:cashier-provider/driver.git"
+        },
+        {
+            "name": "driver-auth",
+            "directory": "src/TemplateDriverAuth",
+            "target": "git@github.com:cashier-provider/driver-auth.git"
+        }
+    ]
 }

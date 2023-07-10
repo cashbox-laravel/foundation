@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace CashierProvider\BankName\Technology\Requests;
 
+use CashierProvider\BankName\Auth\Auth;
 use CashierProvider\Core\Facades\Config\Main;
 use CashierProvider\Core\Http\Request;
-use CashierProvider\BankName\Auth\Auth;
 
 abstract class BaseRequest extends Request
 {

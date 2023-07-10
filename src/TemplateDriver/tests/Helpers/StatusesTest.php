@@ -2,9 +2,9 @@
 
 namespace Tests\Helpers;
 
-use Tests\TestCase;
 use CashierProvider\BankName\Technology\Helpers\Statuses;
 use CashierProvider\BankName\Technology\Resources\Details;
+use Tests\TestCase;
 
 class StatusesTest extends TestCase
 {

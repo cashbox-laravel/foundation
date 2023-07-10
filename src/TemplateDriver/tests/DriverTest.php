@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use CashierProvider\BankName\Technology\Driver as Technology;
 use CashierProvider\Core\Http\Response;
 use CashierProvider\Core\Services\Jobs;
 use DragonCode\Contracts\Cashier\Driver as DriverContract;
@@ -9,7 +10,6 @@ use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
 use DragonCode\Support\Facades\Http\Url;
 use Illuminate\Database\Eloquent\Model;
 use Tests\Fixtures\Models\RequestPayment;
-use CashierProvider\BankName\Technology\Driver as Technology;
 
 class DriverTest extends TestCase
 {

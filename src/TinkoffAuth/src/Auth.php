@@ -63,9 +63,7 @@ class Auth implements AuthContract
         ]);
     }
 
-    public function refresh(): void
-    {
-    }
+    public function refresh(): void {}
 
     protected function getAccessToken(): AccessToken
     {

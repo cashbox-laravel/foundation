@@ -2,11 +2,11 @@
 
 namespace Tests\Requests;
 
+use CashierProvider\BankName\Technology\Requests\Cancel;
 use CashierProvider\Core\Http\Request;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Requests\Cancel;
 
 class CancelTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 namespace Tests\Responses;
 
+use CashierProvider\BankName\Technology\Responses\Refund;
 use CashierProvider\Core\Http\Response as BaseResponse;
 use DragonCode\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Responses\Refund;
 
 class RefundTest extends TestCase
 {

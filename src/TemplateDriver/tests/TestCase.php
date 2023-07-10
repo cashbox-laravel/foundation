@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use CashierProvider\BankName\Technology\Driver;
 use CashierProvider\Core\Config\Driver as DriverConfig;
 use CashierProvider\Core\Constants\Driver as DriverConstant;
 use CashierProvider\Core\Facades\Config\Payment as PaymentConfig;
@@ -15,35 +16,23 @@ use Tests\Concerns\Database;
 use Tests\Concerns\TestServiceProvider;
 use Tests\Fixtures\Models\ReadyPayment;
 use Tests\Fixtures\Resources\Model;
-use CashierProvider\BankName\Technology\Driver;
 
 abstract class TestCase extends BaseTestCase
 {
     use Database;
 
-    public const PAYMENT_EXTERNAL_ID = '456789';
-
-    public const PAYMENT_ID = '1234567890';
-
-    public const PAYMENT_SUM = 12.34;
-
-    public const PAYMENT_SUM_FORMATTED = 1234;
-
-    public const CURRENCY = 643;
-
-    public const CURRENCY_FORMATTED = '643';
-
-    public const PAYMENT_DATE = '2021-07-23 17:33:27';
-
+    public const PAYMENT_EXTERNAL_ID    = '456789';
+    public const PAYMENT_ID             = '1234567890';
+    public const PAYMENT_SUM            = 12.34;
+    public const PAYMENT_SUM_FORMATTED  = 1234;
+    public const CURRENCY               = 643;
+    public const CURRENCY_FORMATTED     = '643';
+    public const PAYMENT_DATE           = '2021-07-23 17:33:27';
     public const PAYMENT_DATE_FORMATTED = '2021-07-23T17:33:27Z';
-
-    public const STATUS = 'NEW';
-
-    public const URL = 'https://example.com';
-
-    public const MODEL_TYPE_ID = 123;
-
-    public const MODEL_STATUS_ID = 0;
+    public const STATUS                 = 'NEW';
+    public const URL                    = 'https://example.com';
+    public const MODEL_TYPE_ID          = 123;
+    public const MODEL_STATUS_ID        = 0;
 
     protected function getPackageProviders($app): array
     {
@@ -73,7 +62,7 @@ abstract class TestCase extends BaseTestCase
         ]);
     }
 
-    protected function model(Details $details = null): ReadyPayment
+    protected function model(?Details $details = null): ReadyPayment
     {
         $model = PaymentConfig::getModel();
 
@@ -100,8 +89,6 @@ abstract class TestCase extends BaseTestCase
 
     /**
      * @param  \CashierProvider\BankName\Technology\Requests\BaseRequest|string  $request
-     *
-     * @return \DragonCode\Contracts\Cashier\Http\Request
      */
     protected function request(string $request): Request
     {

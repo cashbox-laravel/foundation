@@ -2,6 +2,7 @@
 
 namespace Tests\Helpers;
 
+use CashierProvider\BankName\Technology\Exceptions\Manager;
 use CashierProvider\Core\Exceptions\Http\BadRequestClientException;
 use CashierProvider\Core\Exceptions\Http\BaseException;
 use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
@@ -9,7 +10,6 @@ use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
 use DragonCode\Contracts\Http\Builder as HttpBuilder;
 use DragonCode\Support\Facades\Http\Builder;
 use Tests\TestCase;
-use CashierProvider\BankName\Technology\Exceptions\Manager;
 
 class ExceptionTest extends TestCase
 {
@@ -103,7 +103,7 @@ class ExceptionTest extends TestCase
         $this->throw(10000, 'Foo Bar');
     }
 
-    protected function throw($code, string $reason = null)
+    protected function throw($code, ?string $reason = null)
     {
         $this->manager()->throw($this->uri(), $code, [
             'Message' => $reason,

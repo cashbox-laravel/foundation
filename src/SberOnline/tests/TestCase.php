@@ -21,29 +21,18 @@ abstract class TestCase extends BaseTestCase
 {
     use Database;
 
-    public const PAYMENT_EXTERNAL_ID = '456789';
-
-    public const PAYMENT_ID = '1234567890';
-
-    public const PAYMENT_SUM = 12.34;
-
-    public const PAYMENT_SUM_FORMATTED = 1234;
-
-    public const CURRENCY = 643;
-
-    public const CURRENCY_FORMATTED = '643';
-
-    public const PAYMENT_DATE = '2021-07-23 17:33:27';
-
+    public const PAYMENT_EXTERNAL_ID    = '456789';
+    public const PAYMENT_ID             = '1234567890';
+    public const PAYMENT_SUM            = 12.34;
+    public const PAYMENT_SUM_FORMATTED  = 1234;
+    public const CURRENCY               = 643;
+    public const CURRENCY_FORMATTED     = '643';
+    public const PAYMENT_DATE           = '2021-07-23 17:33:27';
     public const PAYMENT_DATE_FORMATTED = '2021-07-23T17:33:27Z';
-
-    public const STATUS = 'NEW';
-
-    public const URL = 'https://example.com';
-
-    public const MODEL_TYPE_ID = 123;
-
-    public const MODEL_STATUS_ID = 0;
+    public const STATUS                 = 'NEW';
+    public const URL                    = 'https://example.com';
+    public const MODEL_TYPE_ID          = 123;
+    public const MODEL_STATUS_ID        = 0;
 
     protected function getPackageProviders($app): array
     {
@@ -99,9 +88,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * @param \CashierProvider\BankName\Technology\Requests\BaseRequest|string $request
-     *
-     * @return \DragonCode\Contracts\Cashier\Http\Request
+     * @param  \CashierProvider\BankName\Technology\Requests\BaseRequest|string  $request
      */
     protected function request(string $request): Request
     {
