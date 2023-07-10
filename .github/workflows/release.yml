@@ -38,7 +38,8 @@ jobs:
 
             -   name: Set matrix data
                 id: set-matrix
-                run: echo "matrix=$(jq -c . < ./split.json)" >> $GITHUB_OUTPUT
+#                run: echo "matrix=$(jq -c . < ./split.json)" >> $GITHUB_OUTPUT
+                run: echo "matrix=${{ toJson(fromJson($(jq -c . < ./split.json)).sub-splits) }}" >> $GITHUB_OUTPUT
 
             -   name: Get version
                 id: ids
@@ -63,6 +64,7 @@ jobs:
                 run: |
                     echo "${{ needs.configure.outputs.tag }}"
                     echo "${{ contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release }}"
+                    echo "${{ toJson(matrix) }}"
 
             -   name: Component release
                 run: |
