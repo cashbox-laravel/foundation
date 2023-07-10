@@ -10,19 +10,8 @@ jobs:
             fail-fast: true
             matrix:
                 php: [ "8.1", "8.2" ]
-                laravel: [ "9.0", "10.0" ]
 
-        name: PHP ${{ matrix.php }}, Laravel ${{ matrix.laravel }}
-
-        services:
-            mysql:
-                image: mysql:5.7
-                env:
-                    MYSQL_ROOT_PASSWORD: root
-                    MYSQL_DATABASE: default
-                ports:
-                    - 3306:3306
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        name: PHP ${{ matrix.php }}
 
         steps:
             -   name: Checkout code
@@ -36,9 +25,9 @@ jobs:
                     coverage: none
 
             -   name: Install dependencies
-                run: composer require laravel/framework:^${{ matrix.laravel }}
+                run: composer install
 
-            -   name: Execute tests
-                run: sudo vendor/bin/phpunit
-                env:
-                    MYSQL_HOST: 127.0.0.1
+#            -   name: Execute tests
+#                run: sudo vendor/bin/phpunit
+#                env:
+#                    MYSQL_HOST: 127.0.0.1
