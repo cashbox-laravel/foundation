@@ -14,8 +14,6 @@ jobs:
                     - { "name": "Foo", "release": false }
                     - { "name": "Bar" }
         
-        name: ${{ matrix.package.name }}
-        
         if: ${{ matrix.package.release != false }}
         
         steps:
