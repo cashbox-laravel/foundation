@@ -1,5 +1,5 @@
 {
-    "name": "cashier-provider/bankname-technology",
+    "name": "cashier-provider/sber-online",
     "description": "Driver for payment with TECHNOLOGY codes via BankName (see cashier-provider/core)",
     "type": "library",
     "license": "MIT",

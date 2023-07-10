@@ -1,77 +1,56 @@
-# BankName Cashier Authorization Driver
+# Template Auth Driver
 
-<img src="https://preview.dragon-code.pro/cashier-provider/auth-driver-template.svg?brand=laravel&mode=dark" alt="Cashier Authorization Driver Template"/>
+![cashier-provider](https://preview.dragon-code.pro/cashier-provider/cash-driver.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
 [![License][badge_license]][link_license]
 
-> **Note:** This driver doesn't need to be installed in the application. I's needed to implement [`BankName`](#) bank authorization for [Cashier Provider](https://github.com/cashier-provider/core) drivers.
+> Attention
+>
+> The project is in a state of global upgrade and some links may not be correct.
 
-## Installation
+## About Cashier Provider
 
-To get the latest version of `BankName Cashier Authorization Driver`, simply require the project using [Composer](https://getcomposer.org):
+`Cashier` provides an expressive and user-friendly interface for managing billing and payment verification services.
+We believe that development should be an enjoyable, creative experience to be truly rewarding.
+`Cashier Provider` tries to ease development by simplifying the tasks of adding payment systems to a web application.
 
-```bash
-$ composer require cashier-provider/bankname-auth
-```
+The project contains some ready-made solutions of payment systems, but you can offer your own.
 
-Or manually update `require` block of `composer.json` and run `composer update`.
+## About Driver
 
-```json
-{
-    "require": {
-        "cashier-provider/bankname-auth": "^2.0"
-    }
-}
-```
+Template for fast authorization driver development.
 
-## Using
+## Documentation
 
-### Without Hashed Token
+You will find full documentation on the dedicated [documentation](https://github.com/cashier-provider/docs) site.
 
-In some cases, for example, to initialize a payment session, it is necessary to transmit `terminal_key` and `terminal_secret` in clear text. In such cases, the `$hash = false`
-parameter must be specified in the request.
+## Contributing
 
-```php
-namespace CashierProvider\BankName\BankTechnology\Requests;
+Thank you for considering contributing to the `Cashier Provider`!
+The contribution guide can be found in the [Cashier Provider documentation](https://github.com/cashier-provider/docs).
 
-use CashierProvider\BankName\Auth\Auth;
-use CashierProvider\Core\Http\Request;
+## Code of Conduct
 
-class Init extends Request
-{
-    // You need to provide a link to the authorization class:
-    protected $auth = Auth::class;
+In order to ensure that the `Cashier Provider` community is welcoming to all, please review and abide by
+the [Code of Conduct](https://github.com/cashier-provider/docs).
 
-    protected $hash = false;
-}
-```
+## Security Vulnerabilities
 
-### With Hashed Token
+Please review [our security policy](https://github.com/cashier-provider/docs) on how to report security vulnerabilities.
 
-In cases where the request must be signed with a special hashed token, you must set the `$hash` variable to `true`.
+## License
 
-```php
-namespace CashierProvider\BankName\BankTechnology\Requests;
-
-use CashierProvider\BankName\Auth\Auth;
-use CashierProvider\Core\Http\Request;
-
-class Get extends Request
-{
-    protected $auth = Auth::class;
-
-    protected $hash = true;
-}
-```
+The Cashier Provider is open-source software that works in conjunction with
+the [Laravel framework](https://laravel.com/), distributed under the MIT license.
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/core.svg?style=flat-square
 
 [badge_license]:        https://img.shields.io/packagist/l/cashier-provider/core.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/cashier-provider/core?label=stable&style=flat-square
+[badge_stable]:         https://img.shields.io/github/v/release/cashier-provider/foundation?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 

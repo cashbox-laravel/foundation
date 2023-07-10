@@ -1,25 +1,61 @@
-# Cashier Provider for Laravel
+# Cashier Provider
 
-<img src="https://preview.dragon-code.pro/cashier-provider/payments.svg?brand=laravel&mode=dark" alt="Cashier Provider Foundation"/>
+![cashier-provider cash-driver](https://preview.dragon-code.pro/cashier-provider/payments.svg?brand=laravel)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
 [![Total Downloads][badge_downloads]][link_packagist]
 [![License][badge_license]][link_license]
 
-> The project is undergoing a global upgrade. 
-> 
-> We will soon release version 4.0 for all our products 💪
+> Attention
+>
+> The project is in a state of global upgrade and some links may not be correct.
 
+## About Cashier Provider
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/core.svg?style=flat-square
+`Cashier` provides an expressive and user-friendly interface for managing billing and payment verification services.
+We believe that development should be an enjoyable, creative experience to be truly rewarding.
+`Cashier Provider` tries to ease development by simplifying the tasks of adding payment systems to a web application.
 
-[badge_license]:        https://img.shields.io/packagist/l/cashier-provider/core.svg?style=flat-square
+The project contains some ready-made solutions of payment systems, but you can offer your own.
 
-[badge_stable]:         https://img.shields.io/github/v/release/cashier-provider/core?label=stable&style=flat-square
+## About Foundation
+
+This project is common to the development of all drivers.
+In case of problems with any driver, write issues and send PR
+to [Foundation](https://github.com/cashier-provider/foundation).
+
+## Documentation
+
+You will find full documentation on the dedicated [documentation](https://github.com/cashier-provider/docs) site.
+
+## Contributing
+
+Thank you for considering contributing to the `Cashier Provider`!
+The contribution guide can be found in the [Cashier Provider documentation](https://github.com/cashier-provider/docs).
+
+## Code of Conduct
+
+In order to ensure that the `Cashier Provider` community is welcoming to all, please review and abide by
+the [Code of Conduct](https://github.com/cashier-provider/docs).
+
+## Security Vulnerabilities
+
+Please review [our security policy](https://github.com/cashier-provider/docs) on how to report security vulnerabilities.
+
+## License
+
+The Cashier Provider is open-source software that works in conjunction with
+the [Laravel framework](https://laravel.com/), distributed under the MIT license.
+
+[badge_downloads]:      https://img.shields.io/packagist/dt/cashier-provider/cash.svg?style=flat-square
+
+[badge_license]:        https://img.shields.io/packagist/l/cashier-provider/foundation.svg?style=flat-square
+
+[badge_stable]:         https://img.shields.io/github/v/release/cashier-provider/foundation?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/cashier-provider/core
+[link_packagist]:       https://packagist.org/packages/cashier-provider/foundation
