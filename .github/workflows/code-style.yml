@@ -1,10 +1,6 @@
 name: Code Style
 
-on:
-    push:
-        branches:
-            - main
-            - 4.x
+on: [ push, pull_request ]
 
 permissions: write-all
 
@@ -49,6 +45,8 @@ jobs:
                     - src/TinkoffQrCode
                     - src/TemplateDriver
                     - src/TemplateDriverAuth
+        
+        if: ${{ github.event_name == 'push' && contains(fromJSON('["refs/heads/main", "refs/heads/4.x"]'), github.ref) }}
         
         steps:
             -   name: Install dependency
