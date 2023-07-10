@@ -6,12 +6,6 @@ on:
             - released
         tags:
             - v4.*
-    
-    workflow_dispatch:
-        inputs:
-            tag:
-                description: 'Tag version'
-                required: true
 
 jobs:
     configure:
@@ -41,7 +35,7 @@ jobs:
             -   name: Get version
                 id: ids
                 run: |
-                    TAG=${{ github.event.release.tag_name || github.event.inputs.tag }}
+                    TAG=${{ github.event.release.tag_name }}
                     
                     echo "tag=v${TAG##*v}" >> "$GITHUB_OUTPUT"
     
@@ -54,18 +48,32 @@ jobs:
             matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
         
         name: ${{ matrix.sub-splits.name }}
-
-        if: ${{ matrix.sub-splits.release }}
         
         steps:
-            -   name: Show version
+            -   name: Authorize
+                id: authorize
                 run: |
-                    echo "${{ needs.configure.outputs.tag }}"
-                    echo "${{ contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release }}"
-                    echo "${{ toJson(matrix) }}"
+                    ALLOW=${{ contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release }}
+                    
+                    echo "release=${ALLOW}" >> "$GITHUB_OUTPUT"
 
             -   name: Component release
+                if: ${{ steps.authorize.outputs.release }}
                 run: |
                     echo "${{ matrix.sub-splits.name }}"
                     echo "${{ matrix.sub-splits.target }}"
-            #                run: ./bin/release.sh ${{ steps.ids.outputs.tag }}
+                    
+                    TMP_DIR="/tmp/cashier-split"
+                    
+                    rm -rf $TMP_DIR;
+                    mkdir $TMP_DIR;
+                    
+                    (
+                        cd $TMP_DIR;
+                    
+                        git clone ${{ matrix.sub-splits.target }} .
+                        git checkout "main"
+                    
+                        git tag ${{ needs.configure.outputs.tag }}
+                        git push origin --tags
+                    )
