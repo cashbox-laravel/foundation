@@ -26,8 +26,8 @@ jobs:
                 uses: frankdejonge/use-github-token@1.0.1
                 with:
                     authentication: '${{ secrets.COMPOSER_USERNAME }}:${{ secrets.COMPOSER_TOKEN }}'
-                    user_name: 'Andrey Helldar'
-                    user_email: 'helldar@dragon-code.pro'
+                    user_name: 'GitHub Action'
+                    user_email: 'action@github.com'
 
             -   name: Cache splitsh-lite
                 id: splitsh-cache
