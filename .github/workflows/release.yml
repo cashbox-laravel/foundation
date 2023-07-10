@@ -1,7 +1,6 @@
 name: Release
 
 on:
-    push:
     release:
         types:
             - released
@@ -12,7 +11,7 @@ on:
         inputs:
             tag:
                 description: 'Tag version'
-                required: true
+                required: false
                 options:
                     - v4
 
