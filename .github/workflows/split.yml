@@ -1,43 +1,44 @@
 name: Split
 
 on:
-  push:
-    branches:
-      - main
-      - 4.x
-  workflow_dispatch:
+    push:
+        branches:
+            - main
+            - 4.x
+    workflow_dispatch:
 
 jobs:
-  components:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: '0'
-          persist-credentials: 'false'
+    components:
+        runs-on: ubuntu-latest
+        
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+                with:
+                    fetch-depth: '0'
+                    persist-credentials: 'false'
 
-      - name: Extract branch name
-        id: extract_branch
-        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+            -   name: Extract branch name
+                id: extract_branch
+                run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
-      - uses: frankdejonge/use-github-token@1.0.1
-        with:
-          authentication: '${{ secrets.COMPOSER_USERNAME }}:${{ secrets.COMPOSER_TOKEN }}'
-          user_name: 'Andrey Helldar'
-          user_email: 'helldar@dragon-code.pro'
+            -   name: Setup GIT
+                uses: frankdejonge/use-github-token@1.0.1
+                with:
+                    authentication: '${{ secrets.COMPOSER_USERNAME }}:${{ secrets.COMPOSER_TOKEN }}'
+                    user_name: 'Andrey Helldar'
+                    user_email: 'helldar@dragon-code.pro'
 
-      - name: Cache splitsh-lite
-        id: splitsh-cache
-        uses: actions/cache@v2
-        with:
-          path: './.splitsh'
-          key: '${{ runner.os }}-splitsh-d-101'
+            -   name: Cache splitsh-lite
+                id: splitsh-cache
+                uses: actions/cache@v2
+                with:
+                    path: './.splitsh'
+                    key: '${{ runner.os }}-splitsh-d-101'
 
-      - name: Extract components
-        uses: frankdejonge/use-subsplit-publish@1.0.0-beta.7
-        with:
-          source-branch: ${{ steps.extract_branch.outputs.branch }}
-          splitsh-path: './.splitsh/splitsh-lite'
-          config-path: split.json
+            -   name: Extract components
+                uses: frankdejonge/use-subsplit-publish@1.0.0-beta.7
+                with:
+                    source-branch: ${{ steps.extract_branch.outputs.branch }}
+                    splitsh-path: './.splitsh/splitsh-lite'
+                    config-path: split.json

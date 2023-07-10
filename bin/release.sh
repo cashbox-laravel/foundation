@@ -52,7 +52,7 @@ git tag $VERSION
 git push origin --tags
 
 # Tag Components
-# sber-online temporairy disabled to release
+# sber-online temporary disabled to release
 for REMOTE in core \
     cash \
     sber-auth \
