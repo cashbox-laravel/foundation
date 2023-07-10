@@ -20,6 +20,6 @@
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
-[link_license]:         LICENSE
+[link_license]:         license.md
 
 [link_packagist]:       https://packagist.org/packages/cashier-provider/core

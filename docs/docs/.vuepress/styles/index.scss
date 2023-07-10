@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+@import "fonts";
+
+:root {
+    --content-width: 75%;
+
+    @media only screen and (min-width: 1921px) {
+        --content-width: 1600px;
+    }
+}
+
+.code-group {
+    &__nav-tab {
+        font-family: Nunito, system-ui, sans-serif;
+    }
+}

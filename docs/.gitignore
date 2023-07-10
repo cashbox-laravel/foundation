@@ -1,15 +1,18 @@
 .idea/
+_site/
 
 build/
 node_modules/
+tmp/
 vendor/
 
-docs/.env
-http-client.private.env.json
+.DS_Store
+.env
+.temp
 
 *.bak
 *.cache
 *.clover
 *.orig
-*.log
-*.lock
+
+package-lock.json
