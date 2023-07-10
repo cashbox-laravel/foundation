@@ -47,14 +47,14 @@ jobs:
         needs: configure
         
         strategy:
-            matrix: ${{ fromJson(needs.configure.outputs.matrix)['sub-splits'] }}
+            matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
     
-        name: ${{ matrix.name }}
+#        name: ${{ matrix.name }}
         
         steps:
             -   name: Show version
                 run: echo "${{ needs.configure.outputs.tag }}"
 
             -   name: Components release
-                run: echo "Release for ${{ matrix }}"
+                run: echo "${{ matrix }}"
 #                run: ./bin/release.sh ${{ steps.ids.outputs.tag }}
