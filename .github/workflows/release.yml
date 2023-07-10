@@ -56,7 +56,7 @@ jobs:
         
         name: ${{ matrix.sub-splits.name }}
         
-        if: ${{ contains(matrix.sub-splits, 'release') && matrix.sub-splits.release != false || true }}
+        if: ${{ contains(matrix.sub-splits, 'release') && matrix.sub-splits.release != false }}
         
         steps:
             -   name: Show version
