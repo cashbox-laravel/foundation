@@ -15,21 +15,21 @@
  * @see https://github.com/cashier-provider/tinkoff-qr
  */
 
-namespace CashierProvider\Tinkoff\QrCode;
+namespace TinkoffQr\src;
 
 use CashierProvider\Core\Facades\Helpers\Model;
 use CashierProvider\Core\Services\Driver as BaseDriver;
-use CashierProvider\Tinkoff\QrCode\Exceptions\Manager;
-use CashierProvider\Tinkoff\QrCode\Helpers\Statuses;
-use CashierProvider\Tinkoff\QrCode\Requests\Cancel;
-use CashierProvider\Tinkoff\QrCode\Requests\GetQR;
-use CashierProvider\Tinkoff\QrCode\Requests\GetState;
-use CashierProvider\Tinkoff\QrCode\Requests\Init;
-use CashierProvider\Tinkoff\QrCode\Resources\Details;
-use CashierProvider\Tinkoff\QrCode\Responses\QrCode;
-use CashierProvider\Tinkoff\QrCode\Responses\Refund;
-use CashierProvider\Tinkoff\QrCode\Responses\State;
-use DragonCode\Contracts\Cashier\Http\Response;
+use TinkoffQr\src\Exceptions\Manager;
+use TinkoffQr\src\Helpers\Statuses;
+use TinkoffQr\src\Requests\Cancel;
+use TinkoffQr\src\Requests\GetQR;
+use TinkoffQr\src\Requests\GetState;
+use TinkoffQr\src\Requests\Init;
+use TinkoffQr\src\Resources\Details;
+use TinkoffQr\src\Responses\QrCode;
+use TinkoffQr\src\Responses\Refund;
+use TinkoffQr\src\Responses\State;
+use Helldar\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver
 {
@@ -66,7 +66,7 @@ class Driver extends BaseDriver
     {
         $request = Init::make($this->model);
 
-        $response = $this->request($request, Responses\Init::class);
+        $response = $this->request($request, \TinkoffQr\src\Responses\Init::class);
 
         $external_id = $response->getExternalId();
 

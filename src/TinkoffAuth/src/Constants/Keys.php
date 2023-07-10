@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "cashier-provider/tinkoff-auth" project.
+ * This file is part of the "andrey-helldar/cashier-tinkoff-auth" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,12 +12,12 @@
  *
  * @license MIT
  *
- * @see https://github.com/cashier-provider/tinkoff-auth
+ * @see https://github.com/andrey-helldar/cashier-tinkoff-auth
  */
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Auth\Constants;
+namespace TinkoffAuth\src\Constants;
 
 class Keys
 {

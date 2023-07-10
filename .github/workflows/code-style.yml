@@ -1,0 +1,24 @@
+name: Code Style
+
+on:
+    push:
+    pull_request:
+
+permissions: write-all
+
+jobs:
+    check:
+        if: ${{ ! (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+        
+        uses: TheDragonCode/.github/.github/workflows/code-style.yml@main
+        with:
+            token: ${{ secrets.COMPOSER_TOKEN }}
+            fix: false
+    
+    fix:
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        
+        uses: TheDragonCode/.github/.github/workflows/code-style.yml@main
+        with:
+            token: ${{ secrets.COMPOSER_TOKEN }}
+            fix: true

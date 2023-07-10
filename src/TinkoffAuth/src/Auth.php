@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "cashier-provider/tinkoff-auth" project.
+ * This file is part of the "andrey-helldar/cashier-tinkoff-auth" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,30 +12,30 @@
  *
  * @license MIT
  *
- * @see https://github.com/cashier-provider/tinkoff-auth
+ * @see https://github.com/andrey-helldar/cashier-tinkoff-auth
  */
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Auth;
+namespace TinkoffAuth\src;
 
-use CashierProvider\Tinkoff\Auth\Constants\Keys;
-use CashierProvider\Tinkoff\Auth\Resources\AccessToken;
-use CashierProvider\Tinkoff\Auth\Support\Hash;
-use DragonCode\Contracts\Cashier\Auth\Auth as AuthContract;
-use DragonCode\Contracts\Cashier\Http\Request;
-use DragonCode\Contracts\Cashier\Resources\Model;
-use DragonCode\Support\Concerns\Makeable;
+use TinkoffAuth\src\Constants\Keys;
+use TinkoffAuth\src\Resources\AccessToken;
+use TinkoffAuth\src\Support\Hash;
+use Helldar\Contracts\Cashier\Auth\Auth as AuthContract;
+use Helldar\Contracts\Cashier\Http\Request;
+use Helldar\Contracts\Cashier\Resources\Model;
+use Helldar\Support\Concerns\Makeable;
 
 /** @method static Auth make(Model $model, Request $request, bool $hash = true) */
 class Auth implements AuthContract
 {
     use Makeable;
 
-    /** @var \DragonCode\Contracts\Cashier\Resources\Model */
+    /** @var \Helldar\Contracts\Cashier\Resources\Model */
     protected $model;
 
-    /** @var \DragonCode\Contracts\Cashier\Http\Request */
+    /** @var \Helldar\Contracts\Cashier\Http\Request */
     protected $request;
 
     /** @var bool */

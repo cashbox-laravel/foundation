@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the "cashier-provider/tinkoff-auth" project.
+ * This file is part of the "andrey-helldar/cashier-tinkoff-auth" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,14 +12,14 @@
  *
  * @license MIT
  *
- * @see https://github.com/cashier-provider/tinkoff-auth
+ * @see https://github.com/andrey-helldar/cashier-tinkoff-auth
  */
 
-namespace CashierProvider\Tinkoff\Auth\Resources;
+namespace TinkoffAuth\src\Resources;
 
-use CashierProvider\Tinkoff\Auth\Constants\Keys;
-use DragonCode\Contracts\Cashier\Resources\AccessToken as AccessTokenContract;
-use DragonCode\SimpleDataTransferObject\DataTransferObject;
+use TinkoffAuth\src\Constants\Keys;
+use Helldar\Contracts\Cashier\Resources\AccessToken as AccessTokenContract;
+use Helldar\SimpleDataTransferObject\DataTransferObject;
 use Illuminate\Support\Carbon;
 
 class AccessToken extends DataTransferObject implements AccessTokenContract

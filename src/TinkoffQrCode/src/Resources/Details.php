@@ -17,7 +17,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\QrCode\Resources;
+namespace TinkoffQr\src\Resources;
 
 use CashierProvider\Core\Resources\Details as BaseDetails;
 

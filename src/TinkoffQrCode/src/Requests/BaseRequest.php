@@ -17,10 +17,9 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\QrCode\Requests;
+namespace TinkoffQr\src\Requests;
 
 use CashierProvider\Core\Http\Request;
-use CashierProvider\Core\Support\URI;
 use CashierProvider\Tinkoff\Auth\Auth;
 
 abstract class BaseRequest extends Request
@@ -37,8 +36,8 @@ abstract class BaseRequest extends Request
         ];
     }
 
-    protected function getUriBuilder(): URI
+    protected function getHost(): string
     {
-        return URI::make($this->host, null);
+        return $this->host;
     }
 }
