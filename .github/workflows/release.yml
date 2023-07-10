@@ -41,7 +41,7 @@ jobs:
                 run: |
                     TAG=${{ github.event.release.tag_name || github.event.inputs.tag }}
                     
-                    echo "tag=${TAG##*v}" >> "$GITHUB_OUTPUT"
+                    echo "tag=v${TAG##*v}" >> "$GITHUB_OUTPUT"
     
     deploy:
         runs-on: ubuntu-latest
@@ -50,14 +50,16 @@ jobs:
         strategy:
             matrix: ${{ fromJson(needs.configure.outputs.matrix) }}
         
-        #        name: ${{ matrix.name }}
+        name: ${{ matrix.sub-splits.name }}
         
         steps:
             -   name: Show version
                 run: echo "${{ needs.configure.outputs.tag }}"
 
             -   name: Components release
-                run: echo "${{ matrix.name }}"
+                run: |
+                    echo "${{ matrix.sub-splits.name }}"
+                    echo "${{ matrix.sub-splits.target }}"
             #                run: ./bin/release.sh ${{ steps.ids.outputs.tag }}
 
             -   name: Info
