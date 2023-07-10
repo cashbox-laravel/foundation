@@ -1,6 +1,10 @@
 name: Code Style
 
-on: [ push, pull_request ]
+on:
+    push:
+        branches:
+            - main
+            - 4.x
 
 permissions: write-all
 
@@ -24,3 +28,43 @@ jobs:
                 with:
                     github_token: ${{ secrets.COMPOSER_TOKEN }}
                     fix: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+
+    normalize:
+        needs: style
+        
+        runs-on: ubuntu-latest
+        
+        strategy:
+            fail-fast: true
+            matrix:
+                file:
+                    - src/Core
+                    - src/Cash
+                    - src/SberAuth
+                    - src/SberOnline
+                    - src/SberQrCode
+                    - src/TinkoffAuth
+                    - src/TinkoffCredit
+                    - src/TinkoffOnline
+                    - src/TinkoffQrCode
+                    - src/TemplateDriver
+                    - src/TemplateDriverAuth
+        
+        steps:
+            -   name: Install dependency
+                run: composer global require ergebnis/composer-normalize
+
+            -   name: Normalize composer.json
+                run: |
+                    composer normalize ${{ matrix.file }}/composer.json
+
+            -   name: Create a Pull Request
+                uses: peter-evans/create-pull-request@v4
+                with:
+                    branch: projects/patch
+                    branch-suffix: random
+                    delete-branch: true
+                    add-paths: .
+                    title: "Normalized `composer.json` files"
+                    commit-message: Normalized `composer.json` files
+                    body: Normalized `composer.json` files
