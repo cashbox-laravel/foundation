@@ -44,17 +44,9 @@
         "cashier-provider/core": "^3.0",
         "psr/http-message": "^1.0"
     },
-    "require-dev": {
-        "ext-json": "*",
-        "dragon-code/support": "^5.0",
-        "illuminate/database": "^6.0|^7.0|^8.0",
-        "orchestra/testbench": "^4.0|^5.0|^6.0",
-        "phpunit/phpunit": "^9.0",
-        "symfony/var-dumper": "^4.0|^5.0"
-    },
     "autoload": {
         "psr-4": {
-            "CashierProvider\\BankName\\Technology\\": "src"
+            "CashierProvider\\BankName\\Technology\\": "src/"
         }
     },
     "config": {
@@ -69,12 +61,6 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "github",
-            "url": "git@github.com:cashier-provider/driver-auth.git"
-        }
-    ],
     "extra": {
         "branch-alias": {
             "dev-main": "4.x-dev"
