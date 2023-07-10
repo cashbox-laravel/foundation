@@ -11,7 +11,7 @@ on:
         inputs:
             tag:
                 description: 'Tag version'
-                required: false
+                required: true
                 options:
                     - v4
 
