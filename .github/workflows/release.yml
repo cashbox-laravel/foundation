@@ -57,7 +57,7 @@ jobs:
         name: ${{ matrix.sub-splits.name }}
         
 #        if: ${{ contains(toJson(matrix.sub-splits), 'release') == false || matrix.sub-splits.release }}
-        if: ${{ contains(toJson(matrix.sub-splits), 'release') }}
+        if: ${{ contains(matrix.sub-splits, 'release') }}
         
         steps:
             -   name: Show version
