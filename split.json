@@ -3,7 +3,8 @@
         {
             "name": "docs",
             "directory": "docs",
-            "target": "git@github.com:cashier-provider/docs.git"
+            "target": "git@github.com:cashier-provider/docs.git",
+            "release": false
         },
         {
             "name": "core",
@@ -23,7 +24,8 @@
         {
             "name": "sber-online",
             "directory": "src/SberOnline",
-            "target": "git@github.com:cashier-provider/sber-online.git"
+            "target": "git@github.com:cashier-provider/sber-online.git",
+            "release": false
         },
         {
             "name": "sber-qr",
@@ -53,12 +55,14 @@
         {
             "name": "driver",
             "directory": "src/TemplateDriver",
-            "target": "git@github.com:cashier-provider/driver.git"
+            "target": "git@github.com:cashier-provider/driver.git",
+            "release": false
         },
         {
             "name": "driver-auth",
             "directory": "src/TemplateDriverAuth",
-            "target": "git@github.com:cashier-provider/driver-auth.git"
+            "target": "git@github.com:cashier-provider/driver-auth.git",
+            "release": false
         }
     ]
 }
