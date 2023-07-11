@@ -23,7 +23,7 @@ jobs:
                 run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
 
             -   name: Setup GIT
-                uses: frankdejonge/use-github-token@1.0.1
+                uses: frankdejonge/use-github-token@1.0.2
                 with:
                     authentication: '${{ secrets.COMPOSER_USERNAME }}:${{ secrets.COMPOSER_TOKEN }}'
                     user_name: 'GitHub Action'
@@ -31,7 +31,7 @@ jobs:
 
             -   name: Cache splitsh-lite
                 id: splitsh-cache
-                uses: actions/cache@v2
+                uses: actions/cache@v3
                 with:
                     path: './.splitsh'
                     key: '${{ runner.os }}-splitsh-d-101'
