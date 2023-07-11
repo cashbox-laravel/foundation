@@ -104,56 +104,28 @@
         },
         "thanks": [
             {
-                "name": "dragon-code/laravel-support",
-                "url": "https://github.com/TheDragonCode/laravel-support"
-            },
-            {
-                "name": "dragon-code/support",
-                "url": "https://github.com/TheDragonCode/support"
-            },
-            {
                 "name": "archtechx/enums",
                 "url": "https://github.com/archtechx/enums"
             },
             {
-                "name": "laravel/framework",
-                "url": "https://github.com/laravel/framework"
-            },
-            {
-                "name": "nesbot/carbon",
-                "url": "https://github.com/briannesbitt/Carbon"
-            },
-            {
-                "name": "spatie/laravel-data",
-                "url": "https://github.com/spatie/laravel-data"
-            },
-            {
-                "name": "symfony/console",
-                "url": "https://github.com/symfony/console"
-            },
-            {
-                "name": "orchestra/testbench",
-                "url": "https://github.com/orchestral/testbench"
-            },
-            {
-                "name": "pestphp/pest",
-                "url": "https://github.com/pestphp/pest"
-            },
-            {
-                "name": "symfony/var-dumper",
-                "url": "https://github.com/symfony/var-dumper"
-            },
-            {
-                "name": "cashier-provider/docs",
-                "url": "https://github.com/cashier-provider/docs"
+                "name": "cashier-provider/cash",
+                "url": "https://github.com/cashier-provider/cash"
             },
             {
                 "name": "cashier-provider/core",
                 "url": "https://github.com/cashier-provider/core"
             },
             {
-                "name": "cashier-provider/cash",
-                "url": "https://github.com/cashier-provider/cash"
+                "name": "cashier-provider/docs",
+                "url": "https://github.com/cashier-provider/docs"
+            },
+            {
+                "name": "cashier-provider/driver",
+                "url": "https://github.com/cashier-provider/driver"
+            },
+            {
+                "name": "cashier-provider/driver-auth",
+                "url": "https://github.com/cashier-provider/driver-auth"
             },
             {
                 "name": "cashier-provider/sber-auth",
@@ -184,12 +156,40 @@
                 "url": "https://github.com/cashier-provider/tinkoff-qr"
             },
             {
-                "name": "cashier-provider/driver",
-                "url": "https://github.com/cashier-provider/driver"
+                "name": "dragon-code/laravel-support",
+                "url": "https://github.com/TheDragonCode/laravel-support"
             },
             {
-                "name": "cashier-provider/driver-auth",
-                "url": "https://github.com/cashier-provider/driver-auth"
+                "name": "dragon-code/support",
+                "url": "https://github.com/TheDragonCode/support"
+            },
+            {
+                "name": "laravel/framework",
+                "url": "https://github.com/laravel/framework"
+            },
+            {
+                "name": "nesbot/carbon",
+                "url": "https://github.com/briannesbitt/Carbon"
+            },
+            {
+                "name": "orchestra/testbench",
+                "url": "https://github.com/orchestral/testbench"
+            },
+            {
+                "name": "pestphp/pest",
+                "url": "https://github.com/pestphp/pest"
+            },
+            {
+                "name": "spatie/laravel-data",
+                "url": "https://github.com/spatie/laravel-data"
+            },
+            {
+                "name": "symfony/console",
+                "url": "https://github.com/symfony/console"
+            },
+            {
+                "name": "symfony/var-dumper",
+                "url": "https://github.com/symfony/var-dumper"
             }
         ]
     }
