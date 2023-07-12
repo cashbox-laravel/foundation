@@ -31,7 +31,7 @@ use DragonCode\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver
 {
-    protected $exceptions = Manager::class;
+    protected $exception = Manager::class;
 
     protected $statuses = Statuses::class;
 

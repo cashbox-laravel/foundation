@@ -17,9 +17,9 @@ declare(strict_types=1);
 
 namespace CashierProvider\BankName\Technology\Responses;
 
-use CashierProvider\Core\Http\Response;
+use CashierProvider\Core\Http\ResponseInfo;
 
-class Created extends Response
+class Created extends ResponseInfo
 {
     protected $map = [
         self::KEY_EXTERNAL_ID => 'PaymentId',

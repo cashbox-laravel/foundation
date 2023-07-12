@@ -15,20 +15,23 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Cash\Responses;
+namespace CashierProvider\Core\Http;
 
-use CashierProvider\Core\Http\Response;
+use DragonCode\Support\Facades\Helpers\Arr;
+use Spatie\LaravelData\Data;
 
-class State extends Response
+abstract class ResponseInfo extends Data
 {
-    protected $map = [
-        self::KEY_EXTERNAL_ID => 'PaymentId',
+    abstract public function getExternalId(): ?string;
 
-        self::KEY_STATUS => 'Status',
-    ];
+    abstract public function getOperationId(): ?string;
+
+    abstract public function getStatus(): ?string;
 
     public function isEmpty(): bool
     {
-        return empty($this->getExternalId()) || empty($this->getStatus());
+        return Arr::of($this->toArray())
+            ->filter(fn (mixed $value) => $value !== null)
+            ->isEmpty();
     }
 }

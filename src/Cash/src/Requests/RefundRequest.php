@@ -19,10 +19,24 @@ namespace CashierProvider\Cash\Requests;
 
 use CashierProvider\Core\Http\Request;
 
-abstract class BaseRequest extends Request
+class RefundRequest extends Request
 {
-    public function getRawHeaders(): array
+    public function body(): array
+    {
+        return [
+            'paymentId' => $this->payment->getKey(),
+
+            'status' => 'REFUNDED',
+        ];
+    }
+
+    public function headers(): array
     {
         return [];
+    }
+
+    public function uri(): ?string
+    {
+        return null;
     }
 }

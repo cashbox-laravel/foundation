@@ -16,7 +16,7 @@
 namespace Tests;
 
 use CashierProvider\BankName\Technology\Driver as Technology;
-use CashierProvider\Core\Http\Response;
+use CashierProvider\Core\Http\ResponseInfo;
 use CashierProvider\Core\Services\Jobs;
 use DragonCode\Contracts\Cashier\Driver as DriverContract;
 use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
@@ -34,7 +34,7 @@ class DriverTest extends TestCase
 
         $response = $this->driver($payment)->start();
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf(ResponseInfo::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
@@ -53,7 +53,7 @@ class DriverTest extends TestCase
 
         $response = $this->driver($payment)->check();
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf(ResponseInfo::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
@@ -75,7 +75,7 @@ class DriverTest extends TestCase
 
         $response = $this->driver($payment)->refund();
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf(ResponseInfo::class, $response);
         $this->assertInstanceOf(ResponseContract::class, $response);
 
         $this->assertIsString($response->getExternalId());
