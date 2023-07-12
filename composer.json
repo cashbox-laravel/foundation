@@ -44,6 +44,7 @@
         "archtechx/enums": "^0.3.2",
         "dragon-code/laravel-support": "^3.6",
         "dragon-code/support": "^6.11.2",
+        "guzzlehttp/guzzle": "^7.7",
         "illuminate/bus": "*",
         "illuminate/console": "^10.14",
         "illuminate/contracts": "*",
@@ -51,6 +52,7 @@
         "illuminate/queue": "*",
         "illuminate/support": "^10.14",
         "nesbot/carbon": "^2.68.1",
+        "psr/log": "^3.0",
         "spatie/laravel-data": "^3.7",
         "symfony/console": "^6.3"
     },
