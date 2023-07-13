@@ -40,7 +40,7 @@ jobs:
 
                     sudo php ./bin/cashbox license
 
-                    { git add . && git commit -a -m "Updated license files"; } || IS_DIRTY_0
+                    { git add . && git commit -a -m "Updated license files"; } || IS_DIRTY=0
 
                     echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
 
@@ -51,7 +51,7 @@ jobs:
 
                     sudo php ./bin/cashbox readme
 
-                    { git add . && git commit -a -m "Updated readme files"; } || IS_DIRTY_0
+                    { git add . && git commit -a -m "Updated readme files"; } || IS_DIRTY=0
 
                     echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
 
@@ -62,7 +62,7 @@ jobs:
 
                     sudo php ./bin/cashbox composer
 
-                    { git add . && git commit -a -m "Updated \`composer.json\` files"; } || IS_DIRTY_0
+                    { git add . && git commit -a -m "Updated \`composer.json\` files"; } || IS_DIRTY=0
 
                     echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
 
