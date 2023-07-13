@@ -101,7 +101,7 @@ class Composer extends Command
     protected function normalize(string $path): void
     {
         if ($path = realpath($path)) {
-            $process = new Process(['composer', 'normalize', $path]);
+            $process = new Process(['php', 'composer', 'normalize', $path]);
 
             $process->run();
 
