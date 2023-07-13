@@ -55,22 +55,10 @@ jobs:
 
                     echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
 
-            -   name: Updating composer.json files
-                id: composer
-                run: |
-                    IS_DIRTY=1
-
-                    sudo php ./bin/cashbox composer
-
-                    { git add . && git commit -a -m "Updated \`composer.json\` files"; } || IS_DIRTY=0
-
-                    echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
-
             -   name: Push changes
                 uses: ad-m/github-push-action@master
                 if: steps.license.outputs.is_dirty == 1 ||
-                    steps.readme.outputs.is_dirty == 1 ||
-                    steps.composer.outputs.is_dirty == 1
+                    steps.readme.outputs.is_dirty == 1
                 with:
                     github_token: ${{ secrets.COMPOSER_TOKEN }}
                     branch: ${{ github.ref }}
