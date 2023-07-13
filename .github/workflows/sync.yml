@@ -73,3 +73,4 @@ jobs:
                     steps.composer.outputs.is_dirty == 1
                 with:
                     github_token: ${{ secrets.COMPOSER_TOKEN }}
+                    branch: ${{ github.ref }}
