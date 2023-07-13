@@ -1,6 +1,6 @@
 
 /**
- * This file is part of the "cashier-provider/foundation" project.
+ * This file is part of the "cashbox/foundation" project.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,7 +9,7 @@
  * @copyright 2023 Andrey Helldar
  * @license MIT
  *
- * @see https://github.com/cashier-provider/foundation
+ * @see https://github.com/cashbox/foundation
  */
 
 import dotenv from 'dotenv'
@@ -21,11 +21,11 @@ import { githubLinkifyPlugin } from 'vuepress-plugin-github-linkify'
 
 dotenv.config()
 
-const hostname = 'cashier-provider.com'
+const hostname = 'cashbox.com'
 
 module.exports = {
     lang: 'en-US',
-    title: 'Cashier Provider',
+    title: 'Cashbox for Laravel',
     description: 'Cashier provides an expressive, fluent interface to manage billing services',
 
     head: [
@@ -41,9 +41,9 @@ module.exports = {
 
         logo: `https://${ hostname }/images/logo.svg`,
 
-        repo: 'https://github.com/cashier-provider/foundation',
+        repo: 'https://github.com/cashbox/foundation',
         repoLabel: 'GitHub',
-        docsRepo: 'https://github.com/cashier-provider/foundation',
+        docsRepo: 'https://github.com/cashbox/foundation',
         docsBranch: 'main',
         docsDir: 'docs',
 

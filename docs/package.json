@@ -4,9 +4,9 @@
     "description": "Easily connect the necessary language packs to the application",
     "author": "Andrey Helldar",
     "license": "MIT",
-    "homepage": "https://cashier-provider.com",
+    "homepage": "https://cashbox.com",
     "bugs": {
-        "url": "https://github.com/cashier-provider/foundation/issues"
+        "url": "https://github.com/cashbox/foundation/issues"
     },
     "scripts": {
         "dev": "vuepress dev docs --debug",
@@ -14,7 +14,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/cashier-provider/foundation.git"
+        "url": "git+ssh://git@github.com/cashbox/foundation.git"
     },
     "keywords": [
         "docs"
