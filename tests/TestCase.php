@@ -14,6 +14,7 @@ use Tests\Fixtures\Details\CashPaymentDetails;
 use Tests\Fixtures\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 use Tests\Fixtures\Models\PaymentModel;
+use Tests\Fixtures\Providers\TestServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -22,6 +23,7 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [
+            TestServiceProvider::class,
             ServiceProvider::class,
             ObserverServiceProvider::class,
             RateLimiterServiceProvider::class,
