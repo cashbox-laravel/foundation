@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Commands;
+namespace CashboxDev\Commands;
 
-use App\Services\Template;
+use CashboxDev\Services\Template;
 use Cerbero\JsonParser\JsonParser;
 
 class Readme extends Command

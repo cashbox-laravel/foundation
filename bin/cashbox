@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
-use App\Commands\Composer;
-use App\Commands\License;
-use App\Commands\Readme;
+use CashboxDev\Commands\Composer;
+use CashboxDev\Commands\License;
+use CashboxDev\Commands\Readme;
 use Symfony\Component\Console\Application;
 
 error_reporting(E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED);

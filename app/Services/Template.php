@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace CashboxDev\Services;
 
 use DragonCode\Support\Facades\Helpers\Str;
 
