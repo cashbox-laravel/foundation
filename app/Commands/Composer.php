@@ -18,6 +18,10 @@ class Composer extends Command
 
     protected string $exclude = 'cashbox/';
 
+    protected array $thanks = [
+        'illuminate/' => 'laravel/framework',
+    ];
+
     protected function handle(string $source, string $target): void
     {
         $composer = $this->load($target . '/composer.json');
@@ -31,8 +35,8 @@ class Composer extends Command
         $this->copyToDriver($composer, 'require.php');
         $this->copyToDriver($composer, 'config');
         $this->copyToDriver($composer, 'extra.branch-alias');
-        $this->copyToDriver($composer, 'extra.thanks');
 
+        $this->copyToDriverThanks($composer, 'extra.thanks', 'require');
         $this->copyToDriverIntersect($composer, 'require');
 
         $this->copyToMain($composer, 'keywords');
@@ -48,6 +52,8 @@ class Composer extends Command
 
     protected function finish(): void
     {
+        $this->sortMainThanks($this->main, 'extra.thanks');
+
         $this->store($this->basePath(), $this->main);
     }
 
@@ -65,6 +71,27 @@ class Composer extends Command
         IA::set($array, $key, $this->fromMain($key, $default));
     }
 
+    protected function copyToDriverThanks(&$array, string $key, string $filterKey): void
+    {
+        $dependencies = array_keys($array[$filterKey] ?? []);
+
+        foreach ($this->thanks as $project => $thank) {
+            foreach ($dependencies as $dependency) {
+                if (str_starts_with($dependency, $project)) {
+                    $dependencies[] = $thank;
+                }
+            }
+        }
+
+        $source = collect($this->fromMain($key))
+            ->filter(fn (array $item) => in_array($item['name'], $dependencies))
+            ->sortBy('name')
+            ->values()
+            ->all();
+
+        IA::set($array, $key, $source);
+    }
+
     protected function copyToDriverIntersect(&$array, string $key): void
     {
         foreach (Arr::get($this->main, $key) as $package => $version) {
@@ -76,7 +103,7 @@ class Composer extends Command
 
     protected function copyToMain($array, string $key): void
     {
-        $main   = Arr::get($this->main, $key);
+        $main = Arr::get($this->main, $key);
         $driver = Arr::get($array, $key);
 
         $items = Arr::of($driver)
@@ -89,6 +116,15 @@ class Composer extends Command
             )->toArray();
 
         IA::set($this->main, $key, $items);
+    }
+
+    protected function sortMainThanks(array &$array, string $key): void
+    {
+        $thanks = Arr::get($array, $key, []);
+
+        $items = collect($thanks)->sortBy('name')->values()->all();
+
+        IA::set($array, $key, $items);
     }
 
     protected function fromMain(string $key, mixed $default = null): mixed
