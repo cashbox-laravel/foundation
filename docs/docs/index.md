@@ -1,4 +1,4 @@
-# [WIP] Cashbox for Laravel Documentation
+# Cashbox Documentation
 
 ![cashbox documentation](https://preview.dragon-code.pro/cashbox/documentation.svg?brand=laravel)
 

@@ -1,4 +1,4 @@
-# [WIP] Cashbox for Laravel Documentation
+# Cashbox Documentation
 
 ![cashbox documentation](https://preview.dragon-code.pro/cashbox/documentation.svg?brand=laravel)
 
@@ -11,11 +11,11 @@
 >
 > The project is in a state of global upgrade and some links may not be correct.
 
-## About Cashbox for Laravel
+## About Cashbox
 
-`Cashier` provides an expressive and user-friendly interface for managing billing and payment verification services.
+`Cashbox` provides an expressive and user-friendly interface for managing billing and payment verification services.
 We believe that development should be an enjoyable, creative experience to be truly rewarding.
-`Cashbox for Laravel` tries to ease development by simplifying the tasks of adding payment systems to a web application.
+`Cashbox` tries to ease development by simplifying the tasks of adding payment systems to a web application.
 
 The project contains some ready-made solutions of payment systems, but you can offer your own.
 
@@ -25,12 +25,12 @@ You will find full documentation on the dedicated [documentation](https://cashbo
 
 ## Contributing
 
-Thank you for considering contributing to the `Cashbox for Laravel`!
-The contribution guide can be found in the [Cashbox for Laravel documentation](https://cashbox-laravel.github.io/docs).
+Thank you for considering contributing to the `Cashbox`!
+The contribution guide can be found in the [Cashbox documentation](https://cashbox-laravel.github.io/docs).
 
 ## Code of Conduct
 
-In order to ensure that the `Cashbox for Laravel` community is welcoming to all, please review and abide by
+In order to ensure that the `Cashbox` community is welcoming to all, please review and abide by
 the [Code of Conduct](https://cashbox-laravel.github.io/docs).
 
 ## Security Vulnerabilities
