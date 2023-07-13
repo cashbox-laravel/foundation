@@ -43,21 +43,21 @@
         }
     ],
     "require": {
-        "php": "^8.1",
-        "ext-json": "*",
         "archtechx/enums": "^0.3.2",
         "dragon-code/contracts": "^2.20",
         "dragon-code/laravel-support": "^3.6",
         "dragon-code/simple-dto": "^2.7.1",
         "dragon-code/support": "^6.11.2",
+        "ext-json": "*",
         "guzzlehttp/guzzle": "^7.7",
-        "illuminate/bus": "*",
+        "illuminate/bus": "^10.15",
         "illuminate/console": "^10.15",
         "illuminate/contracts": "^10.15",
         "illuminate/database": "^10.15",
         "illuminate/queue": "^10.15",
         "illuminate/support": "^10.15",
         "nesbot/carbon": "^2.68.1",
+        "php": "^8.1",
         "psr/http-message": "^1.1",
         "psr/log": "^3.0",
         "spatie/laravel-data": "^3.7",
@@ -65,6 +65,7 @@
     },
     "require-dev": {
         "cerbero/json-parser": "^1.0",
+        "mockery/mockery": "^1.6",
         "orchestra/testbench": "^8.5.10",
         "pestphp/pest": "^2.8.3",
         "symfony/var-dumper": "^6.3.1"
@@ -170,6 +171,10 @@
                 "url": "https://github.com/cashbox-laravel/tinkoff-qr"
             },
             {
+                "name": "cerbero/json-parser",
+                "url": "https://github.com/cerbero90/json-parser"
+            },
+            {
                 "name": "dragon-code/laravel-support",
                 "url": "https://github.com/TheDragonCode/laravel-support"
             },
@@ -178,8 +183,40 @@
                 "url": "https://github.com/TheDragonCode/support"
             },
             {
+                "name": "guzzlehttp/guzzle",
+                "url": "https://github.com/guzzle/guzzle"
+            },
+            {
+                "name": "illuminate/bus",
+                "url": "https://github.com/illuminate/bus"
+            },
+            {
+                "name": "illuminate/console",
+                "url": "https://github.com/illuminate/console"
+            },
+            {
+                "name": "illuminate/contracts",
+                "url": "https://github.com/illuminate/contracts"
+            },
+            {
+                "name": "illuminate/database",
+                "url": "https://github.com/illuminate/database"
+            },
+            {
+                "name": "illuminate/queue",
+                "url": "https://github.com/illuminate/queue"
+            },
+            {
+                "name": "illuminate/support",
+                "url": "https://github.com/illuminate/support"
+            },
+            {
                 "name": "laravel/framework",
                 "url": "https://github.com/laravel/framework"
+            },
+            {
+                "name": "mockery/mockery",
+                "url": "https://github.com/mockery/mockery"
             },
             {
                 "name": "nesbot/carbon",
@@ -192,6 +229,14 @@
             {
                 "name": "pestphp/pest",
                 "url": "https://github.com/pestphp/pest"
+            },
+            {
+                "name": "psr/http-message",
+                "url": "https://github.com/php-fig/http-message"
+            },
+            {
+                "name": "psr/log",
+                "url": "https://github.com/php-fig/log"
             },
             {
                 "name": "spatie/laravel-data",
