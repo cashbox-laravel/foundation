@@ -9,7 +9,6 @@ use DragonCode\Support\Facades\Filesystem\File;
 use DragonCode\Support\Facades\Helpers\Arr;
 use DragonCode\Support\Helpers\Ables\Arrayable;
 use Illuminate\Support\Arr as IA;
-use Symfony\Component\Process\Process;
 
 use function str_starts_with;
 
@@ -59,7 +58,6 @@ class Composer extends Command
         file_put_contents($target . '/composer.json', json_encode($composer, $flags) . PHP_EOL);
 
         $this->composerLock($target . '/composer.lock');
-        $this->normalize($target . '/composer.json');
     }
 
     protected function copyToDriver(&$array, string $key, mixed $default = null): void
@@ -96,19 +94,6 @@ class Composer extends Command
     protected function fromMain(string $key, mixed $default = null): mixed
     {
         return Arr::get($this->main, $key, $default);
-    }
-
-    protected function normalize(string $path): void
-    {
-        if ($path = realpath($path)) {
-            $process = new Process(['php', 'composer', 'normalize', $path]);
-
-            $process->run();
-
-            if (! $process->isSuccessful()) {
-                dd($process->getOutput());
-            }
-        }
     }
 
     protected function composerLock(string $path): void
