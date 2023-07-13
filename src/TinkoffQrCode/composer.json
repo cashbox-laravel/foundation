@@ -52,7 +52,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "CashierProvider\\Tinkoff\\QrCode\\": "src/"
+            "Cashbox\\Tinkoff\\QrCode\\": "src/"
         }
     },
     "config": {

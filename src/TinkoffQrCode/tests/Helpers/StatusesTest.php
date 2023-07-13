@@ -15,8 +15,8 @@
 
 namespace Tests\Helpers;
 
-use CashierProvider\Tinkoff\QrCode\Helpers\Statuses;
-use CashierProvider\Tinkoff\QrCode\Resources\Details;
+use Cashbox\Tinkoff\QrCode\Helpers\Statuses;
+use Cashbox\Tinkoff\QrCode\Resources\Details;
 use Tests\TestCase;
 
 class StatusesTest extends TestCase

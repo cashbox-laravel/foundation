@@ -15,11 +15,11 @@
 
 namespace Tests\Helpers;
 
-use CashierProvider\BankName\Technology\Exceptions\Manager;
-use CashierProvider\Core\Exceptions\Http\BadRequestClientException;
-use CashierProvider\Core\Exceptions\Http\BaseException;
-use CashierProvider\Core\Exceptions\Http\BuyerNotFoundClientException;
-use CashierProvider\Core\Exceptions\Http\ContactTheSellerClientException;
+use Cashbox\BankName\Technology\Exceptions\Manager;
+use Cashbox\Core\Exceptions\Http\BadRequestClientException;
+use Cashbox\Core\Exceptions\Http\BaseException;
+use Cashbox\Core\Exceptions\Http\BuyerNotFoundClientException;
+use Cashbox\Core\Exceptions\Http\ContactTheSellerClientException;
 use DragonCode\Contracts\Http\Builder as HttpBuilder;
 use DragonCode\Support\Facades\Http\Builder;
 use Tests\TestCase;

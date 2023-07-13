@@ -15,8 +15,8 @@
 
 namespace Tests\Responses;
 
-use CashierProvider\BankName\Technology\Responses\Refund;
-use CashierProvider\Core\Http\ResponseInfo as BaseResponse;
+use Cashbox\BankName\Technology\Responses\Refund;
+use Cashbox\Core\Http\ResponseInfo as BaseResponse;
 use DragonCode\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
 

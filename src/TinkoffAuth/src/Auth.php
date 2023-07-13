@@ -15,11 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Auth;
+namespace Cashbox\Tinkoff\Auth;
 
-use CashierProvider\Tinkoff\Auth\Constants\Keys;
-use CashierProvider\Tinkoff\Auth\Resources\AccessToken;
-use CashierProvider\Tinkoff\Auth\Support\Hash;
+use Cashbox\Tinkoff\Auth\Constants\Keys;
+use Cashbox\Tinkoff\Auth\Resources\AccessToken;
+use Cashbox\Tinkoff\Auth\Support\Hash;
 use DragonCode\Contracts\Cashier\Auth\Auth as AuthContract;
 use DragonCode\Contracts\Cashier\Http\Request;
 use DragonCode\Contracts\Cashier\Resources\Model;

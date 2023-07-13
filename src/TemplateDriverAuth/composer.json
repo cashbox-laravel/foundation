@@ -56,7 +56,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "CashierProvider\\BankName\\Auth\\": "src/"
+            "Cashbox\\BankName\\Auth\\": "src/"
         }
     },
     "config": {

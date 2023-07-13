@@ -15,9 +15,9 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\QrCode\Responses;
+namespace Cashbox\Tinkoff\QrCode\Responses;
 
-use CashierProvider\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\ResponseInfo;
 
 class Refund extends ResponseInfo
 {

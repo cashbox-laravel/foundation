@@ -15,11 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Auth;
+namespace Cashbox\BankName\Auth;
 
-use CashierProvider\BankName\Auth\Constants\Keys;
-use CashierProvider\BankName\Auth\Resources\AccessToken;
-use CashierProvider\BankName\Auth\Support\Hash;
+use Cashbox\BankName\Auth\Constants\Keys;
+use Cashbox\BankName\Auth\Resources\AccessToken;
+use Cashbox\BankName\Auth\Support\Hash;
 use DragonCode\Contracts\Cashier\Auth\Auth as AuthContract;
 use DragonCode\Contracts\Cashier\Http\Request;
 use DragonCode\Contracts\Cashier\Resources\Model;

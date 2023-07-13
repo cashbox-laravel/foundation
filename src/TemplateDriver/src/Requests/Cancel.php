@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Requests;
+namespace Cashbox\BankName\Technology\Requests;
 
 class Cancel extends BaseRequest
 {

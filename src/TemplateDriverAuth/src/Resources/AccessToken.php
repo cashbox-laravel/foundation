@@ -13,9 +13,9 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\BankName\Auth\Resources;
+namespace Cashbox\BankName\Auth\Resources;
 
-use CashierProvider\BankName\Auth\Constants\Keys;
+use Cashbox\BankName\Auth\Constants\Keys;
 use DragonCode\Contracts\Cashier\Resources\AccessToken as AccessTokenContract;
 use DragonCode\SimpleDataTransferObject\DataTransferObject;
 use Illuminate\Support\Carbon;

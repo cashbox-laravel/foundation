@@ -15,8 +15,8 @@
 
 namespace Tests;
 
-use CashierProvider\Core\Http\ResponseInfo;
-use CashierProvider\Tinkoff\QrCode\Driver as QR;
+use Cashbox\Core\Http\ResponseInfo;
+use Cashbox\Tinkoff\QrCode\Driver as QR;
 use DragonCode\Contracts\Cashier\Driver as DriverContract;
 use DragonCode\Contracts\Cashier\Http\Response as ResponseContract;
 use DragonCode\Support\Facades\Http\Url;

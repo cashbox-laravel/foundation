@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Auth\Constants;
+namespace Cashbox\BankName\Auth\Constants;
 
 class Keys
 {

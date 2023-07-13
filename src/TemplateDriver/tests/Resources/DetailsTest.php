@@ -15,8 +15,8 @@
 
 namespace Tests\Resources;
 
-use CashierProvider\BankName\Technology\Resources\Details;
-use CashierProvider\Core\Resources\Details as BaseDetails;
+use Cashbox\BankName\Technology\Resources\Details;
+use Cashbox\Core\Resources\Details as BaseDetails;
 use DragonCode\Contracts\Cashier\Resources\Details as DetailsContract;
 use Tests\TestCase;
 

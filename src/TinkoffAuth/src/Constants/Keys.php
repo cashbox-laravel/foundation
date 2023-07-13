@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Auth\Constants;
+namespace Cashbox\Tinkoff\Auth\Constants;
 
 class Keys
 {

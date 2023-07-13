@@ -15,8 +15,8 @@
 
 namespace Tests\Responses;
 
-use CashierProvider\Core\Http\ResponseInfo as BaseResponse;
-use CashierProvider\Tinkoff\QrCode\Responses\Init;
+use Cashbox\Core\Http\ResponseInfo as BaseResponse;
+use Cashbox\Tinkoff\QrCode\Responses\Init;
 use DragonCode\Contracts\Cashier\Http\Response;
 use Tests\TestCase;
 

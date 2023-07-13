@@ -18,7 +18,7 @@ declare(strict_types=1);
 namespace Tests\Support\Hash;
 
 use Carbon\Carbon as BaseCarbon;
-use CashierProvider\Tinkoff\Auth\Support\Hash;
+use Cashbox\Tinkoff\Auth\Support\Hash;
 use DateTimeInterface;
 use DragonCode\Contracts\Cashier\Resources\AccessToken;
 use Illuminate\Support\Carbon;

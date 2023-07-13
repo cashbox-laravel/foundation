@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\QrCode\Requests;
+namespace Cashbox\Tinkoff\QrCode\Requests;
 
 class Init extends BaseRequest
 {

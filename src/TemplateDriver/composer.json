@@ -62,7 +62,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "CashierProvider\\BankName\\Technology\\": "src/"
+            "Cashbox\\BankName\\Technology\\": "src/"
         }
     },
     "config": {

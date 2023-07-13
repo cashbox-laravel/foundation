@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 namespace Tests\Support\Hash;
 
-use CashierProvider\BankName\Auth\Support\Hash;
+use Cashbox\BankName\Auth\Support\Hash;
 use Tests\TestCase;
 
 class MakeTest extends TestCase

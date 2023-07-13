@@ -15,8 +15,8 @@
 
 namespace Tests\Requests;
 
-use CashierProvider\BankName\Technology\Requests\GetState;
-use CashierProvider\Core\Http\Request;
+use Cashbox\BankName\Technology\Requests\GetState;
+use Cashbox\Core\Http\Request;
 use DragonCode\Contracts\Cashier\Http\Request as RequestContract;
 use DragonCode\Contracts\Http\Builder;
 use Tests\TestCase;

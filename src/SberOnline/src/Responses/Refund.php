@@ -15,9 +15,9 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Responses;
+namespace Cashbox\BankName\Technology\Responses;
 
-use CashierProvider\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\ResponseInfo;
 
 class Refund extends ResponseInfo
 {

@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 namespace Tests\Resources\AccessToken;
 
-use CashierProvider\BankName\Auth\Resources\AccessToken;
+use Cashbox\BankName\Auth\Resources\AccessToken;
 use Tests\TestCase;
 
 class GetClientIdTest extends TestCase

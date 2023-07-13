@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 namespace Tests\Resources\AccessToken;
 
-use CashierProvider\Tinkoff\Auth\Resources\AccessToken;
+use Cashbox\Tinkoff\Auth\Resources\AccessToken;
 use DragonCode\Contracts\Cashier\Resources\AccessToken as AccessTokenContract;
 use Tests\TestCase;
 

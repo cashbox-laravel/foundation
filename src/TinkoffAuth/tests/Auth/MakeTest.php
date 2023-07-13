@@ -17,7 +17,7 @@ declare(strict_types=1);
 
 namespace Tests\Auth;
 
-use CashierProvider\Tinkoff\Auth\Auth;
+use Cashbox\Tinkoff\Auth\Auth;
 use DragonCode\Contracts\Cashier\Auth\Auth as AuthContract;
 use Tests\TestCase;
 

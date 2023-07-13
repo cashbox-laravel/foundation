@@ -15,11 +15,11 @@
 
 namespace Tests;
 
-use CashierProvider\BankName\Technology\Driver;
-use CashierProvider\Core\Config\Driver as DriverConfig;
-use CashierProvider\Core\Constants\Driver as DriverConstant;
-use CashierProvider\Core\Facades\Config\Payment as PaymentConfig;
-use CashierProvider\Core\Models\CashierDetail;
+use Cashbox\BankName\Technology\Driver;
+use Cashbox\Core\Config\Driver as DriverConfig;
+use Cashbox\Core\Constants\Driver as DriverConstant;
+use Cashbox\Core\Facades\Config\Payment as PaymentConfig;
+use Cashbox\Core\Models\CashierDetail;
 use DragonCode\Contracts\Cashier\Http\Request;
 use DragonCode\Contracts\Cashier\Resources\Details;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
@@ -101,7 +101,7 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
-     * @param  \CashierProvider\BankName\Technology\Requests\BaseRequest|string  $request
+     * @param  \Cashbox\BankName\Technology\Requests\BaseRequest|string  $request
      */
     protected function request(string $request): Request
     {

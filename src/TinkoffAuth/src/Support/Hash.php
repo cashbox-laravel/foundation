@@ -13,10 +13,10 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Tinkoff\Auth\Support;
+namespace Cashbox\Tinkoff\Auth\Support;
 
-use CashierProvider\Tinkoff\Auth\Constants\Keys;
-use CashierProvider\Tinkoff\Auth\Resources\AccessToken;
+use Cashbox\Tinkoff\Auth\Constants\Keys;
+use Cashbox\Tinkoff\Auth\Resources\AccessToken;
 use DragonCode\Contracts\Cashier\Resources\Model;
 use DragonCode\Support\Concerns\Makeable;
 use DragonCode\Support\Facades\Helpers\Ables\Arrayable;
