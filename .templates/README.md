@@ -13,7 +13,8 @@
 
 ## About Cashbox
 
-`Cashbox for Laravel` provides an expressive and user-friendly interface for managing billing and payment verification services.
+`Cashbox for Laravel` provides an expressive and user-friendly interface for managing billing and payment verification
+services.
 We believe that development should be an enjoyable, creative experience to be truly rewarding.
 `Cashbox` tries to ease development by simplifying the tasks of adding payment systems to a web application.
 
