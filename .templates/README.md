@@ -1,6 +1,6 @@
 # {{title}}
 
-![{{title}}](https://preview.dragon-code.pro/cashbox/{{package}}.svg?brand=laravel&preposition=of)
+![{{title}}](https://preview.dragon-code.pro/{{name}}.svg?brand=laravel&preposition=none)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -37,7 +37,7 @@ We also have Telegram channels where we post announcements:
 ## Contributing
 
 Thank you for considering contributing to the `Cashbox`!
-The contribution guide can be found in the [Cashbox documentation](https://cashbox-laravel.github.io/docs).
+The contribution guide can be found in the [documentation](https://cashbox-laravel.github.io/docs).
 
 ## Code of Conduct
 
@@ -53,14 +53,15 @@ Please review [our security policy](https://cashbox-laravel.github.io/docs) on h
 The `Cashbox` is open-source software that works in conjunction with
 the [Laravel framework](https://laravel.com/), distributed under the MIT license.
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/cashbox/{{package}}.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/cashbox/{{package}}.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/{{name}}.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/cashbox/{{package}}?label=stable&style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/{{name}}.svg?style=flat-square
+
+[badge_stable]:         https://img.shields.io/github/v/release/{{name}}?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/cashbox/{{package}}
+[link_packagist]:       https://packagist.org/packages/{{name}}

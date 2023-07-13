@@ -1,6 +1,6 @@
 {
     "name": "cashbox/tinkoff-auth",
-    "description": "Tinkoff API Authorization Driver",
+    "description": "The Auth driver generates a signature for requests in the Tinkoff API.",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -70,6 +70,7 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         },
+        "title": "Tinkoff Auth Driver",
         "thanks": [
             {
                 "name": "dragon-code/laravel-support",

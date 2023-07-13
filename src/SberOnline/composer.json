@@ -1,6 +1,6 @@
 {
     "name": "cashbox/sber-online",
-    "description": "Driver for payment with TECHNOLOGY codes via BankName (see cashbox/core)",
+    "description": "The Sber Online driver implements payments in the Sber billing system.",
     "type": "library",
     "license": "MIT",
     "keywords": [
@@ -65,6 +65,7 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         },
+        "title": "Sber Online Driver",
         "thanks": [
             {
                 "name": "dragon-code/laravel-support",

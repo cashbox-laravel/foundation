@@ -1,6 +1,6 @@
 {
     "name": "cashbox/tinkoff-qr",
-    "description": "Driver for payment with QR codes via Tinkoff (see cashbox/core)",
+    "description": "The Tinkoff QR Code driver implements payments in the Tinkoff billing system.",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -69,6 +69,7 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         },
+        "title": "Tinkoff QR Code Driver",
         "thanks": [
             {
                 "name": "dragon-code/laravel-support",

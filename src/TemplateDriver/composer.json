@@ -1,6 +1,6 @@
 {
     "name": "cashbox/bankname-technology",
-    "description": "Driver for payment with TECHNOLOGY codes via BankName (see cashbox/core)",
+    "description": "The Technology driver implements payments in the Bank billing system.",
     "license": "MIT",
     "type": "library",
     "keywords": [
@@ -79,6 +79,7 @@
         "branch-alias": {
             "dev-main": "4.x-dev"
         },
+        "title": "Driver Template",
         "thanks": [
             {
                 "name": "dragon-code/laravel-support",

@@ -16,6 +16,8 @@ class License extends Command
     protected function handle(OutputInterface $output): void
     {
         foreach ($this->projects() as $project) {
+            $output->writeln('Processing: ' . $project);
+
             $this->process($this->template(), $project . '/LICENSE');
         }
     }

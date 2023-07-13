@@ -21,9 +21,11 @@ abstract class Command extends BaseCommand
         $this->setName($this->commandName());
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output): void
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->handle($output);
+
+        return static::SUCCESS;
     }
 
     protected function projects(): array

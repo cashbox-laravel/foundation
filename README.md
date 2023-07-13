@@ -38,7 +38,7 @@ We also have Telegram channels where we post announcements:
 ## Contributing
 
 Thank you for considering contributing to the `Cashbox`!
-The contribution guide can be found in the [Cashbox documentation](https://cashbox-laravel.github.io/docs).
+The contribution guide can be found in the [documentation](https://cashbox-laravel.github.io/docs).
 
 ## Code of Conduct
 
@@ -53,6 +53,7 @@ Please review [our security policy](https://cashbox-laravel.github.io/docs) on h
 
 The Cashbox for Laravel is open-source software that works in conjunction with
 the [Laravel framework](https://laravel.com/), distributed under the MIT license.
+
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/cashbox/core.svg?style=flat-square
 
