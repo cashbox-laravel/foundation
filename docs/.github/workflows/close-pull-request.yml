@@ -10,4 +10,4 @@ jobs:
         steps:
             -   uses: superbrothers/close-pull-request@v3
                 with:
-                    comment: "Thank you for your pull request. However, you have submitted this PR on the Cashbox for Laravel organization which is a read-only sub split of `cashbox/foundation`. Please submit your PR on the https://github.com/cashbox/foundation repository.<br><br>Thanks!"
+                    comment: "Thank you for your pull request. However, you have submitted this PR on the Cashbox for Laravel organization which is a read-only sub split of `cashbox/foundation`. Please submit your PR on the https://github.com/cashbox-laravel/foundation repository.<br><br>Thanks!"

@@ -3,65 +3,65 @@
         {
             "name": "docs",
             "directory": "docs",
-            "target": "git@github.com:cashbox/docs.git",
+            "target": "git@github.com:cashbox-laravel/docs.git",
             "release": false
         },
         {
             "name": "core",
             "directory": "src/Core",
-            "target": "git@github.com:cashbox/core.git"
+            "target": "git@github.com:cashbox-laravel/core.git"
         },
         {
             "name": "cash",
             "directory": "src/Cash",
-            "target": "git@github.com:cashbox/cash.git"
+            "target": "git@github.com:cashbox-laravel/cash.git"
         },
         {
             "name": "sber-auth",
             "directory": "src/SberAuth",
-            "target": "git@github.com:cashbox/sber-auth.git"
+            "target": "git@github.com:cashbox-laravel/sber-auth.git"
         },
         {
             "name": "sber-online",
             "directory": "src/SberOnline",
-            "target": "git@github.com:cashbox/sber-online.git",
+            "target": "git@github.com:cashbox-laravel/sber-online.git",
             "release": false
         },
         {
             "name": "sber-qr",
             "directory": "src/SberQrCode",
-            "target": "git@github.com:cashbox/sber-qr.git"
+            "target": "git@github.com:cashbox-laravel/sber-qr.git"
         },
         {
             "name": "tinkoff-auth",
             "directory": "src/TinkoffAuth",
-            "target": "git@github.com:cashbox/tinkoff-auth.git"
+            "target": "git@github.com:cashbox-laravel/tinkoff-auth.git"
         },
         {
             "name": "tinkoff-credit",
             "directory": "src/TinkoffCredit",
-            "target": "git@github.com:cashbox/tinkoff-credit.git"
+            "target": "git@github.com:cashbox-laravel/tinkoff-credit.git"
         },
         {
             "name": "tinkoff-online",
             "directory": "src/TinkoffOnline",
-            "target": "git@github.com:cashbox/tinkoff-online.git"
+            "target": "git@github.com:cashbox-laravel/tinkoff-online.git"
         },
         {
             "name": "tinkoff-qr",
             "directory": "src/TinkoffQrCode",
-            "target": "git@github.com:cashbox/tinkoff-qr.git"
+            "target": "git@github.com:cashbox-laravel/tinkoff-qr.git"
         },
         {
             "name": "driver",
             "directory": "src/TemplateDriver",
-            "target": "git@github.com:cashbox/driver.git",
+            "target": "git@github.com:cashbox-laravel/driver.git",
             "release": false
         },
         {
             "name": "driver-auth",
             "directory": "src/TemplateDriverAuth",
-            "target": "git@github.com:cashbox/driver-auth.git",
+            "target": "git@github.com:cashbox-laravel/driver-auth.git",
             "release": false
         }
     ]

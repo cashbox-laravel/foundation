@@ -9,7 +9,7 @@
  * @copyright 2023 Andrey Helldar
  * @license MIT
  *
- * @see https://github.com/cashbox/foundation
+ * @see https://github.com/cashbox-laravel/foundation
  */
 
 import dotenv from 'dotenv'
@@ -41,9 +41,9 @@ module.exports = {
 
         logo: `https://${ hostname }/images/logo.svg`,
 
-        repo: 'https://github.com/cashbox/foundation',
+        repo: 'https://github.com/cashbox-laravel/foundation',
         repoLabel: 'GitHub',
-        docsRepo: 'https://github.com/cashbox/foundation',
+        docsRepo: 'https://github.com/cashbox-laravel/foundation',
         docsBranch: 'main',
         docsDir: 'docs',
 

@@ -23,7 +23,7 @@ The project contains some ready-made solutions of payment systems, but you can o
 
 This project is common to the development of all drivers.
 In case of problems with any driver, write issues and send PR
-to [Foundation](https://github.com/cashbox/foundation).
+to [Foundation](https://github.com/cashbox-laravel/foundation).
 
 ## Documentation
 
