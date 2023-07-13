@@ -57,6 +57,7 @@
         "symfony/console": "^6.3"
     },
     "require-dev": {
+        "cerbero/json-parser": "^1.0",
         "orchestra/testbench": "^8.5.10",
         "pestphp/pest": "^2.8.2",
         "symfony/var-dumper": "^6.3.1"
