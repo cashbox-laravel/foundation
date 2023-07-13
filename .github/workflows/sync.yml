@@ -38,7 +38,7 @@ jobs:
                 run: |
                     IS_DIRTY=1
 
-                    ./bin/cashbox license
+                    sudo ./bin/cashbox license
 
                     { git add . && git commit -a -m "Updated license files"; } || IS_DIRTY_0
 
@@ -49,7 +49,7 @@ jobs:
                 run: |
                     IS_DIRTY=1
 
-                    ./bin/cashbox readme
+                    sudo ./bin/cashbox readme
 
                     { git add . && git commit -a -m "Updated readme files"; } || IS_DIRTY_0
 
@@ -60,7 +60,7 @@ jobs:
                 run: |
                     IS_DIRTY=1
 
-                    ./bin/cashbox composer
+                    sudo ./bin/cashbox composer
 
                     { git add . && git commit -a -m "Updated \`composer.json\` files"; } || IS_DIRTY_0
 
