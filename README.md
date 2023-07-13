@@ -1,6 +1,6 @@
 # Cashbox for Laravel
 
-![cashbox](https://preview.dragon-code.pro/cashbox/payments.svg?brand=laravel)
+![cashbox payments](https://preview.dragon-code.pro/cashbox/payments.svg?brand=laravel&preposition=with)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
