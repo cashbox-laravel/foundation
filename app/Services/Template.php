@@ -28,6 +28,6 @@ class Template
 
     protected static function store(string $path, string $content): void
     {
-        file_put_contents($path, $content);
+        file_put_contents($path, $content . PHP_EOL);
     }
 }

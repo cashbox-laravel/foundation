@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Commands;
 
 use App\Services\Template;
-use Symfony\Component\Console\Output\OutputInterface;
 
 use function date;
 
@@ -13,18 +12,9 @@ class License extends Command
 {
     protected ?string $template = '.templates/LICENSE';
 
-    protected function handle(OutputInterface $output): void
+    protected function handle(string $source, string $target): void
     {
-        foreach ($this->projects() as $project) {
-            $output->writeln('Processing: ' . $project);
-
-            $this->process($this->template(), $project . '/LICENSE');
-        }
-    }
-
-    protected function process(string $source, string $target): void
-    {
-        Template::replace($source, $target, [
+        Template::replace($source, $target . '/LICENSE', [
             'year' => $this->year(),
         ]);
     }

@@ -1,0 +1,75 @@
+name: Synchronization
+
+on:
+    push:
+        branches:
+            - main
+            - 4.x
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Git setup
+                if: success()
+                run: |
+                    git config --local user.email "action@github.com"
+                    git config --local user.name "GitHub Action"
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
+                    coverage: none
+
+            -   name: Install dependency
+                run: composer global require ergebnis/composer-normalize
+
+            -   name: Install dependencies
+                run: composer update
+
+            -   name: Updating license files
+                id: license
+                run: |
+                    IS_DIRTY=1
+
+                    ./bin/cashbox license
+
+                    { git add . && git commit -a -m "Updated license files"; } || IS_DIRTY_0
+
+                    echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
+
+            -   name: Updating readme files
+                id: readme
+                run: |
+                    IS_DIRTY=1
+
+                    ./bin/cashbox readme
+
+                    { git add . && git commit -a -m "Updated readme files"; } || IS_DIRTY_0
+
+                    echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
+
+            -   name: Updating composer.json files
+                id: composer
+                run: |
+                    IS_DIRTY=1
+
+                    ./bin/cashbox composer
+
+                    { git add . && git commit -a -m "Updated \`composer.json\` files"; } || IS_DIRTY_0
+
+                    echo "is_dirty=${IS_DIRTY}" >> $GITHUB_OUTPUT
+
+            -   name: Push changes
+                uses: ad-m/github-push-action@master
+                if: steps.license.outputs.is_dirty == 1 || \
+                    steps.readme.outputs.is_dirty == 1 || \
+                    steps.composer.outputs.is_dirty == 1
+                with:
+                    github_token: ${{ secrets.COMPOSER_TOKEN }}

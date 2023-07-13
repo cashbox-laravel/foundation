@@ -14,7 +14,7 @@ abstract class Command extends BaseCommand
 {
     protected ?string $template = null;
 
-    abstract protected function handle(OutputInterface $output): void;
+    abstract protected function handle(string $source, string $target): void;
 
     protected function configure(): void
     {
@@ -23,10 +23,22 @@ abstract class Command extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->handle($output);
+        $this->prepare();
+
+        foreach ($this->projects() as $project) {
+            $output->writeln('Processing: ' . $project);
+
+            $this->handle($this->template(), $project);
+        }
+
+        $this->finish();
 
         return static::SUCCESS;
     }
+
+    protected function prepare(): void {}
+
+    protected function finish(): void {}
 
     protected function projects(): array
     {
