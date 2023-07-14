@@ -5,11 +5,13 @@ namespace Tests;
 use Cashbox\Cash\Driver;
 use Cashbox\Core\Enums\AttributeEnum;
 use Cashbox\Core\Enums\StatusEnum;
+use Cashbox\Core\Providers\BindingServiceProvider;
 use Cashbox\Core\Providers\ObserverServiceProvider;
 use Cashbox\Core\Providers\RateLimiterServiceProvider;
 use Cashbox\Core\Providers\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as BaseTestCase;
+use Spatie\LaravelData\LaravelDataServiceProvider;
 use Tests\Fixtures\Details\CashPaymentDetails;
 use Tests\Fixtures\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
@@ -23,8 +25,10 @@ abstract class TestCase extends BaseTestCase
     protected function getPackageProviders($app): array
     {
         return [
+            LaravelDataServiceProvider::class,
             TestServiceProvider::class,
             ServiceProvider::class,
+            BindingServiceProvider::class,
             ObserverServiceProvider::class,
             RateLimiterServiceProvider::class,
         ];
@@ -48,6 +52,24 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('cashbox.drivers.' . TypeEnum::cash(), [
             'driver'  => Driver::class,
             'details' => CashPaymentDetails::class,
+        ]);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::cash() . '_1', [
+            'driver'  => Driver::class,
+            'details' => CashPaymentDetails::class,
+            'queue'   => [
+                'start'  => 'q4',
+                'verify' => 'q5',
+                'refund' => 'q6',
+            ],
+        ]);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::cash() . '_2', [
+            'driver'  => Driver::class,
+            'details' => CashPaymentDetails::class,
+            'queue'   => [
+                'start' => 'q4',
+            ],
         ]);
     }
 }

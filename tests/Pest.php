@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Facade;
 use Tests\Fixtures\Enums\TypeEnum;
 use Tests\Fixtures\Models\PaymentModel;
 use Tests\TestCase;
@@ -33,20 +34,6 @@ expect()->extend('toBeOne', function () {
     return $this->toBe(1);
 });
 
-function tableToBeNotEmpty(string $table): void
-{
-    expect(
-        DB::table($table)->exists()
-    )->toBeTrue();
-}
-
-function tableToBeEmpty(string $table): void
-{
-    expect(
-        DB::table($table)->doesntExist()
-    )->toBeTrue();
-}
-
 /*
 |--------------------------------------------------------------------------
 | Functions
@@ -57,6 +44,15 @@ function tableToBeEmpty(string $table): void
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
+
+function forget(string $class, Facade|string|null $facade = null): void
+{
+    if ($facade) {
+        $facade::clearResolvedInstances();
+    }
+
+    App::forgetInstance($class);
+}
 
 function createPayment(TypeEnum $type, ?float $price = null): PaymentModel
 {
