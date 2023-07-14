@@ -42,7 +42,7 @@
         "php": "^8.1",
         "cashbox/bankname-auth": "^3.0",
         "cashbox/core": "^3.0",
-        "psr/http-message": "^1.1"
+        "psr/http-message": "^2.0"
     },
     "require-dev": {
         "ext-json": "*",

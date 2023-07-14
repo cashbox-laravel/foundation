@@ -58,7 +58,7 @@
         "illuminate/queue": "^10.15",
         "illuminate/support": "^10.15",
         "nesbot/carbon": "^2.68.1",
-        "psr/http-message": "^1.1",
+        "psr/http-message": "^2.0",
         "psr/log": "^3.0",
         "spatie/laravel-data": "^3.7",
         "symfony/console": "^6.3"
