@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="parallel" type="PestRunConfigurationType">
+    <option name="pestRunnerSettings">
+      <PestRunner directory="$PROJECT_DIR$/tests" method="" options="--parallel --processes=4 --compact" />
+    </option>
+    <option name="runnerSettings">
+      <PhpTestRunnerSettings directory="$PROJECT_DIR$/tests" method="" options="--parallel --processes=4 --compact" />
+    </option>
+    <method v="2" />
+  </configuration>
+</component>

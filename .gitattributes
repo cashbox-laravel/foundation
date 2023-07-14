@@ -3,6 +3,7 @@
 .github/ export-ignore
 .idea/ export-ignore
 .requests/ export-ignore
+.run/ export-ignore
 
 tests/ export-ignore
 
