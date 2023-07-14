@@ -23,10 +23,12 @@
          stopOnFailure="false"
 >
     <php>
+        <ini name="date.timezone" value="UTC" />
+        <ini name="intl.default_locale" value="C.UTF-8" />
+        <ini name="memory_limit" value="2048M" />
         <env name="APP_KEY" value="base64:cW+4bNmhMQKcLH/+u+uByODdGBuXAgd1nzZpufnIwks=" />
         <env name="APP_ENV" value="testing" />
-        <env name="DB_CONNECTION" value="sqlite" />
-        <env name="DB_DATABASE" value=":memory:" />
+        <env name="DB_CONNECTION" value="testing" />
         <env name="QUEUE_CONNECTION" value="sync" />
     </php>
     <coverage>

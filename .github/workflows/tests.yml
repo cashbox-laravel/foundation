@@ -3,16 +3,28 @@ name: Tests
 on: [ push, pull_request ]
 
 jobs:
-    ci:
-        runs-on: ubuntu-latest
+    mysql:
+        runs-on: ${{ matrix.os }}
+        
+        name: OS ${{ matrix.os }}, MySQL ${{ matrix.db }}, PHP ${{ matrix.php }}
         
         strategy:
             fail-fast: true
             matrix:
+                os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
                 php: [ "8.1", "8.2" ]
+                db: [ "8" ]
         
-        name: PHP ${{ matrix.php }}
-        
+        services:
+            mysql:
+                image: mysql:${{ matrix.db }}
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: yes
+                    MYSQL_DATABASE: forge
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
         steps:
             -   name: Checkout code
                 uses: actions/checkout@v3
@@ -21,11 +33,158 @@ jobs:
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php }}
-                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, bcmath
-                    coverage: xdebug
+                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, json
+                    coverage: none
 
             -   name: Install dependencies
-                run: composer install --no-interaction --prefer-dist --optimize-autoloader
+                uses: nick-fields/retry@v2
+                with:
+                    timeout_minutes: 5
+                    max_attempts: 5
+                    command: composer update --prefer-stable --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
             -   name: Execute tests
-                run: sudo vendor/bin/pest --parallel --compact
+                run: vendor/bin/pest --parallel --compact
+                env:
+                    DB_CONNECTION: mysql
+                    DB_USERNAME: root
+    
+    mariadb:
+        runs-on: ${{ matrix.os }}
+
+        name: OS ${{ matrix.os }}, MariaDB ${{ matrix.db }}, PHP ${{ matrix.php }}
+
+        strategy:
+            fail-fast: true
+            matrix:
+                os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
+                php: [ "8.1", "8.2" ]
+                db: [ "10" ]
+
+        services:
+            mysql:
+                image: mariadb:${{ matrix.db }}
+                env:
+                    MYSQL_ALLOW_EMPTY_PASSWORD: yes
+                    MYSQL_DATABASE: forge
+                ports:
+                    - 3306:3306
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, json
+                    coverage: none
+
+            -   name: Install dependencies
+                uses: nick-fields/retry@v2
+                with:
+                    timeout_minutes: 5
+                    max_attempts: 5
+                    command: composer update --prefer-stable --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+            -   name: Execute tests
+                run: vendor/bin/pest --parallel --compact
+                env:
+                    DB_CONNECTION: mysql
+                    DB_USERNAME: root
+    
+    pgsql:
+        runs-on: ${{ matrix.os }}
+
+        name: OS ${{ matrix.os }}, PostgreSQL ${{ matrix.db }}, PHP ${{ matrix.php }}
+
+        strategy:
+            fail-fast: true
+            matrix:
+                os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
+                php: [ "8.1", "8.2" ]
+                db: [ "14", "15" ]
+
+        services:
+            postgresql:
+                image: postgres:${{ matrix.db }}
+                env:
+                    POSTGRES_DB: forge
+                    POSTGRES_USER: forge
+                    POSTGRES_PASSWORD: password
+                ports:
+                    - 5432:5432
+                options: --health-cmd=pg_isready --health-interval=10s --health-timeout=5s --health-retries=3
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, json
+                    coverage: none
+
+            -   name: Install dependencies
+                uses: nick-fields/retry@v2
+                with:
+                    timeout_minutes: 5
+                    max_attempts: 5
+                    command: composer update --prefer-stable --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+            -   name: Execute tests
+                run: vendor/bin/pest --parallel --compact
+                env:
+                    DB_CONNECTION: pgsql
+                    DB_PASSWORD: password
+    
+    mssql:
+        runs-on: ${{ matrix.os }}
+
+        name: OS ${{ matrix.os }}, SQL Server ${{ matrix.db }}, PHP ${{ matrix.php }}
+
+        strategy:
+            fail-fast: true
+            matrix:
+                os: [ "ubuntu-latest", "macos-latest", "windows-latest" ]
+                php: [ "8.1", "8.2" ]
+                db: [ "2019-latest", "2022-latest" ]
+
+        services:
+            sqlsrv:
+                image: mcr.microsoft.com/mssql/server:${{ matrix.db }}
+                env:
+                    ACCEPT_EULA: Y
+                    SA_PASSWORD: Forge123
+                ports:
+                    - 1433:1433
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, pdo_mysql, json
+                    coverage: none
+
+            -   name: Install dependencies
+                uses: nick-fields/retry@v2
+                with:
+                    timeout_minutes: 5
+                    max_attempts: 5
+                    command: composer update --prefer-stable --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+            -   name: Execute tests
+                run: vendor/bin/pest --parallel --compact
+                env:
+                    DB_CONNECTION: sqlsrv
+                    DB_DATABASE: master
+                    DB_USERNAME: SA
+                    DB_PASSWORD: Forge123
