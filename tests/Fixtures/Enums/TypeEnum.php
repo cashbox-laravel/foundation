@@ -8,10 +8,12 @@ use ArchTech\Enums\InvokableCases;
 
 /**
  * @method static string cash()
+ * @method static string outside()
  */
 enum TypeEnum: string
 {
     use InvokableCases;
 
-    case cash = 'cash';
+    case cash    = 'cash';
+    case outside = 'outside';
 }

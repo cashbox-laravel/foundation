@@ -24,5 +24,7 @@ class PaymentModel extends Model
     protected $casts = [
         'type'   => TypeEnum::class,
         'status' => StatusEnum::class,
+
+        'price' => 'float',
     ];
 }
