@@ -6,7 +6,7 @@ jobs:
     mysql:
         runs-on: ${{ matrix.os }}
         
-        name: OS ${{ matrix.os }}, MySQL ${{ matrix.db }}, PHP ${{ matrix.php }}
+        name: ${{ matrix.os }}, MySQL ${{ matrix.db }}, PHP ${{ matrix.php }}
         
         strategy:
             fail-fast: true
@@ -52,7 +52,7 @@ jobs:
     mariadb:
         runs-on: ${{ matrix.os }}
 
-        name: OS ${{ matrix.os }}, MariaDB ${{ matrix.db }}, PHP ${{ matrix.php }}
+        name: ${{ matrix.os }}, MariaDB ${{ matrix.db }}, PHP ${{ matrix.php }}
 
         strategy:
             fail-fast: true
@@ -98,7 +98,7 @@ jobs:
     pgsql:
         runs-on: ${{ matrix.os }}
 
-        name: OS ${{ matrix.os }}, PostgreSQL ${{ matrix.db }}, PHP ${{ matrix.php }}
+        name: ${{ matrix.os }}, PostgreSQL ${{ matrix.db }}, PHP ${{ matrix.php }}
 
         strategy:
             fail-fast: true
@@ -145,7 +145,7 @@ jobs:
     mssql:
         runs-on: ${{ matrix.os }}
 
-        name: OS ${{ matrix.os }}, SQL Server ${{ matrix.db }}, PHP ${{ matrix.php }}
+        name: ${{ matrix.os }}, SQL Server ${{ matrix.db }}, PHP ${{ matrix.php }}
 
         strategy:
             fail-fast: true
