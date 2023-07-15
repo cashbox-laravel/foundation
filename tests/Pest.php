@@ -2,7 +2,9 @@
 
 use Cashbox\Core\Data\Config\ConfigData;
 use Cashbox\Core\Facades\Config;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Facade;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
@@ -35,9 +37,9 @@ uses(TestCase::class)->in('Unit');
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
+//expect()->extend('toBeOne', function () {
+//    return $this->toBe(1);
+//});
 
 /*
 |--------------------------------------------------------------------------
@@ -64,11 +66,16 @@ function forgetConfig(): void
     forget(ConfigData::class, Config::class);
 }
 
-function createPayment(TypeEnum $type, ?float $price = null): PaymentModel
+function createPayment(TypeEnum $type, ?int $price = null): PaymentModel
 {
     $price ??= random_int(1, 50000);
 
     return PaymentModel::create(compact('type', 'price'));
+}
+
+function paymentTable(): Builder
+{
+    return DB::table('payments');
 }
 
 function fakeDataProperty(): DataProperty
