@@ -1,7 +1,11 @@
 <?php
 
+use Cashbox\Core\Data\Config\ConfigData;
+use Cashbox\Core\Facades\Config;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
+use Spatie\LaravelData\Support\DataProperty;
+use Tests\Fixtures\Data\FakeData;
 use Tests\Fixtures\Enums\TypeEnum;
 use Tests\Fixtures\Models\PaymentModel;
 use Tests\TestCase;
@@ -54,9 +58,28 @@ function forget(string $class, Facade|string|null $facade = null): void
     App::forgetInstance($class);
 }
 
+function forgetConfig(): void
+{
+    forget(ConfigData::class, Config::class);
+}
+
 function createPayment(TypeEnum $type, ?float $price = null): PaymentModel
 {
     $price ??= random_int(1, 50000);
 
     return PaymentModel::create(compact('type', 'price'));
+}
+
+function fakeDataProperty(): DataProperty
+{
+    $reflection = new ReflectionProperty(FakeData::class, 'foo');
+
+    return DataProperty::create($reflection);
+}
+
+function dataCast(string $cast, mixed $value, ?DataProperty $property = null, array $context = []): mixed
+{
+    $property ??= fakeDataProperty();
+
+    return (new $cast())->cast($property, $value, $context);
 }

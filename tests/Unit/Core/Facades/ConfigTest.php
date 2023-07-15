@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use Cashbox\Cash\Driver;
-use Cashbox\Core\Data\Config\ConfigData;
 use Cashbox\Core\Exceptions\Internal\ConfigCannotBeEmptyException;
 use Cashbox\Core\Facades\Config;
 use Tests\Fixtures\Details\CashPaymentDetails;
@@ -12,7 +11,7 @@ use Tests\Fixtures\Enums\TypeEnum;
 use Tests\Fixtures\Models\PaymentModel;
 
 it('should return an error when running an empty config file', function () {
-    forget(ConfigData::class, Config::class);
+    forgetConfig();
 
     config(['cashbox' => []]);
 
@@ -75,55 +74,18 @@ it('checks the queue block', function () {
     expect($data->name->refund)->toBeNull();
 });
 
-it('should be correct tries', function (int $set, int $tries, int $exceptions) {
-    forget(ConfigData::class, Config::class);
+it('checks the verify block', function () {
+    $data = Config::verify();
 
-    config(['cashbox.queue.tries' => $set]);
-    config(['cashbox.queue.exceptions' => $set]);
+    expect($data->delay)->toBe(3);
+    expect($data->timeout)->toBe(30);
+});
 
-    expect(Config::queue()->tries)->toBe($tries);
-    expect(Config::queue()->exceptions)->toBe($exceptions);
-})->with([
-    [-10, 1, 1],
-    [794, 50, 10],
-    [51, 50, 10],
-    [50, 50, 10],
-    [1, 1, 1],
-]);
+it('checks the refund block', function () {
+    forgetConfig();
 
-it('checks the verify block', function (int $set, int $delay, int $timeout) {
-    forget(ConfigData::class, Config::class);
-
-    config(['cashbox.verify.delay' => $set]);
-    config(['cashbox.verify.timeout' => $set]);
-
-    expect(Config::verify()->delay)->toBe($delay);
-    expect(Config::verify()->timeout)->toBe($timeout);
-})->with([
-    [-10, 0, 0],
-    [0, 0, 0],
-    [1, 1, 1],
-    [10, 10, 10],
-    [50, 50, 30],
-    [100, 60, 30],
-]);
-
-it('checks the refund block', function (int $set, int $delay) {
-    forget(ConfigData::class, Config::class);
-
-    config(['cashbox.auto_refund.delay' => $set]);
-
-    expect(Config::refund()->delay)->toBe($delay);
-})->with([
-    [-10, 0],
-    [0, 0],
-    [1, 1],
-    [10, 10],
-    [50, 50],
-    [100, 100],
-    [600, 600],
-    [700, 600],
-]);
+    expect(Config::refund()->delay)->toBe(600);
+});
 
 it('should return an error when accessing a non-existent driver', function () {
     expect(
@@ -148,7 +110,7 @@ it('should check the driver settings', function () {
 it(
     'should check the correctness of getting the name of the queue for the job',
     function (array $main, array $driver, array $expected) {
-        forget(ConfigData::class, Config::class);
+        forgetConfig();
 
         $name = TypeEnum::cash();
 
