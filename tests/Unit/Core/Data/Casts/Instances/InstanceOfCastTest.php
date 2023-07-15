@@ -6,8 +6,8 @@ use Cashbox\Core\Billable;
 use Cashbox\Core\Data\Casts\Instances\InstanceOfCast;
 use Cashbox\Core\Exceptions\Internal\IncorrectModelException;
 use Cashbox\Core\Services\Driver;
+use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Data\FakeData;
-use Tests\Fixtures\Models\PaymentModel;
 
 it('must be correct', function () {
     expect(

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Models;
+namespace Tests\Fixtures\App\Models;
 
 use Cashbox\Core\Billable;
 use Illuminate\Database\Eloquent\Model;
-use Tests\Fixtures\Enums\StatusEnum;
-use Tests\Fixtures\Enums\TypeEnum;
+use Tests\Fixtures\App\Enums\StatusEnum;
+use Tests\Fixtures\App\Enums\TypeEnum;
 
 class PaymentModel extends Model
 {

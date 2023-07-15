@@ -9,11 +9,11 @@ use Cashbox\Core\Exceptions\Internal\IncorrectResourceException;
 use Cashbox\Core\Facades\Config;
 use Cashbox\Core\Resources\Resource;
 use Cashbox\Core\Services\Driver;
+use Tests\Fixtures\App\Enums\StatusEnum;
+use Tests\Fixtures\App\Enums\TypeEnum;
+use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Data\FakeData;
-use Tests\Fixtures\Enums\StatusEnum;
-use Tests\Fixtures\Enums\TypeEnum;
-use Tests\Fixtures\Models\PaymentModel;
-use Tests\Fixtures\Payments\Cash;
+use Tests\Fixtures\Drivers\Cash\Payments\Cash;
 
 it('should return an error when running an empty config file', function () {
     forgetConfig();

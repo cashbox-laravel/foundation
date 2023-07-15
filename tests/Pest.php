@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
+use Tests\Fixtures\App\Enums\TypeEnum;
+use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Data\FakeData;
-use Tests\Fixtures\Enums\TypeEnum;
-use Tests\Fixtures\Models\PaymentModel;
 use Tests\TestCase;
 
 /*

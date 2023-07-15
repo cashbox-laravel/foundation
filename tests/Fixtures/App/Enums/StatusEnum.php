@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Enums;
+namespace Tests\Fixtures\App\Enums;
 
 enum StatusEnum: int
 {

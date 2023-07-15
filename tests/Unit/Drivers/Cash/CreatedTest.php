@@ -13,8 +13,8 @@ use Cashbox\Core\Jobs\VerifyJob;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
-use Tests\Fixtures\Enums\StatusEnum;
-use Tests\Fixtures\Enums\TypeEnum;
+use Tests\Fixtures\App\Enums\StatusEnum;
+use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the create', function () {
     fakes();

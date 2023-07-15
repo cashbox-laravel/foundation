@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Cashbox\Core\Data\Casts\FromEnumCast;
-use Tests\Fixtures\Enums\TypeEnum;
+use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('must be a enum', function () {
     expect(
