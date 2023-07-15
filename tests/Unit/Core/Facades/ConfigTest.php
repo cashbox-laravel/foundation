@@ -2,13 +2,18 @@
 
 declare(strict_types=1);
 
-use Cashbox\Cash\Driver;
+use Cashbox\Cash\Driver as CashDriver;
 use Cashbox\Core\Exceptions\Internal\ConfigCannotBeEmptyException;
+use Cashbox\Core\Exceptions\Internal\IncorrectDriverException;
+use Cashbox\Core\Exceptions\Internal\IncorrectResourceException;
 use Cashbox\Core\Facades\Config;
-use Tests\Fixtures\Details\CashPaymentDetails;
+use Cashbox\Core\Resources\Resource;
+use Cashbox\Core\Services\Driver;
+use Tests\Fixtures\Data\FakeData;
 use Tests\Fixtures\Enums\StatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 use Tests\Fixtures\Models\PaymentModel;
+use Tests\Fixtures\Payments\Cash;
 
 it('should return an error when running an empty config file', function () {
     forgetConfig();
@@ -33,6 +38,8 @@ it('checks the payment block', function () {
 
     expect($data->attribute->type)->toBe('type');
     expect($data->attribute->status)->toBe('status');
+    expect($data->attribute->sum)->toBe('sum');
+    expect($data->attribute->currency)->toBe('currency');
     expect($data->attribute->createdAt)->toBe('created_at');
 
     expect($data->status->new)->toBe(StatusEnum::new);
@@ -97,8 +104,8 @@ it('should check the driver settings', function () {
     // cash
     $cash = Config::driver(TypeEnum::cash());
 
-    expect($cash->driver)->toBe(Driver::class);
-    expect($cash->details)->toBe(CashPaymentDetails::class);
+    expect($cash->driver)->toBe(CashDriver::class);
+    expect($cash->resource)->toBe(Cash::class);
     expect($cash->credentials)->toBeNull();
     expect($cash->queue)->toBeNull();
 
@@ -106,6 +113,34 @@ it('should check the driver settings', function () {
     expect($cash->getQueue()->verify)->toBeNull();
     expect($cash->getQueue()->refund)->toBeNull();
 });
+
+it('should check the driver instance', function () {
+    forgetConfig();
+
+    $name = TypeEnum::cash();
+
+    config(["cashbox.drivers.$name.driver" => FakeData::class]);
+
+    Config::driver($name)->driver;
+})
+    ->throws(IncorrectDriverException::class)
+    ->expectExceptionMessage(
+        sprintf('The "%s" class must implement "%s".', FakeData::class, Driver::class)
+    );
+
+it('should check the resource instance', function () {
+    forgetConfig();
+
+    $name = TypeEnum::cash();
+
+    config(["cashbox.drivers.$name.resource" => FakeData::class]);
+
+    Config::driver($name)->resource;
+})
+    ->throws(IncorrectResourceException::class)
+    ->expectExceptionMessage(
+        sprintf('The "%s" class must implement "%s".', FakeData::class, Resource::class)
+    );
 
 it(
     'should check the correctness of getting the name of the queue for the job',

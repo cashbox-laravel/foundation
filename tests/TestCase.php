@@ -12,10 +12,10 @@ use Cashbox\Core\Providers\ServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\LaravelData\LaravelDataServiceProvider;
-use Tests\Fixtures\Details\CashPaymentDetails;
 use Tests\Fixtures\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 use Tests\Fixtures\Models\PaymentModel;
+use Tests\Fixtures\Payments\Cash;
 use Tests\Fixtures\Providers\TestServiceProvider;
 
 abstract class TestCase extends BaseTestCase
@@ -50,8 +50,8 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('cashbox.payment.drivers.' . TypeEnum::cash(), TypeEnum::cash());
 
         $app['config']->set('cashbox.drivers.' . TypeEnum::cash(), [
-            'driver'  => Driver::class,
-            'details' => CashPaymentDetails::class,
+            'driver'   => Driver::class,
+            'resource' => Cash::class,
         ]);
     }
 }

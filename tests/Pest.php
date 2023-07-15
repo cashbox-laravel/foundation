@@ -4,6 +4,7 @@ use Cashbox\Core\Data\Config\ConfigData;
 use Cashbox\Core\Facades\Config;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Facade;
+use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
 use Tests\Fixtures\Data\FakeData;
 use Tests\Fixtures\Enums\TypeEnum;
@@ -77,9 +78,11 @@ function fakeDataProperty(): DataProperty
     return DataProperty::create($reflection);
 }
 
-function dataCast(string $cast, mixed $value, ?DataProperty $property = null, array $context = []): mixed
+function dataCast(Cast|string $cast, mixed $value, ?DataProperty $property = null, array $context = []): mixed
 {
     $property ??= fakeDataProperty();
 
-    return (new $cast())->cast($property, $value, $context);
+    $cast = is_string($cast) ? new $cast() : $cast;
+
+    return $cast->cast($property, $value, $context);
 }
