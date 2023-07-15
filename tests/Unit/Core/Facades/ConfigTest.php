@@ -131,7 +131,7 @@ it('should return an error when accessing a non-existent driver', function () {
     )->toBeNull();
 });
 
-it('should check the correctness of the driver settings', function () {
+it('should check the driver settings', function () {
     // cash
     $cash = Config::driver(TypeEnum::cash());
 
@@ -147,36 +147,49 @@ it('should check the correctness of the driver settings', function () {
 
 it(
     'should check the correctness of getting the name of the queue for the job',
-    function (
-        string $name,
-        ?string $ms,
-        ?string $mv,
-        ?string $mr,
-        ?string $ds,
-        ?string $dv,
-        ?string $dr,
-        ?string $bs,
-        ?string $bv,
-        ?string $br
-    ) {
+    function (array $main, array $driver, array $expected) {
         forget(ConfigData::class, Config::class);
 
-        config(['cashbox.queue.name.start' => $ms]);
-        config(['cashbox.queue.name.verify' => $mv]);
-        config(['cashbox.queue.name.refund' => $mr]);
+        $name = TypeEnum::cash();
 
-        config(["cashbox.drivers.$name.start" => $ds]);
-        config(["cashbox.drivers.$name.verify" => $dv]);
-        config(["cashbox.drivers.$name.refund" => $dr]);
+        config(['cashbox.queue.name' => $main]);
+        config(["cashbox.drivers.$name.queue" => $driver]);
 
         $item = Config::driver($name);
 
-        expect($item->getQueue()->start)->toBe($bs);
-        expect($item->getQueue()->verify)->toBe($bv);
-        expect($item->getQueue()->refund)->toBe($br);
+        expect($item->getQueue()->start)->toBe($expected['start']);
+        expect($item->getQueue()->verify)->toBe($expected['verify']);
+        expect($item->getQueue()->refund)->toBe($expected['refund']);
     }
 )->with([
-    [TypeEnum::cash(), 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q1', 'q2', 'q3'],
-    [TypeEnum::cash() . '_1', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q4', 'q5', 'q6'],
-    [TypeEnum::cash() . '_2', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q4', null, null],
+    'filled'       => [
+        driverData('q1', 'q2', 'q3'),
+        driverData('q4', 'q5', 'q6'),
+        driverData('q4', 'q5', 'q6'),
+    ],
+    'partial'      => [
+        driverData('q1', 'q2', 'q3'),
+        driverData('q4', null, null),
+        driverData('q4', null, null),
+    ],
+    'driver empty' => [
+        driverData('q1', 'q2', 'q3'),
+        [],
+        driverData(null, null, null),
+    ],
+    'main empty'   => [
+        [],
+        driverData('q4', 'q5', 'q6'),
+        driverData('q4', 'q5', 'q6'),
+    ],
+    'full empty'   => [
+        [],
+        [],
+        driverData(null, null, null),
+    ],
 ]);
+
+function driverData(?string $start, ?string $verify, ?string $refund): array
+{
+    return compact('start', 'verify', 'refund');
+}

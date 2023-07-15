@@ -53,23 +53,5 @@ abstract class TestCase extends BaseTestCase
             'driver'  => Driver::class,
             'details' => CashPaymentDetails::class,
         ]);
-
-        $app['config']->set('cashbox.drivers.' . TypeEnum::cash() . '_1', [
-            'driver'  => Driver::class,
-            'details' => CashPaymentDetails::class,
-            'queue'   => [
-                'start'  => 'q4',
-                'verify' => 'q5',
-                'refund' => 'q6',
-            ],
-        ]);
-
-        $app['config']->set('cashbox.drivers.' . TypeEnum::cash() . '_2', [
-            'driver'  => Driver::class,
-            'details' => CashPaymentDetails::class,
-            'queue'   => [
-                'start' => 'q4',
-            ],
-        ]);
     }
 }
