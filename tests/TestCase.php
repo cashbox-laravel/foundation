@@ -47,7 +47,7 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('cashbox.payment.status.' . StatusEnum::refund(), TestStatusEnum::refund);
         $app['config']->set('cashbox.payment.status.' . StatusEnum::failed(), TestStatusEnum::failed);
 
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::cash(), TypeEnum::cash());
+        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::cash(), TypeEnum::cash);
 
         $app['config']->set('cashbox.drivers.' . TypeEnum::cash(), [
             'driver'   => Driver::class,
