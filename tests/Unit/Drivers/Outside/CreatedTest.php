@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Queue;
 use Tests\Fixtures\Enums\StatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 
-it('checks for ignoring unspecified types of payments', function () {
+it('checks the create', function () {
     Event::fake();
     Queue::fake();
 

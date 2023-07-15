@@ -12,15 +12,24 @@ use Cashbox\Core\Jobs\StartJob;
 use Cashbox\Core\Jobs\VerifyJob;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Queue;
+use Tests\Fixtures\Enums\StatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 
-it('checks for ignoring unspecified types of payments', function () {
+it('checks the failed', function () {
     Event::fake();
     Queue::fake();
 
     expect(paymentTable()->count())->toBe(0);
 
-    createPayment(TypeEnum::outside);
+    $payment = createPayment(TypeEnum::outside)->refresh();
+
+    expect($payment->price)->toBeInt();
+    expect($payment->type)->toBe(TypeEnum::outside);
+    expect($payment->status)->toBe(StatusEnum::new);
+
+    $payment->update(['status' => StatusEnum::failed]);
+
+    expect($payment->refresh()->status)->toBe(StatusEnum::failed);
 
     expect(paymentTable()->count())->toBe(1);
 
