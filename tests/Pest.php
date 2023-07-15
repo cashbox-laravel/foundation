@@ -1,11 +1,22 @@
 <?php
 
 use Cashbox\Core\Data\Config\ConfigData;
+use Cashbox\Core\Events\CreatedEvent;
+use Cashbox\Core\Events\FailedEvent;
+use Cashbox\Core\Events\RefundedEvent;
+use Cashbox\Core\Events\SuccessEvent;
+use Cashbox\Core\Events\WaitRefundEvent;
 use Cashbox\Core\Facades\Config;
+use Cashbox\Core\Jobs\RefundJob;
+use Cashbox\Core\Jobs\StartJob;
+use Cashbox\Core\Jobs\VerifyJob;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
 use Tests\Fixtures\Data\FakeData;
@@ -92,4 +103,29 @@ function dataCast(Cast|string $cast, mixed $value, ?DataProperty $property = nul
     $cast = is_string($cast) ? new $cast() : $cast;
 
     return $cast->cast($property, $value, $context);
+}
+
+function fakes(bool $events = true, bool $queue = true, bool $http = true): void
+{
+    if ($events) {
+        Event::fake([
+            CreatedEvent::class,
+            FailedEvent::class,
+            RefundedEvent::class,
+            SuccessEvent::class,
+            WaitRefundEvent::class,
+        ]);
+    }
+
+    if ($queue) {
+        Queue::fake([
+            StartJob::class,
+            VerifyJob::class,
+            RefundJob::class,
+        ]);
+    }
+
+    if ($http) {
+        Http::fake();
+    }
 }

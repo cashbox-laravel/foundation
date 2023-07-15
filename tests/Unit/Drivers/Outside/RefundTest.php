@@ -16,8 +16,7 @@ use Tests\Fixtures\Enums\StatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 
 it('checks the wait to refund', function () {
-    Event::fake();
-    Queue::fake();
+    fakes();
 
     expect(paymentTable()->count())->toBe(0);
 

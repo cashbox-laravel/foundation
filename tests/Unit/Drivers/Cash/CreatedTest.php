@@ -11,34 +11,33 @@ use Cashbox\Core\Jobs\RefundJob;
 use Cashbox\Core\Jobs\StartJob;
 use Cashbox\Core\Jobs\VerifyJob;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Queue;
 use Tests\Fixtures\Enums\StatusEnum;
 use Tests\Fixtures\Enums\TypeEnum;
 
-it('checks the failed', function () {
+it('checks the create', function () {
     fakes();
 
     expect(paymentTable()->count())->toBe(0);
 
-    $payment = createPayment(TypeEnum::outside)->refresh();
+    $payment = createPayment(TypeEnum::cash)->refresh();
 
     expect($payment->price)->toBeInt();
-    expect($payment->type)->toBe(TypeEnum::outside);
+    expect($payment->type)->toBe(TypeEnum::cash);
     expect($payment->status)->toBe(StatusEnum::new);
-
-    $payment->update(['status' => StatusEnum::failed]);
-
-    expect($payment->refresh()->status)->toBe(StatusEnum::failed);
 
     expect(paymentTable()->count())->toBe(1);
 
-    Event::assertNotDispatched(CreatedEvent::class);
+    Event::assertDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);
     Event::assertNotDispatched(RefundedEvent::class);
     Event::assertNotDispatched(SuccessEvent::class);
     Event::assertNotDispatched(WaitRefundEvent::class);
 
-    Queue::assertNotPushed(StartJob::class);
+    Queue::assertPushed(StartJob::class);
     Queue::assertNotPushed(VerifyJob::class);
     Queue::assertNotPushed(RefundJob::class);
+
+    Http::assertNothingSent();
 });
