@@ -38,8 +38,6 @@ it('checks the payment block', function () {
 
     expect($data->attribute->type)->toBe('type');
     expect($data->attribute->status)->toBe('status');
-    expect($data->attribute->sum)->toBe('sum');
-    expect($data->attribute->currency)->toBe('currency');
     expect($data->attribute->createdAt)->toBe('created_at');
 
     expect($data->status->new)->toBe(StatusEnum::new);

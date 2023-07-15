@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
 
-            $table->double('price', 10, 2);
+            $table->integer('price');
 
             $table->string('type');
             $table->smallInteger('status')->default(StatusEnum::new->value);

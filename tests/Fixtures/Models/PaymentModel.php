@@ -25,6 +25,6 @@ class PaymentModel extends Model
         'type'   => TypeEnum::class,
         'status' => StatusEnum::class,
 
-        'price' => 'float',
+        'price' => 'int',
     ];
 }
