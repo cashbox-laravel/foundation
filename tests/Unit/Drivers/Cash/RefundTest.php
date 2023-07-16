@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
-it('checks the verify', function () {
+it('checks the manual refund', function () {
     fakes();
 
     $payment = createPayment(TypeEnum::cash);
@@ -21,13 +21,6 @@ it('checks the verify', function () {
     expect($payment->status)->toBe(StatusEnum::new);
 
     assertHasCashbox($payment);
-
-    // verify
-    $payment->refresh()->updateQuietly([
-        'status' => StatusEnum::new,
-    ]);
-
-    $payment->cashboxJob()->verify();
 
     $payment->refresh();
     expect($payment->status)->toBe(StatusEnum::success);
@@ -40,7 +33,33 @@ it('checks the verify', function () {
     expect($payment->status)->toBe(StatusEnum::refund);
 
     Event::assertDispatchedTimes(CreatedEvent::class);
-    Event::assertDispatchedTimes(SuccessEvent::class, 2);
+    Event::assertDispatchedTimes(SuccessEvent::class);
+    Event::assertDispatchedTimes(RefundedEvent::class);
+
+    Event::assertNotDispatched(FailedEvent::class);
+    Event::assertNotDispatched(WaitRefundEvent::class);
+
+    Http::assertNothingSent();
+});
+
+it('checks the auto refund', function () {
+    fakes();
+    forgetConfig();
+
+    config(['cashbox.auto_refund.enabled' => true]);
+
+    $payment = createPayment(TypeEnum::cash);
+
+    expect($payment->type)->toBe(TypeEnum::cash);
+    expect($payment->status)->toBe(StatusEnum::new);
+
+    assertHasCashbox($payment);
+
+    $payment->refresh();
+    expect($payment->status)->toBe(StatusEnum::refund);
+
+    Event::assertDispatchedTimes(CreatedEvent::class);
+    Event::assertDispatchedTimes(SuccessEvent::class);
     Event::assertDispatchedTimes(RefundedEvent::class);
 
     Event::assertNotDispatched(FailedEvent::class);
