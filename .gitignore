@@ -6,6 +6,8 @@ vendor/
 
 http-client.private.env.json
 
+.env
+
 *.bak
 *.cache
 *.clover
