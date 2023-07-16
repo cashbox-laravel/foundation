@@ -47,13 +47,14 @@
         }
     ],
     "require": {
+        "php": "^8.1",
+        "ext-json": "*",
         "archtechx/enums": "^0.3.2",
         "doctrine/dbal": "^3.6",
         "dragon-code/contracts": "^2.20",
         "dragon-code/laravel-support": "^3.6",
         "dragon-code/simple-dto": "^2.7.1",
         "dragon-code/support": "^6.11.2",
-        "ext-json": "*",
         "guzzlehttp/guzzle": "^7.7",
         "illuminate/bus": "^10.15",
         "illuminate/console": "^10.15",
@@ -62,7 +63,6 @@
         "illuminate/queue": "^10.15",
         "illuminate/support": "^10.15",
         "nesbot/carbon": "^2.68.1",
-        "php": "^8.1",
         "psr/http-message": "^2.0",
         "psr/log": "^3.0",
         "spatie/laravel-data": "^3.7",
