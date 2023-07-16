@@ -7,9 +7,8 @@ use Cashbox\Core\Events\RefundedEvent;
 use Cashbox\Core\Events\SuccessEvent;
 use Cashbox\Core\Events\WaitRefundEvent;
 use Cashbox\Core\Facades\Config;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Http;
@@ -69,6 +68,11 @@ function assertDoesntHaveCashbox(PaymentModel $payment): void
 |
 */
 
+function artisan(string $command, array $parameters = []): void
+{
+    Artisan::call($command, $parameters);
+}
+
 function forget(string $class, Facade|string|null $facade = null): void
 {
     if ($facade) {
@@ -88,11 +92,6 @@ function createPayment(TypeEnum $type, ?int $price = null): PaymentModel
     $price ??= random_int(1, 50000);
 
     return PaymentModel::create(compact('type', 'price'));
-}
-
-function paymentTable(): Builder
-{
-    return DB::table('payments');
 }
 
 function fakeDataProperty(): DataProperty
