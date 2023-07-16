@@ -35,17 +35,18 @@ class Hash
     {
         $items = static::resolve($clientId, $clientSecret, $data);
 
-        return hash('sha256', implode('', $items));
+        return hash('sha256', $items);
     }
 
-    protected static function resolve(string $clientId, string $clientSecret, array $data): array
+    protected static function resolve(string $clientId, string $clientSecret, array $data): string
     {
         return Arr::of($data)
             ->set(Keys::TERMINAL, $clientId)
             ->set(Keys::PASSWORD, $clientSecret)
             ->ksort()
             ->values()
-            ->toArray();
+            ->implode('')
+            ->toString();
     }
 
     protected static function data(string $clientId, string $clientSecret, ?DateTimeInterface $expiresIn = null): Token

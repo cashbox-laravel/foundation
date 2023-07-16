@@ -11,6 +11,7 @@ it('checks the basic data', function () {
     $hashed = Hash::get($clientId, $clientSecret, [
         'field1' => 'qwe',
         'field2' => 'rty',
+        'field3' => 'asd',
     ], false);
 
     expect($hashed->clientId)->toBe($clientId);
@@ -20,13 +21,17 @@ it('checks the basic data', function () {
 it('checks the hashed data', function (array $data) {
     $clientId     = 'foo';
     $clientSecret = 'bar';
-    $hash         = '53ed3ed16f10e22841fab015a863170d14fa551e9d2b2c411d1c0570caa69c99';
+    $hash         = '7959ae1ec20a02490d8d2f01d3704a2543e70c43cbe0c672209741263ef8048f';
 
     $hashed = Hash::get($clientId, $clientSecret, $data, true);
 
     expect($hashed->clientId)->toBe($clientId);
     expect($hashed->clientSecret)->toBe($hash);
 })->with([
-    [['field1' => 'qwe', 'field2' => 'rty']],
-    [['field2' => 'rty', 'field1' => 'qwe']],
+    [['field1' => 'qwe', 'field2' => 'rty', 'field3' => 'asd']],
+    [['field1' => 'qwe', 'field3' => 'asd', 'field2' => 'rty']],
+    [['field2' => 'rty', 'field1' => 'qwe', 'field3' => 'asd']],
+    [['field2' => 'rty', 'field3' => 'asd', 'field1' => 'qwe']],
+    [['field3' => 'asd', 'field1' => 'qwe', 'field2' => 'rty']],
+    [['field3' => 'asd', 'field2' => 'rty', 'field1' => 'qwe']],
 ]);
