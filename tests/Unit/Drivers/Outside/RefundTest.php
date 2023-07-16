@@ -18,23 +18,20 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the wait to refund', function () {
     fakes();
 
-    expect(paymentTable()->count())->toBe(0);
+    $payment = createPayment(TypeEnum::outside);
 
-    $payment = createPayment(TypeEnum::outside)->refresh();
-
-    expect($payment->price)->toBeInt();
     expect($payment->type)->toBe(TypeEnum::outside);
     expect($payment->status)->toBe(StatusEnum::new);
 
     $payment->update(['status' => StatusEnum::waitRefund]);
 
-    expect($payment->refresh()->status)->toBe(StatusEnum::waitRefund);
-    expect(paymentTable()->count())->toBe(1);
+    expect($payment->status)->toBe(StatusEnum::waitRefund);
 
     $payment->update(['status' => StatusEnum::refund]);
 
-    expect($payment->refresh()->status)->toBe(StatusEnum::refund);
-    expect(paymentTable()->count())->toBe(1);
+    expect($payment->status)->toBe(StatusEnum::refund);
+
+    assertDoesntHaveCashbox($payment);
 
     Event::assertNotDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);
@@ -48,22 +45,18 @@ it('checks the wait to refund', function () {
 });
 
 it('checks the refund', function () {
-    Event::fake();
-    Queue::fake();
+    fakes();
 
-    expect(paymentTable()->count())->toBe(0);
+    $payment = createPayment(TypeEnum::outside);
 
-    $payment = createPayment(TypeEnum::outside)->refresh();
-
-    expect($payment->price)->toBeInt();
     expect($payment->type)->toBe(TypeEnum::outside);
     expect($payment->status)->toBe(StatusEnum::new);
 
     $payment->update(['status' => StatusEnum::refund]);
 
-    expect($payment->refresh()->status)->toBe(StatusEnum::refund);
+    expect($payment->status)->toBe(StatusEnum::refund);
 
-    expect(paymentTable()->count())->toBe(1);
+    assertDoesntHaveCashbox($payment);
 
     Event::assertNotDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);

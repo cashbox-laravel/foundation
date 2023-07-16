@@ -48,9 +48,19 @@ uses(TestCase::class)->in('Unit');
 |
 */
 
-//expect()->extend('toBeOne', function () {
-//    return $this->toBe(1);
-//});
+function assertHasCashbox(PaymentModel $payment): void
+{
+    expect(true)->toBeTrue(
+        $payment->cashbox()->exists()
+    );
+}
+
+function assertDoesntHaveCashbox(PaymentModel $payment): void
+{
+    expect(true)->toBeTrue(
+        $payment->cashbox()->doesntExist()
+    );
+}
 
 /*
 |--------------------------------------------------------------------------

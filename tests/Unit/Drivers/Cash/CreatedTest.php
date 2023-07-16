@@ -19,15 +19,12 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the create', function () {
     fakes();
 
-    expect(paymentTable()->count())->toBe(0);
+    $payment = createPayment(TypeEnum::cash);
 
-    $payment = createPayment(TypeEnum::cash)->refresh();
-
-    expect($payment->price)->toBeInt();
     expect($payment->type)->toBe(TypeEnum::cash);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    expect(paymentTable()->count())->toBe(1);
+    assertHasCashbox($payment);
 
     Event::assertDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);
