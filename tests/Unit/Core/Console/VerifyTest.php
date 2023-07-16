@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
-it('full check', function () {
+it('full verification', function () {
     fakes();
 
     $payment1 = createPayment(TypeEnum::outside);
