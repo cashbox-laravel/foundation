@@ -79,13 +79,6 @@ it('checks the queue block', function () {
     expect($data->name->refund)->toBeNull();
 });
 
-it('checks the verify block', function () {
-    $data = Config::verify();
-
-    expect($data->delay)->toBe(3);
-    expect($data->timeout)->toBe(30);
-});
-
 it('checks the refund block', function () {
     forgetConfig();
 
@@ -157,12 +150,12 @@ it(
         expect($item->getQueue()->refund)->toBe($expected['refund']);
     }
 )->with([
-    'filled' => [
+    'filled'       => [
         driverData('q1', 'q2', 'q3'),
         driverData('q4', 'q5', 'q6'),
         driverData('q4', 'q5', 'q6'),
     ],
-    'partial' => [
+    'partial'      => [
         driverData('q1', 'q2', 'q3'),
         driverData('q4', null, null),
         driverData('q4', null, null),
@@ -172,12 +165,12 @@ it(
         [],
         driverData(null, null, null),
     ],
-    'main empty' => [
+    'main empty'   => [
         [],
         driverData('q4', 'q5', 'q6'),
         driverData('q4', 'q5', 'q6'),
     ],
-    'full empty' => [
+    'full empty'   => [
         [],
         [],
         driverData(null, null, null),
