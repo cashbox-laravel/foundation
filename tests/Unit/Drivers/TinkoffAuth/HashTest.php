@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Cashbox\Tinkoff\Auth\Services\Hash;
 
-it('checks the basic data', function () {
+it('basic data', function () {
     $clientId     = 'foo';
     $clientSecret = 'bar';
 
@@ -18,7 +18,7 @@ it('checks the basic data', function () {
     expect($hashed->clientSecret)->toBe($clientSecret);
 });
 
-it('checks the hashed data', function (array $data) {
+it('hashed data', function (array $data) {
     $clientId     = 'foo';
     $clientSecret = 'bar';
     $hash         = '7959ae1ec20a02490d8d2f01d3704a2543e70c43cbe0c672209741263ef8048f';
