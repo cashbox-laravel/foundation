@@ -48,7 +48,7 @@ it('checks the payment block', function () {
 
     expect($data->drivers)->toBeArray();
     expect($data->drivers)->toBe([
-        TypeEnum::cash() => TypeEnum::cash(),
+        TypeEnum::cash() => TypeEnum::cash,
     ]);
 });
 
