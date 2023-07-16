@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use Cashbox\Cash\Driver as CashDriver;
 use Cashbox\Core\Exceptions\Internal\ConfigCannotBeEmptyException;
 use Cashbox\Core\Exceptions\Internal\IncorrectDriverException;
 use Cashbox\Core\Exceptions\Internal\IncorrectResourceException;
@@ -13,7 +12,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Data\FakeData;
-use Tests\Fixtures\Drivers\Cash\Payments\Cash;
+use Tests\Fixtures\Payments\Cash;
 
 it('should return an error when running an empty config file', function () {
     forgetConfig();
@@ -95,7 +94,7 @@ it('should check the driver settings', function () {
     // cash
     $cash = Config::driver(TypeEnum::cash());
 
-    expect($cash->driver)->toBe(CashDriver::class);
+    expect($cash->driver)->toBe(Driver::class);
     expect($cash->resource)->toBe(Cash::class);
     expect($cash->credentials)->toBeNull();
     expect($cash->queue)->toBeNull();

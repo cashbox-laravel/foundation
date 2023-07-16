@@ -2,20 +2,22 @@
 
 namespace Tests;
 
-use Cashbox\Cash\Driver;
+use Cashbox\Cash\Driver as CashDriver;
 use Cashbox\Core\Enums\AttributeEnum;
 use Cashbox\Core\Enums\StatusEnum;
 use Cashbox\Core\Providers\BindingServiceProvider;
 use Cashbox\Core\Providers\ObserverServiceProvider;
 use Cashbox\Core\Providers\RateLimiterServiceProvider;
 use Cashbox\Core\Providers\ServiceProvider;
+use Cashbox\Tinkoff\Credit\Driver as TinkoffCreditDriver;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\LaravelData\LaravelDataServiceProvider;
 use Tests\Fixtures\App\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
-use Tests\Fixtures\Drivers\Cash\Payments\Cash;
+use Tests\Fixtures\Payments\Cash;
+use Tests\Fixtures\Payments\Tinkoff;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -46,10 +48,16 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('cashbox.payment.status.' . StatusEnum::failed(), TestStatusEnum::failed);
 
         $app['config']->set('cashbox.payment.drivers.' . TypeEnum::cash(), TypeEnum::cash);
+        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::tinkoffCredit(), TypeEnum::tinkoffCredit);
 
         $app['config']->set('cashbox.drivers.' . TypeEnum::cash(), [
-            'driver'   => Driver::class,
+            'driver'   => CashDriver::class,
             'resource' => Cash::class,
+        ]);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffCredit(), [
+            'driver'   => TinkoffCreditDriver::class,
+            'resource' => Tinkoff::class,
         ]);
     }
 

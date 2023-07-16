@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
 use Tests\Fixtures\App\Enums\TypeEnum;
@@ -54,6 +55,13 @@ function assertDoesntHaveCashbox(PaymentModel $payment): void
 {
     expect(true)->toBeTrue(
         $payment->cashbox()->doesntExist()
+    );
+}
+
+function assertIsUrl(string $value): void
+{
+    expect(true)->toBeTrue(
+        Str::isUrl($value)
     );
 }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Drivers\Cash\Payments;
+namespace Tests\Fixtures\Payments;
 
 use Cashbox\Cash\Resources\CashResource;
 use Cashbox\Core\Enums\CurrencyEnum;
