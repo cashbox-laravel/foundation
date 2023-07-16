@@ -40,6 +40,10 @@
         {
             "type": "open_collective",
             "url": "https://opencollective.com/dragon-code"
+        },
+        {
+            "type": "donationalerts",
+            "url": "https://www.donationalerts.com/r/dragon_code"
         }
     ],
     "require": {
