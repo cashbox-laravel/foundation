@@ -16,7 +16,6 @@ use Tests\Fixtures\App\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Drivers\Cash\Payments\Cash;
-use Tests\Fixtures\Providers\TestServiceProvider;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -26,7 +25,6 @@ abstract class TestCase extends BaseTestCase
     {
         return [
             LaravelDataServiceProvider::class,
-            TestServiceProvider::class,
             ServiceProvider::class,
             BindingServiceProvider::class,
             ObserverServiceProvider::class,
@@ -53,5 +51,10 @@ abstract class TestCase extends BaseTestCase
             'driver'   => Driver::class,
             'resource' => Cash::class,
         ]);
+    }
+
+    protected function defineDatabaseMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/database');
     }
 }
