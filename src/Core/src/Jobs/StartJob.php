@@ -15,14 +15,20 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Jobs;
+namespace Cashbox\Core\Jobs;
 
-use CashierProvider\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\Response;
 
 class StartJob extends BaseJob
 {
-    protected function request(): ResponseInfo
+    protected function request(): Response
     {
         return $this->driver()->start();
+    }
+
+    protected function finish(): void
+    {
+        $this->payment->refresh();
+        $this->payment->cashboxJob(true)->verify();
     }
 }

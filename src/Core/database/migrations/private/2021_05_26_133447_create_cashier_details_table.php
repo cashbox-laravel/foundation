@@ -15,13 +15,15 @@
 
 declare(strict_types=1);
 
-use CashierProvider\Core\Concerns\Migrations\PrivateMigration;
+use Cashbox\Core\Concerns\Migrations\PrivateMigration;
 use Illuminate\Database\Schema\Blueprint;
 
-new class extends PrivateMigration {
+return new class extends PrivateMigration {
     public function up(): void
     {
         $this->connection()->create($this->table(), function (Blueprint $table) {
+            $table->id();
+
             $table->string('item_type');
 
             match ($this->primaryType()) {
@@ -31,6 +33,7 @@ new class extends PrivateMigration {
             };
 
             $table->string('external_id')->nullable();
+            $table->string('operation_id')->nullable();
 
             $table->json('details')->nullable();
 

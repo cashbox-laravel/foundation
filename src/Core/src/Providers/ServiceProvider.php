@@ -15,19 +15,15 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Providers;
+namespace Cashbox\Core\Providers;
 
-use CashierProvider\Core\Console\Commands\Refund;
-use CashierProvider\Core\Console\Commands\Verify;
+use Cashbox\Core\Console\Commands\Refund;
+use Cashbox\Core\Console\Commands\Verify;
 
 class ServiceProvider extends BaseProvider
 {
     public function boot(): void
     {
-        if ($this->disabled()) {
-            return;
-        }
-
         $this->bootMigrations();
         $this->bootPublishes();
         $this->bootCommands();
@@ -35,17 +31,17 @@ class ServiceProvider extends BaseProvider
 
     public function register(): void
     {
-        if ($this->disabled()) {
-            return;
-        }
-
         $this->registerConfig();
     }
 
     protected function bootPublishes(): void
     {
+        if (! $this->app->runningInConsole()) {
+            return;
+        }
+
         $this->publishes([
-            __DIR__ . '/../../config/cashier.php' => $this->app->configPath('cashier.php'),
+            __DIR__ . '/../../config/cashbox.php' => $this->app->configPath('cashbox.php'),
         ], 'config');
 
         $this->publishes([
@@ -68,6 +64,6 @@ class ServiceProvider extends BaseProvider
 
     protected function registerConfig(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/cashier.php', 'cashier');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/cashbox.php', 'cashbox');
     }
 }

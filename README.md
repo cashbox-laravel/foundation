@@ -1,6 +1,6 @@
 # Cashbox for Laravel
 
-![cashbox](https://preview.dragon-code.pro/cashbox/payments.svg?brand=laravel)
+![cashbox payments](https://preview.dragon-code.pro/cashbox/payments.svg?brand=laravel&preposition=with)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -29,10 +29,17 @@ to [Foundation](https://github.com/cashbox-laravel/foundation).
 
 You will find full documentation on the dedicated [documentation](https://cashbox-laravel.github.io/docs) site.
 
+We also have Telegram channels where we post announcements:
+
+- [English](https://t.me/dragon_code_news_en)
+- [Русский](https://t.me/dragon_code_news)
+
+You can also select the news channels you need from the [Telegram folder](https://t.me/addlist/FKmP70KKc7g2ZWMy).
+
 ## Contributing
 
 Thank you for considering contributing to the `Cashbox`!
-The contribution guide can be found in the [Cashbox documentation](https://cashbox-laravel.github.io/docs).
+The contribution guide can be found in the [documentation](https://cashbox-laravel.github.io/docs).
 
 ## Code of Conduct
 
@@ -47,6 +54,7 @@ Please review [our security policy](https://cashbox-laravel.github.io/docs) on h
 
 The Cashbox for Laravel is open-source software that works in conjunction with
 the [Laravel framework](https://laravel.com/), distributed under the MIT license.
+
 
 [badge_downloads]:      https://img.shields.io/packagist/dt/cashbox/core.svg?style=flat-square
 

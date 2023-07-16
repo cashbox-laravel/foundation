@@ -15,14 +15,14 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Jobs;
+namespace Cashbox\Core\Jobs;
 
-use CashierProvider\Core\Billable;
-use CashierProvider\Core\Concerns\Config\Queue;
-use CashierProvider\Core\Enums\RateLimiterEnum;
-use CashierProvider\Core\Exceptions\External\EmptyResponseException;
-use CashierProvider\Core\Http\ResponseInfo;
-use CashierProvider\Core\Services\Driver;
+use Cashbox\Core\Billable;
+use Cashbox\Core\Concerns\Config\Queue;
+use Cashbox\Core\Enums\RateLimiterEnum;
+use Cashbox\Core\Exceptions\External\EmptyResponseException;
+use Cashbox\Core\Http\Response;
+use Cashbox\Core\Services\Driver;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\RateLimitedWithRedis;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 use Throwable;
 
 /**
@@ -46,14 +47,14 @@ abstract class BaseJob implements ShouldBeUnique, ShouldQueue
 
     public int $maxExceptions = 3;
 
-    abstract protected function request(): ResponseInfo;
+    abstract protected function request(): Response;
 
     public function __construct(
         public Model $payment,
         public bool $force = false
     ) {
-        $this->tries         = static::queue()->tries;
-        $this->maxExceptions = static::queue()->exceptions;
+        $this->tries         = static::queueConfig()->tries;
+        $this->maxExceptions = static::queueConfig()->exceptions;
     }
 
     public function handle(): void
@@ -66,15 +67,8 @@ abstract class BaseJob implements ShouldBeUnique, ShouldQueue
             return;
         }
 
-        $data = [
-            'external_id'  => $response->getExternalId(),
-            'operation_id' => $response->getOperationId(),
-            'info'         => $response,
-        ];
-
-        $this->payment->cashier
-            ? $this->payment->cashier->update($data)
-            : $this->payment->cashier()->create($data);
+        $this->updateParent($this->prepareData($response));
+        $this->finish();
     }
 
     public function uniqueId(): int|string
@@ -87,9 +81,27 @@ abstract class BaseJob implements ShouldBeUnique, ShouldQueue
         return [new RateLimitedWithRedis($this->getRateLimiter())];
     }
 
+    protected function prepareData(Response $response): array
+    {
+        return [
+            'external_id'  => $response->getExternalId(),
+            'operation_id' => $response->getOperationId(),
+            'info'         => $response->getInfo(),
+        ];
+    }
+
+    protected function updateParent(array $data): void
+    {
+        $this->payment->cashbox
+            ? $this->payment->cashbox->update($data)
+            : $this->payment->cashbox()->create($data);
+    }
+
+    protected function finish(): void {}
+
     protected function driver(): Driver
     {
-        return $this->payment->cashierDriver();
+        return $this->payment->cashboxDriver();
     }
 
     protected function getRateLimiter(): string
@@ -104,7 +116,7 @@ abstract class BaseJob implements ShouldBeUnique, ShouldQueue
                 return '';
             }
 
-            return retry(2, fn () => '_' . random_bytes(10));
+            return retry(2, fn () => Str::random());
         }
         catch (Throwable) {
             return '_' . (int) $this->force;

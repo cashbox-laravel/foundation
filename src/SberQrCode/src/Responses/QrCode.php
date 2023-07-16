@@ -15,11 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Sber\QrCode\Responses;
+namespace Cashbox\Sber\QrCode\Responses;
 
-use CashierProvider\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\Response;
 
-class QrCode extends ResponseInfo
+class QrCode extends Response
 {
     public const KEY_URL = 'url';
 

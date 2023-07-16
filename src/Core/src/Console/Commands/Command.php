@@ -15,13 +15,12 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Console\Commands;
+namespace Cashbox\Core\Console\Commands;
 
-use CashierProvider\Core\Concerns\Config\Payment\Attributes;
-use CashierProvider\Core\Concerns\Config\Payment\Drivers;
-use CashierProvider\Core\Concerns\Config\Payment\Payments;
-use CashierProvider\Core\Concerns\Config\Payment\Statuses;
-use CashierProvider\Core\Concerns\Helpers\Jobs;
+use Cashbox\Core\Concerns\Config\Payment\Attributes;
+use Cashbox\Core\Concerns\Config\Payment\Drivers;
+use Cashbox\Core\Concerns\Config\Payment\Payments;
+use Cashbox\Core\Concerns\Config\Payment\Statuses;
 use Closure;
 use DragonCode\LaravelSupport\Traits\InitModelHelper;
 use Illuminate\Console\Command as BaseCommand;
@@ -35,7 +34,6 @@ abstract class Command extends BaseCommand
     use Attributes;
     use Drivers;
     use InitModelHelper;
-    use Jobs;
     use Payments;
     use Statuses;
 
@@ -85,7 +83,9 @@ abstract class Command extends BaseCommand
 
     protected function getTypes(): array
     {
-        return static::drivers()->keys()->toArray();
+        return array_values(
+            static::payment()->drivers
+        );
     }
 
     protected function action(): string

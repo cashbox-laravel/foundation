@@ -4,10 +4,14 @@
     "license": "MIT",
     "type": "library",
     "keywords": [
+        "auth",
         "bank",
         "billing",
         "cashier",
-        "payments"
+        "payment",
+        "payments",
+        "qr",
+        "sber"
     ],
     "authors": [
         {
@@ -22,43 +26,49 @@
     },
     "funding": [
         {
-            "type": "github",
-            "url": "https://github.com/sponsors/TheDragonCode"
-        },
-        {
-            "type": "open_collective",
-            "url": "https://opencollective.com/dragon-code"
-        },
-        {
             "type": "boosty",
             "url": "https://boosty.to/dragon-code"
         },
         {
             "type": "yoomoney",
             "url": "https://yoomoney.ru/to/410012608840929"
+        },
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/TheDragonCode"
+        },
+        {
+            "type": "open_collective",
+            "url": "https://opencollective.com/dragon-code"
         }
     ],
     "require": {
-        "php": "^8.1",
-        "ext-json": "*",
         "archtechx/enums": "^0.3.2",
+        "doctrine/dbal": "^3.6",
+        "dragon-code/contracts": "^2.20",
         "dragon-code/laravel-support": "^3.6",
+        "dragon-code/simple-dto": "^2.7.1",
         "dragon-code/support": "^6.11.2",
+        "ext-json": "*",
         "guzzlehttp/guzzle": "^7.7",
-        "illuminate/bus": "*",
-        "illuminate/console": "^10.14",
-        "illuminate/contracts": "*",
-        "illuminate/database": "*",
-        "illuminate/queue": "*",
-        "illuminate/support": "^10.14",
+        "illuminate/bus": "^10.15",
+        "illuminate/console": "^10.15",
+        "illuminate/contracts": "^10.15",
+        "illuminate/database": "^10.15",
+        "illuminate/queue": "^10.15",
+        "illuminate/support": "^10.15",
         "nesbot/carbon": "^2.68.1",
+        "php": "^8.1",
+        "psr/http-message": "^2.0",
         "psr/log": "^3.0",
         "spatie/laravel-data": "^3.7",
         "symfony/console": "^6.3"
     },
     "require-dev": {
+        "cerbero/json-parser": "^1.0",
+        "mockery/mockery": "^1.6",
         "orchestra/testbench": "^8.5.10",
-        "pestphp/pest": "^2.8.2",
+        "pestphp/pest": "^2.8.3",
         "symfony/var-dumper": "^6.3.1"
     },
     "replace": {
@@ -75,21 +85,22 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "CashierProvider\\BankName\\Auth\\": "src/TemplateDriverAuth/src/",
-            "CashierProvider\\BankName\\PaymentType\\": "src/TemplateDriver/src/",
-            "CashierProvider\\Cash\\": "src/Cash/src/",
-            "CashierProvider\\Core\\": "src/Core/src/",
-            "CashierProvider\\Sber\\Auth\\": "src/SberAuth/src/",
-            "CashierProvider\\Sber\\Online\\": "src/SberOnline/src/",
-            "CashierProvider\\Sber\\QrCode\\": "src/SberQrCode/src/",
-            "CashierProvider\\Tinkoff\\Auth\\": "src/TinkoffAuth/src/",
-            "CashierProvider\\Tinkoff\\Credit\\": "src/TinkoffCredit/src/",
-            "CashierProvider\\Tinkoff\\Online\\": "src/TinkoffOnline/src/",
-            "CashierProvider\\Tinkoff\\QrCode\\": "src/TinkoffQrCode/src/"
+            "Cashbox\\BankName\\Auth\\": "src/TemplateDriverAuth/src/",
+            "Cashbox\\BankName\\PaymentType\\": "src/TemplateDriver/src/",
+            "Cashbox\\Cash\\": "src/Cash/src/",
+            "Cashbox\\Core\\": "src/Core/src/",
+            "Cashbox\\Sber\\Auth\\": "src/SberAuth/src/",
+            "Cashbox\\Sber\\Online\\": "src/SberOnline/src/",
+            "Cashbox\\Sber\\QrCode\\": "src/SberQrCode/src/",
+            "Cashbox\\Tinkoff\\Auth\\": "src/TinkoffAuth/src/",
+            "Cashbox\\Tinkoff\\Credit\\": "src/TinkoffCredit/src/",
+            "Cashbox\\Tinkoff\\Online\\": "src/TinkoffOnline/src/",
+            "Cashbox\\Tinkoff\\QrCode\\": "src/TinkoffQrCode/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "CashboxDev\\": "app/",
             "Tests\\": "tests/"
         }
     },
@@ -106,6 +117,14 @@
     "extra": {
         "branch-alias": {
             "dev-main": "4.x-dev"
+        },
+        "laravel": {
+            "providers": [
+                "Cashbox\\Core\\Providers\\ServiceProvider",
+                "Cashbox\\Core\\Providers\\BindingServiceProvider",
+                "Cashbox\\Core\\Providers\\ObserverServiceProvider",
+                "Cashbox\\Core\\Providers\\RateLimiterServiceProvider"
+            ]
         },
         "thanks": [
             {
@@ -161,6 +180,10 @@
                 "url": "https://github.com/cashbox-laravel/tinkoff-qr"
             },
             {
+                "name": "cerbero/json-parser",
+                "url": "https://github.com/cerbero90/json-parser"
+            },
+            {
                 "name": "dragon-code/laravel-support",
                 "url": "https://github.com/TheDragonCode/laravel-support"
             },
@@ -169,8 +192,40 @@
                 "url": "https://github.com/TheDragonCode/support"
             },
             {
+                "name": "guzzlehttp/guzzle",
+                "url": "https://github.com/guzzle/guzzle"
+            },
+            {
+                "name": "illuminate/bus",
+                "url": "https://github.com/illuminate/bus"
+            },
+            {
+                "name": "illuminate/console",
+                "url": "https://github.com/illuminate/console"
+            },
+            {
+                "name": "illuminate/contracts",
+                "url": "https://github.com/illuminate/contracts"
+            },
+            {
+                "name": "illuminate/database",
+                "url": "https://github.com/illuminate/database"
+            },
+            {
+                "name": "illuminate/queue",
+                "url": "https://github.com/illuminate/queue"
+            },
+            {
+                "name": "illuminate/support",
+                "url": "https://github.com/illuminate/support"
+            },
+            {
                 "name": "laravel/framework",
                 "url": "https://github.com/laravel/framework"
+            },
+            {
+                "name": "mockery/mockery",
+                "url": "https://github.com/mockery/mockery"
             },
             {
                 "name": "nesbot/carbon",
@@ -185,6 +240,14 @@
                 "url": "https://github.com/pestphp/pest"
             },
             {
+                "name": "psr/http-message",
+                "url": "https://github.com/php-fig/http-message"
+            },
+            {
+                "name": "psr/log",
+                "url": "https://github.com/php-fig/log"
+            },
+            {
                 "name": "spatie/laravel-data",
                 "url": "https://github.com/spatie/laravel-data"
             },
@@ -196,6 +259,11 @@
                 "name": "symfony/var-dumper",
                 "url": "https://github.com/symfony/var-dumper"
             }
+        ]
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "@php vendor/bin/testbench package:discover --ansi"
         ]
     }
 }

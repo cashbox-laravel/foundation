@@ -1,6 +1,6 @@
-# Template Driver
+# Driver Template
 
-![cashbox](https://preview.dragon-code.pro/cashbox/cash-driver.svg?brand=laravel)
+![Driver Template](https://preview.dragon-code.pro/cashbox/bankname-technology.svg?brand=laravel&preposition=none)
 
 [![Stable Version][badge_stable]][link_packagist]
 [![Unstable Version][badge_unstable]][link_packagist]
@@ -13,24 +13,33 @@
 
 ## About Cashbox
 
-`Cashier` provides an expressive and user-friendly interface for managing billing and payment verification services.
+`Cashbox for Laravel` provides an expressive and user-friendly interface for managing billing and payment verification
+services.
 We believe that development should be an enjoyable, creative experience to be truly rewarding.
 `Cashbox` tries to ease development by simplifying the tasks of adding payment systems to a web application.
 
 The project contains some ready-made solutions of payment systems, but you can offer your own.
 
-## About Driver
+## About Driver Template
 
-Template for fast driver development.
+The Technology driver implements payments in the Bank billing system.
 
 ## Documentation
 
 You will find full documentation on the dedicated [documentation](https://cashbox-laravel.github.io/docs) site.
 
+We also have Telegram channels where we post announcements:
+
+- [English](https://t.me/dragon_code_news_en)
+- [Русский](https://t.me/dragon_code_news)
+- [Український](https://t.me/dragon_code_news_ua)
+
+You can also select the news channels you need from the [Telegram folder](https://t.me/addlist/FKmP70KKc7g2ZWMy).
+
 ## Contributing
 
 Thank you for considering contributing to the `Cashbox`!
-The contribution guide can be found in the [Cashbox documentation](https://cashbox-laravel.github.io/docs).
+The contribution guide can be found in the [documentation](https://cashbox-laravel.github.io/docs).
 
 ## Code of Conduct
 
@@ -43,17 +52,19 @@ Please review [our security policy](https://cashbox-laravel.github.io/docs) on h
 
 ## License
 
-The Cashbox is open-source software that works in conjunction with
+The `Cashbox` is open-source software that works in conjunction with
 the [Laravel framework](https://laravel.com/), distributed under the MIT license.
 
-[badge_downloads]:      https://img.shields.io/packagist/dt/cashbox/core.svg?style=flat-square
 
-[badge_license]:        https://img.shields.io/packagist/l/cashbox/core.svg?style=flat-square
+[badge_downloads]:      https://img.shields.io/packagist/dt/cashbox/bankname-technology.svg?style=flat-square
 
-[badge_stable]:         https://img.shields.io/github/v/release/cashbox/foundation?label=stable&style=flat-square
+[badge_license]:        https://img.shields.io/packagist/l/cashbox/bankname-technology.svg?style=flat-square
+
+[badge_stable]:         https://img.shields.io/github/v/release/cashbox/bankname-technology?label=stable&style=flat-square
 
 [badge_unstable]:       https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square
 
 [link_license]:         LICENSE
 
-[link_packagist]:       https://packagist.org/packages/cashbox/core
+[link_packagist]:       https://packagist.org/packages/cashbox/bankname-technology
+

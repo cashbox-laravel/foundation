@@ -15,11 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Responses;
+namespace Cashbox\BankName\Technology\Responses;
 
-use CashierProvider\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\Response;
 
-class Refund extends ResponseInfo
+class Refund extends Response
 {
     protected $map = [
         self::KEY_EXTERNAL_ID => 'PaymentId',

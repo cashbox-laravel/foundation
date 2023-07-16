@@ -15,28 +15,30 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Services;
+namespace Cashbox\Core\Services;
 
-use CashierProvider\Core\Concerns\Config\Payment\Drivers;
-use CashierProvider\Core\Concerns\Helpers\Validatable;
-use CashierProvider\Core\Data\Config\DriverData;
+use Cashbox\Core\Concerns\Config\Payment\Drivers;
+use Cashbox\Core\Concerns\Helpers\Validatable;
+use Cashbox\Core\Concerns\Repositories\Registry;
+use Cashbox\Core\Data\Config\DriverData;
 use Illuminate\Database\Eloquent\Model;
 
 class DriverManager
 {
     use Drivers;
+    use Registry;
     use Validatable;
 
     public static function find(Model $payment): Driver
     {
-        static::validateModel($payment);
-
         return static::call(static::data($payment), $payment);
     }
 
     protected static function call(DriverData $data, Model $payment): Driver
     {
-        return resolve($data->driver, compact('payment', 'data'));
+        $driver = $data->driver;
+
+        return new $driver($payment, $data);
     }
 
     protected static function data(Model $payment): ?DriverData

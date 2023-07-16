@@ -15,14 +15,13 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Enums;
+namespace Cashbox\Core\Enums;
 
 use ArchTech\Enums\InvokableCases;
 use ArchTech\Enums\Values;
-use CashierProvider\Core\Concerns\Enums\From;
+use Cashbox\Core\Concerns\Enums\From;
 
 /**
- * @method string deleted()
  * @method string failed()
  * @method string new()
  * @method string refund()
@@ -35,10 +34,9 @@ enum StatusEnum: string
     use InvokableCases;
     use Values;
 
+    case failed     = 'failed';
     case new        = 'new';
+    case refund     = 'refund';
     case success    = 'success';
     case waitRefund = 'wait_refund';
-    case refund     = 'refund';
-    case failed     = 'failed';
-    case deleted    = 'deleted';
 }

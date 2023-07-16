@@ -15,11 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Tinkoff\Credit\Responses;
+namespace Cashbox\Tinkoff\Credit\Responses;
 
-use CashierProvider\Core\Http\ResponseInfo;
+use Cashbox\Core\Http\Response;
 
-class State extends ResponseInfo
+class State extends Response
 {
     protected $map = [
         self::KEY_EXTERNAL_ID => 'id',

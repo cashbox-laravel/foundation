@@ -13,9 +13,9 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Tinkoff\QrCode\Helpers;
+namespace Cashbox\Tinkoff\QrCode\Helpers;
 
-use CashierProvider\Core\Services\Statuses as BaseStatus;
+use Cashbox\Core\Services\Statuses as BaseStatus;
 
 class Statuses extends BaseStatus
 {

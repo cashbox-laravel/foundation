@@ -15,10 +15,10 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Data\Config;
+namespace Cashbox\Core\Data\Config;
 
-use CashierProvider\Core\Data\Config\Payment\PaymentData;
-use CashierProvider\Core\Data\Config\Queue\QueueData;
+use Cashbox\Core\Data\Config\Payment\PaymentData;
+use Cashbox\Core\Data\Config\Queue\QueueData;
 use Spatie\LaravelData\Attributes\DataCollectionOf;
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
@@ -75,9 +75,13 @@ class ConfigData extends Data
         return $this->refund;
     }
 
-    public function driver(int|string $name): DriverData
+    public function driver(int|string $name): ?DriverData
     {
-        return $this->drivers->offsetGet($name);
+        if ($driver = $this->drivers[$name] ?? null) {
+            return $driver;
+        }
+
+        return null;
     }
 
     public function isProduction(): bool

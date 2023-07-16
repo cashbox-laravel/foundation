@@ -15,16 +15,15 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Services;
+namespace Cashbox\Core\Services;
 
-use CashierProvider\Core\Concerns\Config\Payment\Attributes;
-use CashierProvider\Core\Concerns\Config\Payment\Statuses;
-use CashierProvider\Core\Facades\Config;
+use Cashbox\Core\Concerns\Config\Payment\Statuses;
+use Cashbox\Core\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class Authorize
 {
-    use Attributes;
     use Statuses;
 
     public static function type(Model $payment): bool
@@ -53,19 +52,28 @@ class Authorize
             && static::hasDetails($payment);
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     protected static function acceptType(Model $payment): bool
     {
-        return in_array(static::paymentType($payment), static::paymentTypes(), true);
+        return in_array($payment->cashboxAttributeType(), static::paymentTypes(), true);
     }
 
-    protected static function acceptStatus(Model $payment, array|int|string $statuses): bool
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
+    protected static function acceptStatus(Model $payment, mixed $statuses): bool
     {
-        return in_array(static::paymentStatus($payment), (array) $statuses, true);
+        return in_array($payment->cashboxAttributeStatus(), Arr::wrap($statuses), true);
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     protected static function hasDetails(Model $payment): bool
     {
-        return ! empty($payment->cashier);
+        return ! empty($payment->cashbox);
     }
 
     protected static function doesntHaveDetails(Model $payment): bool
@@ -75,16 +83,6 @@ class Authorize
 
     protected static function paymentTypes(): array
     {
-        return Config::payment()->drivers->keys()->toArray();
-    }
-
-    protected static function paymentType(Model $payment): mixed
-    {
-        return $payment->getAttribute(static::attribute()->type);
-    }
-
-    protected static function paymentStatus(Model $payment): mixed
-    {
-        return $payment->getAttribute(static::attribute()->status);
+        return Config::payment()->drivers;
     }
 }

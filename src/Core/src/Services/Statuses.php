@@ -15,18 +15,19 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Services;
+namespace Cashbox\Core\Services;
 
-use CashierProvider\Core\Concerns\Config\Payment\Attributes;
-use CashierProvider\Core\Concerns\Config\Payment\Payments;
-use CashierProvider\Core\Enums\StatusEnum;
+use Cashbox\Core\Concerns\Config\Payment\Payments;
+use Cashbox\Core\Enums\StatusEnum;
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
+/**
+ * @property Model|\Cashbox\Core\Billable $payment
+ */
 abstract class Statuses
 {
-    use Attributes;
     use Payments;
 
     public const FAILED    = [];
@@ -49,37 +50,37 @@ abstract class Statuses
             static::FAILED,
         ]);
 
-        return ! $this->hasCashier($bank, $status)
+        return ! $this->hasCashbox($bank, $status)
             && ! $this->hasModel(StatusEnum::values(), $status);
     }
 
     public function isCreated(?StatusEnum $status = null): bool
     {
-        return $this->hasCashier(static::NEW, $status)
+        return $this->hasCashbox(static::NEW, $status)
             || $this->hasModel(static::NEW, $status);
     }
 
     public function isFailed(?StatusEnum $status = null): bool
     {
-        return $this->hasCashier(static::FAILED, $status)
+        return $this->hasCashbox(static::FAILED, $status)
             || $this->hasModel(static::FAILED, $status);
     }
 
     public function isRefunding(?StatusEnum $status = null): bool
     {
-        return $this->hasCashier(static::REFUNDING, $status)
+        return $this->hasCashbox(static::REFUNDING, $status)
             || $this->hasModel(static::REFUNDING, $status);
     }
 
     public function isRefunded(?StatusEnum $status = null): bool
     {
-        return $this->hasCashier(static::REFUNDED, $status)
+        return $this->hasCashbox(static::REFUNDED, $status)
             || $this->hasModel(static::REFUNDED, $status);
     }
 
     public function isSuccess(?StatusEnum $status = null): bool
     {
-        return $this->hasCashier(static::SUCCESS, $status)
+        return $this->hasCashbox(static::SUCCESS, $status)
             || $this->hasModel(static::SUCCESS, $status);
     }
 
@@ -90,9 +91,21 @@ abstract class Statuses
             && ! $this->isRefunded($status);
     }
 
-    protected function hasCashier(array|string $statuses, ?StatusEnum $status): bool
+    public function detect(string $status): ?StatusEnum
     {
-        $status ??= $this->cashierStatus();
+        return match (true) {
+            Str::contains($status, static::NEW)       => StatusEnum::new,
+            Str::contains($status, static::SUCCESS)   => StatusEnum::success,
+            Str::contains($status, static::REFUNDING) => StatusEnum::waitRefund,
+            Str::contains($status, static::REFUNDED)  => StatusEnum::refund,
+            Str::contains($status, static::FAILED)    => StatusEnum::failed,
+            default                                   => null
+        };
+    }
+
+    protected function hasCashbox(array $statuses, ?StatusEnum $status): bool
+    {
+        $status ??= $this->payment->cashbox?->status;
 
         return $this->has($status, $statuses);
     }
@@ -112,31 +125,11 @@ abstract class Statuses
             return false;
         }
 
-        return in_array($this->resolveStatus($needle), $this->resolveStatus($haystack), true);
+        return in_array($needle, $this->resolveStatuses($haystack), true);
     }
 
-    protected function cashierStatus(): ?StatusEnum
+    protected function resolveStatuses(mixed $statuses): array
     {
-        if ($status = $this->payment->cashier?->details?->getStatus()) {
-            return StatusEnum::tryFrom($status);
-        }
-
-        return null;
-    }
-
-    protected function modelStatus(): mixed
-    {
-        return $this->payment->getAttribute(
-            static::attribute()->status
-        );
-    }
-
-    protected function resolveStatus(mixed $status): mixed
-    {
-        if (is_array($status)) {
-            return array_map(fn (mixed $value) => $this->resolveStatus($value), $status);
-        }
-
-        return is_string($status) ? Str::lower($status) : $status;
+        return array_map(fn (string $status) => $this->detect($status), $statuses);
     }
 }

@@ -13,16 +13,16 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Cash;
+namespace Cashbox\Cash;
 
-use CashierProvider\Cash\Exceptions\Exception;
-use CashierProvider\Cash\Requests\CreateRequest;
-use CashierProvider\Cash\Requests\RefundRequest;
-use CashierProvider\Cash\Requests\VerifyRequest;
-use CashierProvider\Cash\Responses\ResponseInfo;
-use CashierProvider\Cash\Services\Statuses;
-use CashierProvider\Core\Http\ResponseInfo as BaseInfoData;
-use CashierProvider\Core\Services\Driver as BaseDriver;
+use Cashbox\Cash\Exceptions\Exception;
+use Cashbox\Cash\Http\Requests\CreateRequest;
+use Cashbox\Cash\Http\Requests\RefundRequest;
+use Cashbox\Cash\Http\Requests\VerifyRequest;
+use Cashbox\Cash\Http\Responses\Response;
+use Cashbox\Cash\Services\Statuses;
+use Cashbox\Core\Http\Response as BaseInfoData;
+use Cashbox\Core\Services\Driver as BaseDriver;
 
 class Driver extends BaseDriver
 {
@@ -30,7 +30,7 @@ class Driver extends BaseDriver
 
     protected string $exception = Exception::class;
 
-    protected string $info = ResponseInfo::class;
+    protected string $response = Response::class;
 
     public function start(): BaseInfoData
     {

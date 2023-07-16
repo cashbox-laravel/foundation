@@ -15,11 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\BankName\Technology\Requests;
+namespace Cashbox\BankName\Technology\Requests;
 
-use CashierProvider\BankName\Auth\Auth;
-use CashierProvider\Core\Facades\Config\Main;
-use CashierProvider\Core\Http\Request;
+use Cashbox\BankName\Auth\Auth;
+use Cashbox\Core\Facades\Config\Main;
+use Cashbox\Core\Http\Request;
 
 abstract class BaseRequest extends Request
 {

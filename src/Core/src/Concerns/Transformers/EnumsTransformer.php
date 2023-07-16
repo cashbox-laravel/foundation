@@ -15,14 +15,18 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Concerns\Transformers;
+namespace Cashbox\Core\Concerns\Transformers;
 
-use UnitEnum;
+use BackedEnum;
 
 trait EnumsTransformer
 {
-    protected static function transformFromEnum(int|string|UnitEnum $item): int|string
+    protected static function transformFromEnum(BackedEnum|int|string $item): int|string
     {
-        return $item instanceof UnitEnum ? ($item->value ?? $item->name) : $item;
+        if ($item instanceof BackedEnum) {
+            return $item->value ?? $item->name;
+        }
+
+        return $item;
     }
 }

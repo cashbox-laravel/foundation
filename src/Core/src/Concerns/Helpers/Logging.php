@@ -15,10 +15,10 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Concerns\Helpers;
+namespace Cashbox\Core\Concerns\Helpers;
 
-use CashierProvider\Core\Facades\Config;
-use CashierProvider\Core\Http\Request;
+use Cashbox\Core\Facades\Config;
+use Cashbox\Core\Http\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Log;
 use Psr\Log\LoggerInterface;
@@ -54,17 +54,11 @@ trait Logging
     protected static function header(Request $request, Response $response): string
     {
         return sprintf(
-            '%d %s, %s %s',
+            '%d %s, POST %s',
             $response->status(),
             static::status($response),
-            static::method($request),
             $request->uri()
         );
-    }
-
-    protected static function method(Request $request): string
-    {
-        return $request->post ? 'POST' : 'GET';
     }
 
     protected static function status(Response $response): string

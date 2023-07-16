@@ -15,29 +15,32 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Concerns\Config;
+namespace Cashbox\Core\Concerns\Config;
 
-use CashierProvider\Core\Concerns\Config\Payment\Drivers;
-use CashierProvider\Core\Data\Config\Queue\QueueData;
-use CashierProvider\Core\Data\Config\Queue\QueueNameData;
-use CashierProvider\Core\Facades\Config;
+use Cashbox\Core\Concerns\Config\Payment\Drivers;
+use Cashbox\Core\Data\Config\Queue\QueueData;
+use Cashbox\Core\Data\Config\Queue\QueueNameData;
+use Cashbox\Core\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
 
 trait Queue
 {
     use Drivers;
 
-    protected static function queue(): QueueData
+    protected static function queueConfig(): QueueData
     {
         return Config::queue();
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable|null  $payment
+     */
     protected static function queueName(?Model $payment = null): QueueNameData
     {
         if ($payment) {
             return static::driverByModel($payment)->getQueue();
         }
 
-        return static::queue()->name;
+        return static::queueConfig()->name;
     }
 }

@@ -15,25 +15,15 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Concerns\Config\Payment;
+namespace Cashbox\Core\Concerns\Config\Payment;
 
-use CashierProvider\Core\Concerns\Transformers\EnumsTransformer;
-use CashierProvider\Core\Data\Config\DriverData;
-use CashierProvider\Core\Exceptions\Internal\UnknownDriverConfigException;
-use CashierProvider\Core\Facades\Config;
+use Cashbox\Core\Data\Config\DriverData;
+use Cashbox\Core\Exceptions\Internal\UnknownDriverConfigException;
+use Cashbox\Core\Facades\Config;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 trait Drivers
 {
-    use Attributes;
-    use EnumsTransformer;
-
-    protected static function drivers(): Collection
-    {
-        return Config::payment()->drivers;
-    }
-
     protected static function driver(int|string $name, Model $payment): DriverData
     {
         if ($driver = Config::driver($name)) {
@@ -43,12 +33,19 @@ trait Drivers
         throw new UnknownDriverConfigException($name, $payment->getKey());
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     *
+     * @throws \Cashbox\Core\Exceptions\Internal\UnknownDriverConfigException
+     */
     protected static function driverByModel(Model $payment): DriverData
     {
-        $name = $payment->getAttribute(
-            static::attribute()->type
-        );
+        $type = $payment->cashboxAttributeType();
 
-        return static::driver(static::transformFromEnum($name), $payment);
+        if ($name = array_search($type, Config::payment()->drivers)) {
+            return static::driver($name, $payment);
+        }
+
+        throw new UnknownDriverConfigException($name, $payment->getKey());
     }
 }

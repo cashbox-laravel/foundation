@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Console\Commands;
+namespace Cashbox\Core\Console\Commands;
 
 use Illuminate\Database\Eloquent\Model;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -32,8 +32,11 @@ class Verify extends Command
         return static::statuses()->inProgress();
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     protected function process(Model $payment): void
     {
-        static::job($payment, $this->hasForce())->verify();
+        $payment->cashboxJob($this->hasForce())->verify();
     }
 }

@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Exceptions;
+namespace Cashbox\Core\Exceptions;
 
 use Exception;
 
@@ -30,7 +30,7 @@ class BaseException extends Exception
         parent::__construct($this->reason($haystack, $needle), $this->statusCode);
     }
 
-    protected function reason(object|string|null $haystack, string $needle): string
+    protected function reason(object|string|null $haystack, ?string $needle): string
     {
         if ($haystack = $this->haystack($haystack)) {
             return sprintf($this->reason, $haystack, $needle);

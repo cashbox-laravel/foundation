@@ -1,35 +1,36 @@
 <?php
 
-/**
- * This file is part of the "cashbox/foundation" project.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * @author Andrey Helldar <helldar@dragon-code.pro>
- * @copyright 2023 Andrey Helldar
- * @license MIT
- *
- * @see https://github.com/cashbox-laravel/foundation
- */
+declare(strict_types=1);
 
-namespace CashierProvider\Core\Data\Models;
+namespace Cashbox\Core\Data\Models;
 
-use CashierProvider\Core\Concerns\Config\Payment\Payments;
-use CashierProvider\Core\Enums\StatusEnum;
+use Cashbox\Core\Concerns\Config\Application;
+use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;
+use Spatie\LaravelData\Mappers\SnakeCaseMapper;
 
-/**
- * @deprecated
- */
-abstract class InfoData extends Data
+#[MapInputName(SnakeCaseMapper::class)]
+class InfoData extends Data
 {
-    use Payments;
+    use Application;
 
-    public int|string|null $status;
+    public ?string $externalId;
 
-    public function statusToEnum(): StatusEnum
+    public ?string $operationId;
+
+    public ?string $status;
+
+    public ?array $extra;
+
+    public function toJson($options = 0): string
     {
-        return static::payment()->status->toEnum($this->status);
+        return parent::toJson($this->flags());
+    }
+
+    protected function flags(): int
+    {
+        return static::isProduction()
+            ? JSON_UNESCAPED_SLASHES ^ JSON_UNESCAPED_UNICODE ^ JSON_NUMERIC_CHECK
+            : JSON_UNESCAPED_SLASHES ^ JSON_UNESCAPED_UNICODE ^ JSON_NUMERIC_CHECK ^ JSON_PRETTY_PRINT;
     }
 }

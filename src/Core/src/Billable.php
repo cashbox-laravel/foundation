@@ -15,25 +15,65 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core;
+namespace Cashbox\Core;
 
-use CashierProvider\Core\Models\Details;
-use CashierProvider\Core\Services\Driver;
-use CashierProvider\Core\Services\DriverManager;
+use Cashbox\Core\Concerns\Config\Payment\Attributes;
+use Cashbox\Core\Concerns\Helpers\Jobs;
+use Cashbox\Core\Concerns\Repositories\Registry;
+use Cashbox\Core\Models\Details;
+use Cashbox\Core\Services\Driver;
+use Cashbox\Core\Services\DriverManager;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * @property Details $cashier
+ * @property Details $cashbox
  */
 trait Billable
 {
-    public function cashier(): Relation
+    use Attributes;
+    use Jobs;
+    use Registry;
+
+    protected ?Driver $cashboxDriver = null;
+
+    public function cashbox(): Relation
     {
         return $this->hasOne(Details::class, 'payment_id', $this->getKeyName());
     }
 
-    public function cashierDriver(): Driver
+    public function cashboxDriver(): Driver
     {
-        return DriverManager::find($this);
+        if ($this->cashboxDriver) {
+            return $this->cashboxDriver;
+        }
+
+        return $this->cashboxDriver = DriverManager::find($this);
+    }
+
+    public function cashboxJob(bool $force = false): Services\Job
+    {
+        return static::job($this, $force);
+    }
+
+    public function cashboxAttributeType(): mixed
+    {
+        return $this->getAttribute(
+            static::attribute()->type
+        );
+    }
+
+    public function cashboxAttributeStatus(): mixed
+    {
+        return $this->getAttribute(
+            static::attribute()->status
+        );
+    }
+
+    public function cashboxAttributeCreatedAt(): DateTimeInterface
+    {
+        return $this->getAttribute(
+            static::attribute()->createdAt
+        );
     }
 }

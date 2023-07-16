@@ -15,42 +15,51 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Observers;
+namespace Cashbox\Core\Observers;
 
-use CashierProvider\Core\Concerns\Config\Payment\Attributes;
-use CashierProvider\Core\Concerns\Config\Payment\Payments;
-use CashierProvider\Core\Enums\StatusEnum;
-use CashierProvider\Core\Models\Details;
+use Cashbox\Core\Concerns\Config\Payment\Attributes;
+use Cashbox\Core\Concerns\Config\Payment\Payments;
+use Cashbox\Core\Concerns\Events\Notifiable;
+use Cashbox\Core\Enums\StatusEnum;
+use Cashbox\Core\Models\Details;
 use Illuminate\Database\Eloquent\Model;
 
 class PaymentDetailsObserver
 {
     use Attributes;
+    use Notifiable;
     use Payments;
+
+    public function created(Details $model): void
+    {
+        if ($model->status === StatusEnum::new) {
+            static::event($model->parent, StatusEnum::new);
+        }
+    }
 
     public function saving(Details $model): void
     {
-        if ($model->isDirty('info') && $model->status !== null) {
-            $model->status = $model->info->statusToEnum();
+        if ($model->isDirty('info') && $status = $model->info->status) {
+            $model->status = $model->parent->cashboxDriver()->statuses()->detect($status);
         }
     }
 
     public function saved(Details $model): void
     {
-        if ($model->isClean()) {
-            return;
-        }
-
-        if ($model->wasChanged('status')) {
-            $this->updateStatus($model->parent, $model->status);
-        }
+        $this->updateStatus($model->parent, $model->status);
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     protected function updateStatus(Model $payment, StatusEnum $status): void
     {
-        $value = static::payment()->status->fromEnum($status);
-        $field = static::attribute()->status;
+        $value   = static::payment()->status->fromEnum($status);
+        $field   = static::attribute()->status;
+        $current = $payment->cashboxAttributeStatus();
 
-        $payment->update([$field => $value]);
+        if ($current !== $value) {
+            $payment->update([$field => $value]);
+        }
     }
 }

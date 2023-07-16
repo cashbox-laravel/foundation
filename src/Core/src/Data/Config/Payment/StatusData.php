@@ -15,28 +15,27 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Data\Config\Payment;
+namespace Cashbox\Core\Data\Config\Payment;
 
-use CashierProvider\Core\Enums\StatusEnum;
+use Cashbox\Core\Enums\StatusEnum;
 use Spatie\LaravelData\Attributes\MapName;
 use Spatie\LaravelData\Data;
 use Spatie\LaravelData\Mappers\SnakeCaseMapper;
-use UnitEnum;
 
 #[MapName(SnakeCaseMapper::class)]
 class StatusData extends Data
 {
-    public int|string|UnitEnum $new;
+    public mixed $new;
 
-    public int|string|UnitEnum $success;
+    public mixed $success;
 
-    public int|string|UnitEnum $refund;
+    public mixed $refund;
 
-    public int|string|UnitEnum $waitRefund;
+    public mixed $waitRefund;
 
-    public int|string|UnitEnum $failed;
+    public mixed $failed;
 
-    public function fromEnum(StatusEnum $status): int|string|UnitEnum
+    public function fromEnum(StatusEnum $status): mixed
     {
         return match ($status) {
             StatusEnum::new        => $this->new,
@@ -47,7 +46,7 @@ class StatusData extends Data
         };
     }
 
-    public function toEnum(int|string|UnitEnum $status): StatusEnum
+    public function toEnum(mixed $status): ?StatusEnum
     {
         return match ($status) {
             $this->new        => StatusEnum::new,
@@ -55,6 +54,7 @@ class StatusData extends Data
             $this->refund     => StatusEnum::refund,
             $this->waitRefund => StatusEnum::waitRefund,
             $this->failed     => StatusEnum::failed,
+            default           => null
         };
     }
 

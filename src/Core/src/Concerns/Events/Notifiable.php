@@ -15,22 +15,19 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Concerns\Events;
+namespace Cashbox\Core\Concerns\Events;
 
-use CashierProvider\Core\Concerns\Config\Payment\Attributes;
-use CashierProvider\Core\Concerns\Config\Payment\Payments;
-use CashierProvider\Core\Enums\StatusEnum;
-use CashierProvider\Core\Events\CreatedEvent;
-use CashierProvider\Core\Events\DeletedEvent;
-use CashierProvider\Core\Events\FailedEvent;
-use CashierProvider\Core\Events\RefundedEvent;
-use CashierProvider\Core\Events\SuccessEvent;
-use CashierProvider\Core\Events\WaitRefundEvent;
+use Cashbox\Core\Concerns\Config\Payment\Payments;
+use Cashbox\Core\Enums\StatusEnum;
+use Cashbox\Core\Events\CreatedEvent;
+use Cashbox\Core\Events\FailedEvent;
+use Cashbox\Core\Events\RefundedEvent;
+use Cashbox\Core\Events\SuccessEvent;
+use Cashbox\Core\Events\WaitRefundEvent;
 use Illuminate\Database\Eloquent\Model;
 
 trait Notifiable
 {
-    use Attributes;
     use Payments;
 
     protected static function event(Model $payment, StatusEnum $status): void
@@ -41,7 +38,6 @@ trait Notifiable
             StatusEnum::waitRefund => event(new WaitRefundEvent($payment)),
             StatusEnum::success    => event(new SuccessEvent($payment)),
             StatusEnum::failed     => event(new FailedEvent($payment)),
-            StatusEnum::deleted    => event(new DeletedEvent($payment)),
         };
     }
 
@@ -50,10 +46,13 @@ trait Notifiable
         static::event($payment, static::detectEvent($payment));
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     protected static function detectEvent(Model $payment): StatusEnum
     {
-        $status = $payment->getAttribute(static::attribute()->status);
-
-        return static::payment()->status->toEnum($status);
+        return static::payment()->status->toEnum(
+            $payment->cashboxAttributeStatus()
+        );
     }
 }

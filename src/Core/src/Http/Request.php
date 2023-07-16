@@ -15,10 +15,10 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Http;
+namespace Cashbox\Core\Http;
 
+use Cashbox\Core\Resources\Resource;
 use DragonCode\Support\Concerns\Makeable;
-use Illuminate\Database\Eloquent\Model;
 
 abstract class Request
 {
@@ -26,13 +26,16 @@ abstract class Request
 
     abstract public function body(): array;
 
-    abstract public function headers(): array;
-
     abstract public function uri(): ?string;
 
     public function __construct(
-        protected Model $payment
+        public readonly Resource $resource
     ) {}
+
+    public function headers(): array
+    {
+        return [];
+    }
 
     public function options(): array
     {

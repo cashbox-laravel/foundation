@@ -15,14 +15,14 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Models;
+namespace Cashbox\Core\Models;
 
-use CashierProvider\Core\Billable;
-use CashierProvider\Core\Casts\InfoCast;
-use CashierProvider\Core\Concerns\Config\Details as DetailsConcern;
-use CashierProvider\Core\Data\Models\InfoData;
-use CashierProvider\Core\Enums\StatusEnum;
-use CashierProvider\Core\Facades\Config;
+use Cashbox\Core\Billable;
+use Cashbox\Core\Concerns\Config\Details as DetailsConcern;
+use Cashbox\Core\Data\Models\InfoData;
+use Cashbox\Core\Enums\StatusEnum;
+use Cashbox\Core\Facades\Config;
+use DragonCode\LaravelSupport\Traits\InitModelHelper;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -34,6 +34,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 class Details extends Model
 {
     use DetailsConcern;
+    use InitModelHelper;
 
     protected $fillable = [
         'payment_id',
@@ -44,7 +45,7 @@ class Details extends Model
     ];
 
     protected $casts = [
-        'info'   => InfoCast::class,
+        'info'   => InfoData::class,
         'status' => StatusEnum::class,
     ];
 
@@ -62,6 +63,10 @@ class Details extends Model
 
     public function parent(): Relation
     {
-        return $this->belongsTo(Config::payment()->model, 'id', 'payment_id');
+        $payment = Config::payment()->model;
+
+        $key = $this->model()->primaryKey($payment);
+
+        return $this->belongsTo($payment, 'payment_id', $key);
     }
 }

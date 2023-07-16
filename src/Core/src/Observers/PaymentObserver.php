@@ -15,13 +15,11 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Observers;
+namespace Cashbox\Core\Observers;
 
-use CashierProvider\Core\Concerns\Config\Payment\Attributes;
-use CashierProvider\Core\Concerns\Events\Notifiable;
-use CashierProvider\Core\Concerns\Helpers\Jobs;
-use CashierProvider\Core\Concerns\Permissions\Allowable;
-use CashierProvider\Core\Enums\StatusEnum;
+use Cashbox\Core\Concerns\Config\Payment\Attributes;
+use Cashbox\Core\Concerns\Events\Notifiable;
+use Cashbox\Core\Concerns\Permissions\Allowable;
 use DragonCode\Support\Facades\Helpers\Arr;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,24 +27,35 @@ class PaymentObserver
 {
     use Allowable;
     use Attributes;
-    use Jobs;
     use Notifiable;
 
+    public function creating(Model $payment): void
+    {
+        // Collision elimination when creating a model using the default value from the database.
+        $payment->status = static::payment()->status->new;
+    }
+
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     public function created(Model $payment): void
     {
-        if ($this->authorizeType()) {
-            static::job($payment)->start();
+        if ($this->authorizeType($payment)) {
+            $payment->cashboxJob()->start();
         }
     }
 
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     public function updated(Model $payment): void
     {
-        if (! $this->authorizeType()) {
+        if (! $this->authorizeType($payment)) {
             return;
         }
 
         if ($this->wasChanged($payment)) {
-            static::job($payment)->verify();
+            $payment->cashboxJob()->verify();
         }
 
         if ($this->wasChangedStatus($payment)) {
@@ -54,17 +63,13 @@ class PaymentObserver
         }
     }
 
-    public function deleted(Model $payment): void
-    {
-        if ($this->authorizeType()) {
-            static::event($payment, StatusEnum::deleted);
-        }
-    }
-
+    /**
+     * @param  \Illuminate\Database\Eloquent\Model|\Cashbox\Core\Billable  $payment
+     */
     public function restored(Model $payment): void
     {
-        if ($this->authorizeType()) {
-            static::job($payment)->retry();
+        if ($this->authorizeType($payment)) {
+            $payment->cashboxJob(true)->retry();
         }
     }
 

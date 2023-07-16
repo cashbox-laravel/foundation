@@ -4,8 +4,9 @@ build/
 node_modules/
 vendor/
 
-docs/.env
 http-client.private.env.json
+
+.env
 
 *.bak
 *.cache

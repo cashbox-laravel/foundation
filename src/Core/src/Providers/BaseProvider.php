@@ -15,9 +15,9 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Providers;
+namespace Cashbox\Core\Providers;
 
-use CashierProvider\Core\Concerns\Config\Payment\Payments;
+use Cashbox\Core\Concerns\Config\Payment\Payments;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 use function class_exists;
@@ -28,6 +28,13 @@ abstract class BaseProvider extends BaseServiceProvider
 
     protected function disabled(): bool
     {
-        return ! class_exists(static::payment()->model);
+        $class = $this->model();
+
+        return empty($class) || ! class_exists($class);
+    }
+
+    protected function model(): ?string
+    {
+        return config('cashbox.payment.model');
     }
 }

@@ -13,10 +13,10 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\BankName\Auth\Support;
+namespace Cashbox\BankName\Auth\Support;
 
-use CashierProvider\BankName\Auth\Constants\Keys;
-use CashierProvider\BankName\Auth\Resources\AccessToken;
+use Cashbox\BankName\Auth\Constants\Keys;
+use Cashbox\BankName\Auth\Resources\AccessToken;
 use DragonCode\Contracts\Cashier\Resources\Model;
 use DragonCode\Support\Concerns\Makeable;
 use DragonCode\Support\Facades\Helpers\Ables\Arrayable;

@@ -13,20 +13,20 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Tinkoff\QrCode;
+namespace Cashbox\Tinkoff\QrCode;
 
-use CashierProvider\Core\Facades\Helpers\Model;
-use CashierProvider\Core\Services\Driver as BaseDriver;
-use CashierProvider\Tinkoff\QrCode\Exceptions\Manager;
-use CashierProvider\Tinkoff\QrCode\Helpers\Statuses;
-use CashierProvider\Tinkoff\QrCode\Requests\Cancel;
-use CashierProvider\Tinkoff\QrCode\Requests\GetQR;
-use CashierProvider\Tinkoff\QrCode\Requests\GetState;
-use CashierProvider\Tinkoff\QrCode\Requests\Init;
-use CashierProvider\Tinkoff\QrCode\Resources\Details;
-use CashierProvider\Tinkoff\QrCode\Responses\QrCode;
-use CashierProvider\Tinkoff\QrCode\Responses\Refund;
-use CashierProvider\Tinkoff\QrCode\Responses\State;
+use Cashbox\Core\Facades\Helpers\Model;
+use Cashbox\Core\Services\Driver as BaseDriver;
+use Cashbox\Tinkoff\QrCode\Exceptions\Manager;
+use Cashbox\Tinkoff\QrCode\Helpers\Statuses;
+use Cashbox\Tinkoff\QrCode\Requests\Cancel;
+use Cashbox\Tinkoff\QrCode\Requests\GetQR;
+use Cashbox\Tinkoff\QrCode\Requests\GetState;
+use Cashbox\Tinkoff\QrCode\Requests\Init;
+use Cashbox\Tinkoff\QrCode\Resources\Details;
+use Cashbox\Tinkoff\QrCode\Responses\QrCode;
+use Cashbox\Tinkoff\QrCode\Responses\Refund;
+use Cashbox\Tinkoff\QrCode\Responses\State;
 use DragonCode\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver

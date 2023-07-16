@@ -13,7 +13,7 @@
  * @see https://github.com/cashbox-laravel/foundation
  */
 
-namespace CashierProvider\Core\Data\Casts;
+namespace Cashbox\Core\Data\Casts;
 
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
@@ -27,6 +27,6 @@ class NumberCast implements Cast
 
     public function cast(DataProperty $property, mixed $value, array $context): int
     {
-        return min(max($this->min, (int) $value), $this->max);
+        return min(max($this->min, intval($value)), $this->max);
     }
 }

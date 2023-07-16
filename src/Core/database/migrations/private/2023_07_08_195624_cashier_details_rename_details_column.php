@@ -15,10 +15,10 @@
 
 declare(strict_types=1);
 
-use CashierProvider\Core\Concerns\Migrations\PrivateMigration;
+use Cashbox\Core\Concerns\Migrations\PrivateMigration;
 use Illuminate\Database\Schema\Blueprint;
 
-new class extends PrivateMigration {
+return new class extends PrivateMigration {
     public function up(): void
     {
         $this->connection()->table($this->table(), function (Blueprint $table) {

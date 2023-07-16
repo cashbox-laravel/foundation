@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace CashierProvider\Core\Enums;
+namespace Cashbox\Core\Enums;
 
 use ArchTech\Enums\InvokableCases;
 
@@ -27,6 +27,6 @@ enum RateLimiterEnum: string
 {
     use InvokableCases;
 
-    case disabled = 'cashier_disabled';
-    case enabled  = 'cashier_enabled';
+    case disabled = 'cashbox_disabled';
+    case enabled  = 'cashbox_enabled';
 }

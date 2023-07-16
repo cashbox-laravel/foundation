@@ -11,28 +11,27 @@
   ~
   ~ @see https://github.com/cashbox-laravel/foundation
   -->
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
-        backupGlobals="false"
-        backupStaticProperties="false"
-        bootstrap="vendor/autoload.php"
-        cacheDirectory=".phpunit.cache"
-        colors="true"
-        processIsolation="false"
-        stopOnError="false"
-        stopOnFailure="false"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.2/phpunit.xsd"
+         backupGlobals="false"
+         backupStaticProperties="false"
+         bootstrap="vendor/autoload.php"
+         cacheDirectory=".phpunit.cache"
+         colors="true"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
 >
     <php>
+        <ini name="date.timezone" value="UTC" />
+        <ini name="intl.default_locale" value="C.UTF-8" />
+        <ini name="memory_limit" value="2048M" />
         <env name="APP_KEY" value="base64:cW+4bNmhMQKcLH/+u+uByODdGBuXAgd1nzZpufnIwks=" />
-        <env name="DB_CONNECTION" value="sqlite" />
-        <env name="DB_DATABASE" value=":memory:" />
+        <env name="APP_ENV" value="testing" />
+        <env name="DB_CONNECTION" value="testing" />
         <env name="QUEUE_CONNECTION" value="sync" />
     </php>
     <coverage>
-        <include>
-            <directory suffix=".php">./src</directory>
-        </include>
         <report>
             <clover outputFile="build/logs/clover.xml" />
             <html outputDirectory="build/logs/coverage" />
@@ -44,4 +43,9 @@
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+    </source>
 </phpunit>
