@@ -103,7 +103,7 @@ class Composer extends Command
 
     protected function copyToMain($array, string $key): void
     {
-        $main = Arr::get($this->main, $key);
+        $main   = Arr::get($this->main, $key);
         $driver = Arr::get($array, $key);
 
         $items = Arr::of($driver)
