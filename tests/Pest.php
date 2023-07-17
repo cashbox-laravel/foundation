@@ -1,22 +1,6 @@
 <?php
 
-use Cashbox\Core\Data\Config\ConfigData;
-use Cashbox\Core\Events\CreatedEvent;
-use Cashbox\Core\Events\FailedEvent;
-use Cashbox\Core\Events\RefundedEvent;
-use Cashbox\Core\Events\SuccessEvent;
-use Cashbox\Core\Events\WaitRefundEvent;
-use Cashbox\Core\Facades\Config;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Str;
-use Spatie\LaravelData\Casts\Cast;
-use Spatie\LaravelData\Support\DataProperty;
-use Tests\Fixtures\App\Enums\TypeEnum;
-use Tests\Fixtures\App\Models\PaymentModel;
-use Tests\Fixtures\Data\FakeData;
 use Tests\TestCase;
 
 /*
@@ -34,38 +18,6 @@ uses(TestCase::class)->in('Unit');
 
 /*
 |--------------------------------------------------------------------------
-| Expectations
-|--------------------------------------------------------------------------
-|
-| When you're writing tests, you often need to check that values meet certain conditions. The
-| "expect()" function gives you access to a set of "expectations" methods that you can use
-| to assert different things. Of course, you may extend the Expectation API at any time.
-|
-*/
-
-function assertHasCashbox(PaymentModel $payment): void
-{
-    expect(true)->toBeTrue(
-        $payment->cashbox()->exists()
-    );
-}
-
-function assertDoesntHaveCashbox(PaymentModel $payment): void
-{
-    expect(true)->toBeTrue(
-        $payment->cashbox()->doesntExist()
-    );
-}
-
-function assertIsUrl(string $value): void
-{
-    expect(true)->toBeTrue(
-        Str::isUrl($value)
-    );
-}
-
-/*
-|--------------------------------------------------------------------------
 | Functions
 |--------------------------------------------------------------------------
 |
@@ -78,52 +30,4 @@ function assertIsUrl(string $value): void
 function artisan(string $command, array $parameters = []): void
 {
     Artisan::call($command, $parameters);
-}
-
-function forget(string $class, Facade|string|null $facade = null): void
-{
-    if ($facade) {
-        $facade::clearResolvedInstances();
-    }
-
-    App::forgetInstance($class);
-}
-
-function forgetConfig(): void
-{
-    forget(ConfigData::class, Config::class);
-}
-
-function createPayment(TypeEnum $type, ?int $price = null): PaymentModel
-{
-    $price ??= random_int(1, 50000);
-
-    return PaymentModel::create(compact('type', 'price'));
-}
-
-function fakeDataProperty(): DataProperty
-{
-    $reflection = new ReflectionProperty(FakeData::class, 'foo');
-
-    return DataProperty::create($reflection);
-}
-
-function dataCast(Cast|string $cast, mixed $value, ?DataProperty $property = null, array $context = []): mixed
-{
-    $property ??= fakeDataProperty();
-
-    $cast = is_string($cast) ? new $cast() : $cast;
-
-    return $cast->cast($property, $value, $context);
-}
-
-function fakeEvents(): void
-{
-    Event::fake([
-        CreatedEvent::class,
-        FailedEvent::class,
-        RefundedEvent::class,
-        SuccessEvent::class,
-        WaitRefundEvent::class,
-    ]);
 }
