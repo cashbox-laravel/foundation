@@ -15,6 +15,9 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the create', function () {
     fakeEvents();
 
+    fakeHttpTinkoffCreditCreate();
+    fakeHttpTinkoffCreditInfo();
+
     $payment = createPayment(TypeEnum::tinkoffCredit);
 
     expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
