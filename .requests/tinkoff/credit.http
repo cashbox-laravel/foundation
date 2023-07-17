@@ -1,0 +1,21 @@
+POST https://forma.tinkoff.ru/api/partners/v2/orders/create-demo
+Accept: application/json
+Content-Type: application/json
+
+{
+    "shopId": {{tinkoff_credit_client_id}},
+    "showcaseId": {{tinkoff_credit_show_case_id}},
+    "promoCode": {{tinkoff_credit_promo_code}},
+    "orderNumber": {{$uuid}},
+    "sum": {{app_sum}},
+    "values": {
+        "contact": {
+            "firstName": {{app_client_first_name}},
+            "middleName": {{app_client_middle_name}},
+            "lastName": {{app_client_last_name}}
+        },
+        "mobilePhone": {{app_client_phone}},
+        "email": {{$random.email}}
+    },
+    "items": []
+}

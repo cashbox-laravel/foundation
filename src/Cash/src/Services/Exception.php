@@ -15,24 +15,8 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\Credit\Resources;
+namespace Cashbox\Cash\Services;
 
-use Cashbox\Core\Resources\Details as BaseDetails;
+use Cashbox\Core\Services\Exception as BaseException;
 
-class Details extends BaseDetails
-{
-    protected $url;
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'status' => $this->status,
-            'url'    => $this->url,
-        ];
-    }
-}
+class Exception extends BaseException { }
