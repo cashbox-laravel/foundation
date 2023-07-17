@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Cashbox\Cash\Driver as CashDriver;
 use Cashbox\Core\Exceptions\Internal\ConfigCannotBeEmptyException;
 use Cashbox\Core\Exceptions\Internal\IncorrectDriverException;
 use Cashbox\Core\Exceptions\Internal\IncorrectResourceException;
@@ -47,7 +48,8 @@ it('checks the payment block', function () {
 
     expect($data->drivers)->toBeArray();
     expect($data->drivers)->toBe([
-        TypeEnum::cash() => TypeEnum::cash,
+        TypeEnum::cash()          => TypeEnum::cash,
+        TypeEnum::tinkoffCredit() => TypeEnum::tinkoffCredit,
     ]);
 });
 
@@ -94,7 +96,7 @@ it('should check the driver settings', function () {
     // cash
     $cash = Config::driver(TypeEnum::cash());
 
-    expect($cash->driver)->toBe(Driver::class);
+    expect($cash->driver)->toBe(CashDriver::class);
     expect($cash->resource)->toBe(Cash::class);
     expect($cash->credentials)->toBeNull();
     expect($cash->queue)->toBeNull();
