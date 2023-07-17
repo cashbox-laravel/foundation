@@ -13,7 +13,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the manual refund', function () {
-    fakes();
+    fakeEvents();
 
     $payment = createPayment(TypeEnum::cash);
 
@@ -43,7 +43,7 @@ it('checks the manual refund', function () {
 });
 
 it('checks the auto refund', function () {
-    fakes();
+    fakeEvents();
     forgetConfig();
 
     config(['cashbox.auto_refund.enabled' => true]);

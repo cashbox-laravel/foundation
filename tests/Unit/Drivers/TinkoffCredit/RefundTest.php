@@ -13,7 +13,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the refund', function () {
-    fakes();
+    fakeEvents();
 
     $payment = createPayment(TypeEnum::tinkoffCredit);
 

@@ -10,7 +10,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('full verification', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -27,7 +27,7 @@ it('full verification', function () {
     $payment5->refresh()->updateQuietly(['status' => StatusEnum::new]);
     $payment6->refresh()->updateQuietly(['status' => StatusEnum::new]);
 
-    fakes();
+    fakeEvents();
 
     artisan(Verify::class);
 
@@ -43,7 +43,7 @@ it('full verification', function () {
 });
 
 it('partial verification', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -58,7 +58,7 @@ it('partial verification', function () {
     $payment5->refresh()->updateQuietly(['status' => StatusEnum::new]);
     $payment6->refresh()->updateQuietly(['status' => StatusEnum::new]);
 
-    fakes();
+    fakeEvents();
 
     artisan(Verify::class);
 
@@ -74,7 +74,7 @@ it('partial verification', function () {
 });
 
 it('verify by ID', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -91,7 +91,7 @@ it('verify by ID', function () {
     $payment5->refresh()->updateQuietly(['status' => StatusEnum::new]);
     $payment6->refresh()->updateQuietly(['status' => StatusEnum::new]);
 
-    fakes();
+    fakeEvents();
 
     artisan(Verify::class, [
         'payment' => $payment4->id,

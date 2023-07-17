@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Facade;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Spatie\LaravelData\Casts\Cast;
 use Spatie\LaravelData\Support\DataProperty;
@@ -118,19 +117,13 @@ function dataCast(Cast|string $cast, mixed $value, ?DataProperty $property = nul
     return $cast->cast($property, $value, $context);
 }
 
-function fakes(bool $events = true, bool $http = true): void
+function fakeEvents(): void
 {
-    if ($events) {
-        Event::fake([
-            CreatedEvent::class,
-            FailedEvent::class,
-            RefundedEvent::class,
-            SuccessEvent::class,
-            WaitRefundEvent::class,
-        ]);
-    }
-
-    if ($http) {
-        Http::fake();
-    }
+    Event::fake([
+        CreatedEvent::class,
+        FailedEvent::class,
+        RefundedEvent::class,
+        SuccessEvent::class,
+        WaitRefundEvent::class,
+    ]);
 }

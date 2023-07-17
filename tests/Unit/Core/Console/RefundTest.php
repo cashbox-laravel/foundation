@@ -11,7 +11,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('full refund', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -23,7 +23,7 @@ it('full refund', function () {
     Event::assertDispatchedTimes(CreatedEvent::class, 4);
     Event::assertDispatchedTimes(SuccessEvent::class, 4);
 
-    fakes();
+    fakeEvents();
 
     artisan(Refund::class);
 
@@ -63,7 +63,7 @@ it('full refund', function () {
 });
 
 it('partial verification', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -84,7 +84,7 @@ it('partial verification', function () {
     $payment5->refresh()->updateQuietly(['status' => StatusEnum::refund]);
     $payment6->refresh()->updateQuietly(['status' => StatusEnum::refund]);
 
-    fakes();
+    fakeEvents();
 
     artisan(Refund::class);
 
@@ -101,7 +101,7 @@ it('partial verification', function () {
 });
 
 it('refund by ID', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -113,7 +113,7 @@ it('refund by ID', function () {
     Event::assertDispatchedTimes(CreatedEvent::class, 4);
     Event::assertDispatchedTimes(SuccessEvent::class, 4);
 
-    fakes();
+    fakeEvents();
 
     artisan(Refund::class, [
         'payment' => $payment4->id,
@@ -132,7 +132,7 @@ it('refund by ID', function () {
 });
 
 it('with force option', function () {
-    fakes();
+    fakeEvents();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::outside);
@@ -144,7 +144,7 @@ it('with force option', function () {
     Event::assertDispatchedTimes(CreatedEvent::class, 4);
     Event::assertDispatchedTimes(SuccessEvent::class, 4);
 
-    fakes();
+    fakeEvents();
 
     artisan(Refund::class, [
         '--force' => true,

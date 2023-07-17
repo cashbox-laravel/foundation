@@ -12,7 +12,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the wait to refund', function () {
-    fakes();
+    fakeEvents();
 
     $payment = createPayment(TypeEnum::outside);
 
@@ -37,7 +37,7 @@ it('checks the wait to refund', function () {
 });
 
 it('checks the refund', function () {
-    fakes();
+    fakeEvents();
 
     $payment = createPayment(TypeEnum::outside);
 

@@ -12,7 +12,7 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the verify', function () {
-    fakes();
+    fakeEvents();
 
     $payment = createPayment(TypeEnum::outside);
 
