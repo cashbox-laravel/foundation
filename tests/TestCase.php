@@ -56,8 +56,19 @@ abstract class TestCase extends BaseTestCase
         ]);
 
         $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffCredit(), [
-            'driver'   => TinkoffCreditDriver::class,
-            'resource' => Tinkoff::class,
+            'driver'      => TinkoffCreditDriver::class,
+            'resource'    => Tinkoff::class,
+            'credentials' => [
+                // shopId
+                'client_id'     => fake()->randomLetter,
+
+                // password
+                'client_secret' => fake()->password,
+
+                'showcase_id' => fake()->randomLetter,
+
+                'promo_code' => 'default',
+            ],
         ]);
     }
 
