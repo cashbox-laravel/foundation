@@ -1,10 +1,11 @@
 name: Feature request
 description: New functionality proposal.
+labels: [ "enhancement" ]
 body:
 
-  - type: textarea
-    attributes:
-      label: Description
-      description: Provide a detailed description of the issue you are facing.
-    validations:
-      required: true
+    -   type: textarea
+        attributes:
+            label: Description
+            description: Provide a detailed description of the issue you are facing.
+        validations:
+            required: true
