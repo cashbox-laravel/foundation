@@ -1,0 +1,37 @@
+name: Driver Request
+description: Sending a request to develop a driver for working with the bank's API
+title: "[Driver]: "
+labels: [ "driver request" ]
+body:
+    -   type: markdown
+        attributes:
+            value: Before submitting a request, make sure that such a driver has not been previously requested.
+
+    -   type: input
+        attributes:
+            label: Name of the bank
+            description: Provide the name of the bank for which you want to develop a driver
+            placeholder: Some Bank
+            validations:
+                required: true
+
+    -   type: input
+        attributes:
+            label: Payment processing technology
+            description: Provide the name of the technology through which the payment will be made
+            placeholder: QR, Online, Installment, Credit, etc.
+            validations:
+                required: true
+
+    -   type: input
+        attributes:
+            label: Link to documentation
+            description: Provide a link to the documentation for working with the bank
+            placeholder: https://example.com/docs/...
+            validations:
+                required: true
+
+    -   type: textarea
+        attributes:
+            label: Additional information
+            description: Provide additional information for the request
