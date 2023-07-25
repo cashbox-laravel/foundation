@@ -73,6 +73,8 @@
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^8.5.10",
         "pestphp/pest": "^2.8.3",
+        "pestphp/pest-plugin-faker": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.1",
         "symfony/var-dumper": "^6.3.1"
     },
     "replace": {
