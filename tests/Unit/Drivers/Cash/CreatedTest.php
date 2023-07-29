@@ -20,7 +20,7 @@ it('checks the create', function () {
     expect($payment->type)->toBe(TypeEnum::cash);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     Event::assertDispatchedTimes(CreatedEvent::class);
     Event::assertDispatchedTimes(SuccessEvent::class);

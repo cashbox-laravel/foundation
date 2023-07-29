@@ -27,7 +27,7 @@ it('checks the wait to refund', function () {
 
     expect($payment->status)->toBe(StatusEnum::refund);
 
-    assertDoesntHaveCashbox($payment);
+    expect($payment)->toBeDoesntHaveCashbox();
 
     Event::assertNotDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);
@@ -48,7 +48,7 @@ it('checks the refund', function () {
 
     expect($payment->status)->toBe(StatusEnum::refund);
 
-    assertDoesntHaveCashbox($payment);
+    expect($payment)->toBeDoesntHaveCashbox();
 
     Event::assertNotDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);

@@ -20,7 +20,7 @@ it('checks the refund', function () {
     expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     throw new Exception('TODO: change a test');
 

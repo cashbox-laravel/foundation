@@ -20,7 +20,7 @@ it('checks the verify', function () {
     expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     expect(StatusEnum::new)->toBe(
         $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)

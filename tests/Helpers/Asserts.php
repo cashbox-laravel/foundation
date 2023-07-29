@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Assert;
-use Tests\Fixtures\App\Models\PaymentModel;
 
-function assertHasCashbox(PaymentModel $payment): void
-{
-    expect($payment->cashbox()->exists())->toBeTrue();
-}
+expect()->extend('toBeHasCashbox', function (string $message = '') {
+    expect($this->value->cashbox()->exists())->toBeTrue($message);
 
-function assertDoesntHaveCashbox(PaymentModel $payment): void
-{
-    expect($payment->cashbox()->doesntExist())->toBeTrue();
-}
+    return $this;
+});
+
+expect()->extend('toBeDoesntHaveCashbox', function (string $message = '') {
+    expect($this->value->cashbox()->doesntExist())->toBeTrue($message);
+
+    return $this;
+});
 
 expect()->extend('toBeUrl', function (string $message = '') {
     Assert::assertTrue(Str::isUrl($this->value), $message);

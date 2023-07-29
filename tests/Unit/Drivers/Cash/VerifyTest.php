@@ -20,7 +20,7 @@ it('checks the verify', function () {
     expect($payment->type)->toBe(TypeEnum::cash);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     // verify
     $payment->refresh()->updateQuietly([

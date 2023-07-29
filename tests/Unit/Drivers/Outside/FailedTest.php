@@ -23,7 +23,7 @@ it('checks the failed', function () {
 
     expect($payment->status)->toBe(StatusEnum::failed);
 
-    assertDoesntHaveCashbox($payment);
+    expect($payment)->toBeDoesntHaveCashbox();
 
     Event::assertNotDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);

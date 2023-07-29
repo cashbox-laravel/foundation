@@ -23,7 +23,7 @@ it('checks the create', function () {
     expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
     expect($payment->status)->toBe(AppStatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 

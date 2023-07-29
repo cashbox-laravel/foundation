@@ -20,7 +20,7 @@ it('checks the manual refund', function () {
     expect($payment->type)->toBe(TypeEnum::cash);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
     expect($payment->status)->toBe(StatusEnum::success);
@@ -53,7 +53,7 @@ it('checks the auto refund', function () {
     expect($payment->type)->toBe(TypeEnum::cash);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertHasCashbox($payment);
+    expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
     expect($payment->status)->toBe(StatusEnum::refund);

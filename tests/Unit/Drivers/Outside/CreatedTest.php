@@ -19,7 +19,7 @@ it('checks the create', function () {
     expect($payment->type)->toBe(TypeEnum::outside);
     expect($payment->status)->toBe(StatusEnum::new);
 
-    assertDoesntHaveCashbox($payment);
+    expect($payment)->toBeDoesntHaveCashbox();
 
     Event::assertNotDispatched(CreatedEvent::class);
     Event::assertNotDispatched(FailedEvent::class);
