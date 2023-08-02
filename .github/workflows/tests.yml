@@ -68,21 +68,6 @@ jobs:
                 stability: [ "prefer-lowest", "prefer-stable" ]
         
         name: PHP ${{ matrix.php }} - ${{ matrix.stability }} - Windows
-        
-        services:
-            mysql:
-                image: mysql:8
-                env:
-                    MYSQL_ALLOW_EMPTY_PASSWORD: yes
-                    MYSQL_DATABASE: forge
-                ports:
-                    - 33306:3306
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-            redis:
-                image: redis:latest
-                ports:
-                    - 6379:6379
-                options: --entrypoint redis-server
 
         steps:
             -   name: Set git to use LF
