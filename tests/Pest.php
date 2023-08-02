@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 
@@ -14,11 +15,11 @@ use Tests\TestCase;
 |
 */
 
-uses(TestCase::class)->group('core')->in('Unit/Core');
-uses(TestCase::class)->group('cash')->in('Unit/Drivers/Cash');
-uses(TestCase::class)->group('outside')->in('Unit/Drivers/Outside');
-uses(TestCase::class)->group('tinkoff-auth')->in('Unit/Drivers/TinkoffAuth');
-uses(TestCase::class)->group('tinkoff-credit')->in('Unit/Drivers/TinkoffCredit');
+uses(TestCase::class, RefreshDatabase::class)->group('core')->in('Unit/Core');
+uses(TestCase::class, RefreshDatabase::class)->group('cash')->in('Unit/Drivers/Cash');
+uses(TestCase::class, RefreshDatabase::class)->group('outside')->in('Unit/Drivers/Outside');
+uses(TestCase::class, RefreshDatabase::class)->group('tinkoff-auth')->in('Unit/Drivers/TinkoffAuth');
+uses(TestCase::class, RefreshDatabase::class)->group('tinkoff-credit')->in('Unit/Drivers/TinkoffCredit');
 
 /*
 |--------------------------------------------------------------------------
