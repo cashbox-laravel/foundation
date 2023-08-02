@@ -36,7 +36,6 @@ class Composer extends Command
         $this->copyToDriver($composer, 'config');
         $this->copyToDriver($composer, 'extra.branch-alias');
 
-        $this->copyToDriverThanks($composer, 'extra.thanks', 'require');
         $this->copyToDriverIntersect($composer, 'require');
 
         $this->copyToMain($composer, 'keywords');
@@ -69,27 +68,6 @@ class Composer extends Command
     protected function copyToDriver(&$array, string $key, mixed $default = null): void
     {
         IA::set($array, $key, $this->fromMain($key, $default));
-    }
-
-    protected function copyToDriverThanks(&$array, string $key, string $filterKey): void
-    {
-        $dependencies = array_keys($array[$filterKey] ?? []);
-
-        foreach ($this->thanks as $project => $thank) {
-            foreach ($dependencies as $dependency) {
-                if (str_starts_with($dependency, $project)) {
-                    $dependencies[] = $thank;
-                }
-            }
-        }
-
-        $source = collect($this->fromMain($key))
-            ->filter(fn (array $item) => in_array($item['name'], $dependencies))
-            ->sortBy('name')
-            ->values()
-            ->all();
-
-        IA::set($array, $key, $source);
     }
 
     protected function copyToDriverIntersect(&$array, string $key): void
