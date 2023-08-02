@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Cashbox\Core\Events\CreatedEvent;
-use Cashbox\Core\Events\FailedEvent;
-use Cashbox\Core\Events\RefundedEvent;
-use Cashbox\Core\Events\SuccessEvent;
-use Cashbox\Core\Events\WaitRefundEvent;
+use Cashbox\Core\Events\PaymentCreatedEvent;
+use Cashbox\Core\Events\PaymentFailedEvent;
+use Cashbox\Core\Events\PaymentRefundedEvent;
+use Cashbox\Core\Events\PaymentSuccessEvent;
+use Cashbox\Core\Events\PaymentWaitRefundEvent;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Tests\Fixtures\App\Enums\StatusEnum;
@@ -36,12 +36,12 @@ it('checks the refund', function () {
 
     assertIsUrl($payment->cashbox->info->extra['url']);
 
-    Event::assertDispatchedTimes(CreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class);
 
-    Event::assertNotDispatched(SuccessEvent::class);
-    Event::assertNotDispatched(FailedEvent::class);
-    Event::assertNotDispatched(RefundedEvent::class);
-    Event::assertNotDispatched(WaitRefundEvent::class);
+    Event::assertNotDispatched(PaymentSuccessEvent::class);
+    Event::assertNotDispatched(PaymentFailedEvent::class);
+    Event::assertNotDispatched(PaymentRefundedEvent::class);
+    Event::assertNotDispatched(PaymentWaitRefundEvent::class);
 
     Http::assertNothingSent();
 });

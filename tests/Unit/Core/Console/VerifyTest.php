@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 use Cashbox\Core\Console\Commands\Verify;
-use Cashbox\Core\Events\CreatedEvent;
-use Cashbox\Core\Events\SuccessEvent;
+use Cashbox\Core\Events\PaymentCreatedEvent;
+use Cashbox\Core\Events\PaymentSuccessEvent;
 use Illuminate\Support\Facades\Event;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
@@ -19,20 +19,15 @@ it('full verification', function () {
     $payment5 = createPayment(TypeEnum::cash);
     $payment6 = createPayment(TypeEnum::cash);
 
-    Event::assertDispatchedTimes(CreatedEvent::class, 4);
-    Event::assertDispatchedTimes(SuccessEvent::class, 4);
-
-    $payment3->refresh()->updateQuietly(['status' => StatusEnum::new]);
-    $payment4->refresh()->updateQuietly(['status' => StatusEnum::new]);
-    $payment5->refresh()->updateQuietly(['status' => StatusEnum::new]);
-    $payment6->refresh()->updateQuietly(['status' => StatusEnum::new]);
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 4);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 4);
 
     fakeEvents();
 
     artisan(Verify::class);
 
-    Event::assertNotDispatched(CreatedEvent::class);
-    Event::assertDispatchedTimes(SuccessEvent::class, 4);
+    Event::assertNotDispatched(PaymentCreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 4);
 
     expect($payment1->refresh()->status)->toBe(StatusEnum::new);
     expect($payment2->refresh()->status)->toBe(StatusEnum::new);
@@ -52,8 +47,8 @@ it('partial verification', function () {
     $payment5 = createPayment(TypeEnum::cash);
     $payment6 = createPayment(TypeEnum::cash);
 
-    Event::assertDispatchedTimes(CreatedEvent::class, 4);
-    Event::assertDispatchedTimes(SuccessEvent::class, 4);
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 4);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 4);
 
     $payment5->refresh()->updateQuietly(['status' => StatusEnum::new]);
     $payment6->refresh()->updateQuietly(['status' => StatusEnum::new]);
@@ -62,8 +57,8 @@ it('partial verification', function () {
 
     artisan(Verify::class);
 
-    Event::assertNotDispatched(CreatedEvent::class);
-    Event::assertDispatchedTimes(SuccessEvent::class, 2);
+    Event::assertNotDispatched(PaymentCreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 2);
 
     expect($payment1->refresh()->status)->toBe(StatusEnum::new);
     expect($payment2->refresh()->status)->toBe(StatusEnum::new);
@@ -83,8 +78,8 @@ it('verify by ID', function () {
     $payment5 = createPayment(TypeEnum::cash);
     $payment6 = createPayment(TypeEnum::cash);
 
-    Event::assertDispatchedTimes(CreatedEvent::class, 4);
-    Event::assertDispatchedTimes(SuccessEvent::class, 4);
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 4);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 4);
 
     $payment3->refresh()->updateQuietly(['status' => StatusEnum::new]);
     $payment4->refresh()->updateQuietly(['status' => StatusEnum::new]);
@@ -97,8 +92,8 @@ it('verify by ID', function () {
         'payment' => $payment4->id,
     ]);
 
-    Event::assertNotDispatched(CreatedEvent::class);
-    Event::assertDispatchedTimes(SuccessEvent::class);
+    Event::assertNotDispatched(PaymentCreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class);
 
     expect($payment1->refresh()->status)->toBe(StatusEnum::new);
     expect($payment2->refresh()->status)->toBe(StatusEnum::new);

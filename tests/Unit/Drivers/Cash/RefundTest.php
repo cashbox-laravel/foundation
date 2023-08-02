@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Cashbox\Core\Events\CreatedEvent;
-use Cashbox\Core\Events\FailedEvent;
-use Cashbox\Core\Events\RefundedEvent;
-use Cashbox\Core\Events\SuccessEvent;
-use Cashbox\Core\Events\WaitRefundEvent;
+use Cashbox\Core\Events\PaymentCreatedEvent;
+use Cashbox\Core\Events\PaymentFailedEvent;
+use Cashbox\Core\Events\PaymentRefundedEvent;
+use Cashbox\Core\Events\PaymentSuccessEvent;
+use Cashbox\Core\Events\PaymentWaitRefundEvent;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Tests\Fixtures\App\Enums\StatusEnum;
@@ -32,12 +32,12 @@ it('checks the manual refund', function () {
     $payment->refresh();
     expect($payment->status)->toBe(StatusEnum::refund);
 
-    Event::assertDispatchedTimes(CreatedEvent::class);
-    Event::assertDispatchedTimes(SuccessEvent::class);
-    Event::assertDispatchedTimes(RefundedEvent::class);
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class);
+    Event::assertDispatchedTimes(PaymentRefundedEvent::class);
 
-    Event::assertNotDispatched(FailedEvent::class);
-    Event::assertNotDispatched(WaitRefundEvent::class);
+    Event::assertNotDispatched(PaymentFailedEvent::class);
+    Event::assertNotDispatched(PaymentWaitRefundEvent::class);
 
     Http::assertNothingSent();
 });
@@ -58,12 +58,12 @@ it('checks the auto refund', function () {
     $payment->refresh();
     expect($payment->status)->toBe(StatusEnum::refund);
 
-    Event::assertDispatchedTimes(CreatedEvent::class);
-    Event::assertDispatchedTimes(SuccessEvent::class);
-    Event::assertDispatchedTimes(RefundedEvent::class);
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class);
+    Event::assertDispatchedTimes(PaymentRefundedEvent::class);
 
-    Event::assertNotDispatched(FailedEvent::class);
-    Event::assertNotDispatched(WaitRefundEvent::class);
+    Event::assertNotDispatched(PaymentFailedEvent::class);
+    Event::assertNotDispatched(PaymentWaitRefundEvent::class);
 
     Http::assertNothingSent();
 });

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use Cashbox\Core\Events\CreatedEvent;
-use Cashbox\Core\Events\FailedEvent;
-use Cashbox\Core\Events\RefundedEvent;
-use Cashbox\Core\Events\SuccessEvent;
-use Cashbox\Core\Events\WaitRefundEvent;
+use Cashbox\Core\Events\PaymentCreatedEvent;
+use Cashbox\Core\Events\PaymentFailedEvent;
+use Cashbox\Core\Events\PaymentRefundedEvent;
+use Cashbox\Core\Events\PaymentSuccessEvent;
+use Cashbox\Core\Events\PaymentWaitRefundEvent;
 use Illuminate\Support\Facades\Event;
 use Spatie\LaravelData\Support\DataProperty;
 use Tests\Fixtures\Data\FakeData;
@@ -21,10 +21,10 @@ function fakeDataProperty(): DataProperty
 function fakeEvents(): void
 {
     Event::fake([
-        CreatedEvent::class,
-        FailedEvent::class,
-        RefundedEvent::class,
-        SuccessEvent::class,
-        WaitRefundEvent::class,
+        PaymentCreatedEvent::class,
+        PaymentFailedEvent::class,
+        PaymentRefundedEvent::class,
+        PaymentSuccessEvent::class,
+        PaymentWaitRefundEvent::class,
     ]);
 }
