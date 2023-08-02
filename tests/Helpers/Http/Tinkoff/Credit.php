@@ -8,7 +8,7 @@ function fakeTinkoffCreditHttp(string $info = 'signed'): void
 {
     Http::fake([
         'https://forma.tinkoff.ru/api/partners/v2/orders/create-demo' => Http::response([
-            'id'   => 'demo-0f0f0f0f-0f0f-0f0f-0f0f-0f0f0f0f0f0f',
+            'id'   => fake()->uuid,
             'link' => fake()->imageUrl,
         ]),
 

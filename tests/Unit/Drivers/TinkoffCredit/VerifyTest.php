@@ -2,18 +2,16 @@
 
 declare(strict_types=1);
 
+use Cashbox\Core\Console\Commands\Verify;
 use Cashbox\Core\Events\PaymentCreatedEvent;
-use Cashbox\Core\Events\PaymentFailedEvent;
-use Cashbox\Core\Events\PaymentRefundedEvent;
 use Cashbox\Core\Events\PaymentSuccessEvent;
-use Cashbox\Core\Events\PaymentWaitRefundEvent;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Http;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
-it('checks the verify', function () {
+it('verify for new', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp('new');
 
     $payment = createPayment(TypeEnum::tinkoffCredit);
 
@@ -22,37 +20,35 @@ it('checks the verify', function () {
 
     expect($payment)->toBeHasCashbox();
 
-    expect(StatusEnum::new)->toBe(
-        $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)
-    );
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 0);
 
-    expect($payment->cashbox->info->externalId)->toBeString()->toMatch(
-        '/^demo-\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/'
-    );
+    fakeEvents();
 
-    assertIsUrl($payment->cashbox->info->extra['url']);
+    artisan(Verify::class);
 
-    // verify
-    $payment->cashboxJob()->verify();
+    expect($payment)->toBeStatus(StatusEnum::new);
 
-    $payment->refresh();
+    Event::assertNothingDispatched();
+});
 
-    expect(StatusEnum::new)->toBe(
-        $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)
-    );
+it('refund for success', function () {
+    fakeEvents();
+    fakeTinkoffCreditHttp();
 
-    expect($payment->cashbox->info->externalId)->toBeString()->toMatch(
-        '/^\b[0-9a-f]{8}\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\b[0-9a-f]{12}\b$/'
-    );
+    $payment = createPayment(TypeEnum::tinkoffCredit);
 
-    assertIsUrl($payment->cashbox->info->extra['url']);
+    expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
+    expect($payment->status)->toBe(StatusEnum::new);
+
+    expect($payment)->toBeHasCashbox();
 
     Event::assertDispatchedTimes(PaymentCreatedEvent::class);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class);
 
-    Event::assertNotDispatched(PaymentFailedEvent::class);
-    Event::assertNotDispatched(PaymentRefundedEvent::class);
-    Event::assertNotDispatched(PaymentWaitRefundEvent::class);
+    fakeEvents();
 
-    Http::assertNothingSent();
+    artisan(Verify::class);
+
+    Event::assertNothingDispatched();
 });
