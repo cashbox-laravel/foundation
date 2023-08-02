@@ -27,12 +27,19 @@ expect()->extend('toBeUrl', function () {
 });
 
 expect()->extend('toBeStatus', function (StatusEnum $status) {
-    $expected = sprintf('"%s" (%s)', $status->value, $status->name);
-    $actual   = sprintf('"%s" (%s)', $this->value->status->value, $this->value->status->name);
+    /** @var \Tests\Fixtures\App\Models\PaymentModel $item */
+    $item = $this->value->refresh();
 
-    $message = sprintf('The status must be %s, %s given.', $expected, $actual);
+    $message = sprintf(
+        'The status must be "%s::%s", "%s::%s" given for payment ID %s.',
+        get_class($status),
+        $status->name,
+        get_class($item->status),
+        $item->status->name,
+        $this->value->getKey()
+    );
 
-    expect($this->value->refresh()->status)->toBe($status, $message);
+    expect($item->status)->toBe($status, $message);
 
     return $this;
 });

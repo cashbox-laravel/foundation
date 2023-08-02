@@ -9,9 +9,47 @@ use Illuminate\Support\Facades\Event;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
-it('full verification', function () {
+it('direct verification', function () {
     fakeEvents();
     fakeTinkoffCreditHttp();
+
+    $payment1 = createPayment(TypeEnum::outside);
+    $payment2 = createPayment(TypeEnum::cash);
+    $payment3 = createPayment(TypeEnum::cash);
+    $payment4 = createPayment(TypeEnum::tinkoffCredit);
+    $payment5 = createPayment(TypeEnum::tinkoffCredit);
+
+    expect($payment1)->toBeStatus(StatusEnum::new);
+    expect($payment2)->toBeStatus(StatusEnum::success);
+    expect($payment3)->toBeStatus(StatusEnum::success);
+    expect($payment4)->toBeStatus(StatusEnum::success);
+    expect($payment5)->toBeStatus(StatusEnum::success);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 4);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 4);
+
+    setStatus(StatusEnum::new, $payment2, $payment4);
+
+    fakeEvents();
+
+    expect($payment2)->toBeStatus(StatusEnum::new);
+    expect($payment4)->toBeStatus(StatusEnum::new);
+
+    artisan(Verify::class);
+
+    expect($payment1)->toBeStatus(StatusEnum::new);
+    expect($payment2)->toBeStatus(StatusEnum::success);
+    expect($payment3)->toBeStatus(StatusEnum::success);
+    expect($payment4)->toBeStatus(StatusEnum::success);
+    expect($payment5)->toBeStatus(StatusEnum::success);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 0);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 2);
+});
+
+it('delayed verification', function () {
+    fakeEvents();
+    fakeTinkoffCreditHttp('new');
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
@@ -28,7 +66,18 @@ it('full verification', function () {
     Event::assertDispatchedTimes(PaymentCreatedEvent::class, 4);
     Event::assertDispatchedTimes(PaymentSuccessEvent::class, 2);
 
-    setStatus(StatusEnum::new, $payment2);
+    fakeEvents();
+
+    artisan(Verify::class);
+
+    expect($payment1)->toBeStatus(StatusEnum::new);
+    expect($payment2)->toBeStatus(StatusEnum::success);
+    expect($payment3)->toBeStatus(StatusEnum::success);
+    expect($payment4)->toBeStatus(StatusEnum::new);
+    expect($payment5)->toBeStatus(StatusEnum::new);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 0);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 0);
 
     fakeEvents();
 
@@ -37,16 +86,16 @@ it('full verification', function () {
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::success);
-    expect($payment4)->toBeStatus(StatusEnum::success);
-    expect($payment5)->toBeStatus(StatusEnum::success);
+    expect($payment4)->toBeStatus(StatusEnum::new);
+    expect($payment5)->toBeStatus(StatusEnum::new);
 
     Event::assertDispatchedTimes(PaymentCreatedEvent::class, 0);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 3);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 0);
 });
 
 it('verify by ID', function () {
     fakeEvents();
-    fakeTinkoffCreditHttp();
+    fakeTinkoffCreditHttp('new');
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
@@ -83,7 +132,7 @@ it('verify by ID', function () {
 
 it('verify by ID with force flag', function () {
     fakeEvents();
-    fakeTinkoffCreditHttp();
+    fakeTinkoffCreditHttp('new');
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);

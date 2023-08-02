@@ -18,13 +18,14 @@ function subHour(Model ...$payments): void
         $payment->created_at = now()->subHour();
 
         $payment->saveQuietly();
-        $payment->refresh();
     }
 }
 
 function setStatus(StatusEnum $status, Model ...$payments): void
 {
     foreach ($payments as $payment) {
-        $payment->refresh()->saveQuietly(compact('status'));
+        $payment->status = $status;
+
+        $payment->saveQuietly();
     }
 }
