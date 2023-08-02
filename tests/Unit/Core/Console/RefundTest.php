@@ -13,17 +13,18 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the refund of fresh payments', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
     $payment3 = createPayment(TypeEnum::tinkoffCredit);
 
-    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
-
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::new);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
 
     fakeEvents();
 
@@ -38,25 +39,20 @@ it('checks the refund of fresh payments', function () {
 
 it('will check the refund on time', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
     $payment3 = createPayment(TypeEnum::tinkoffCredit);
 
-    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
-
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::new);
 
-    $payment1->created_at = now()->subHour();
-    $payment2->created_at = now()->subHour();
-    $payment3->created_at = now()->subHour();
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
 
-    $payment1->saveQuietly();
-    $payment2->saveQuietly();
-    $payment3->saveQuietly();
+    subHour($payment1, $payment2, $payment3);
 
     fakeEvents();
 
@@ -72,17 +68,18 @@ it('will check the refund on time', function () {
 
 it('check forced refund', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
     $payment3 = createPayment(TypeEnum::tinkoffCredit);
 
-    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
-
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::new);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
 
     fakeEvents();
 
@@ -98,17 +95,18 @@ it('check forced refund', function () {
 
 it('checks the refund of payment by ID', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
     $payment3 = createPayment(TypeEnum::tinkoffCredit);
 
-    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
-
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::new);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
 
     fakeEvents();
 
@@ -125,25 +123,20 @@ it('checks the refund of payment by ID', function () {
 
 it('will check the payment return by time with the ID', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
     $payment3 = createPayment(TypeEnum::tinkoffCredit);
 
-    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
-
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::new);
 
-    $payment1->created_at = now()->subHour();
-    $payment2->created_at = now()->subHour();
-    $payment3->created_at = now()->subHour();
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
 
-    $payment1->saveQuietly();
-    $payment2->saveQuietly();
-    $payment3->saveQuietly();
+    subHour($payment1, $payment2, $payment3);
 
     fakeEvents();
 
@@ -155,23 +148,24 @@ it('will check the payment return by time with the ID', function () {
     expect($payment2)->toBeStatus(StatusEnum::refund);
     expect($payment3)->toBeStatus(StatusEnum::new);
 
-    Event::assertDispatchedTimes(PaymentRefundedEvent::class);
-    Event::assertNotDispatched(PaymentWaitRefundEvent::class);
+    Event::assertDispatchedTimes(PaymentRefundedEvent::class, 1);
+    Event::assertDispatchedTimes(PaymentWaitRefundEvent::class, 0);
 });
 
 it('check forced refund by ID', function () {
     fakeEvents();
+    fakeTinkoffCreditHttp();
 
     $payment1 = createPayment(TypeEnum::outside);
     $payment2 = createPayment(TypeEnum::cash);
     $payment3 = createPayment(TypeEnum::tinkoffCredit);
 
-    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
-    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
-
     expect($payment1)->toBeStatus(StatusEnum::new);
     expect($payment2)->toBeStatus(StatusEnum::success);
     expect($payment3)->toBeStatus(StatusEnum::new);
+
+    Event::assertDispatchedTimes(PaymentCreatedEvent::class, 2);
+    Event::assertDispatchedTimes(PaymentSuccessEvent::class, 1);
 
     fakeEvents();
 
@@ -184,6 +178,6 @@ it('check forced refund by ID', function () {
     expect($payment2)->toBeStatus(StatusEnum::refund);
     expect($payment3)->toBeStatus(StatusEnum::new);
 
-    Event::assertDispatchedTimes(PaymentRefundedEvent::class);
-    Event::assertNotDispatched(PaymentWaitRefundEvent::class);
+    Event::assertDispatchedTimes(PaymentRefundedEvent::class, 1);
+    Event::assertDispatchedTimes(PaymentWaitRefundEvent::class, 0);
 });
