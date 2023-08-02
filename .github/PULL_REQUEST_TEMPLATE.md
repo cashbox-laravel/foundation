@@ -1,7 +1,7 @@
 <!--
-Please only send a pull request to branches that are currently supported: https://cashbox-laravel.github.io/docs#support-policy 
+Please only send a pull request to branches that are currently supported: https://cashbox.city#support-policy 
 
-If you are unsure which branch your pull request should be sent to, please read: https://cashbox-laravel.github.io/docs#which-branch
+If you are unsure which branch your pull request should be sent to, please read: https://cashbox.city#which-branch
 
 Pull requests without a descriptive title, thorough description, or tests will be closed.
 

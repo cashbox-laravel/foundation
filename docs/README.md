@@ -21,21 +21,21 @@ The project contains some ready-made solutions of payment systems, but you can o
 
 ## Documentation
 
-You will find full documentation on the dedicated [documentation](https://cashbox-laravel.github.io/docs) site.
+You will find full documentation on the dedicated [documentation](https://cashbox.city) site.
 
 ## Contributing
 
 Thank you for considering contributing to the `Cashbox`!
-The contribution guide can be found in the [Cashbox documentation](https://cashbox-laravel.github.io/docs).
+The contribution guide can be found in the [Cashbox documentation](https://cashbox.city).
 
 ## Code of Conduct
 
 In order to ensure that the `Cashbox` community is welcoming to all, please review and abide by
-the [Code of Conduct](https://cashbox-laravel.github.io/docs).
+the [Code of Conduct](https://cashbox.city).
 
 ## Security Vulnerabilities
 
-Please review [our security policy](https://cashbox-laravel.github.io/docs) on how to report security vulnerabilities.
+Please review [our security policy](https://cashbox.city) on how to report security vulnerabilities.
 
 ## License
 

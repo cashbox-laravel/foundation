@@ -6,7 +6,7 @@ body:
     -   type: markdown
         attributes:
             value: "Before submitting your report,
-        [please ensure your Cashbox version is still supported](https://cashbox-laravel.github.io/docs#support-policy)."
+        [please ensure your Cashbox version is still supported](https://cashbox.city#support-policy)."
 
     -   type: input
         attributes:
