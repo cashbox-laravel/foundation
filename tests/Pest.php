@@ -14,7 +14,11 @@ use Tests\TestCase;
 |
 */
 
-uses(TestCase::class)->in('Unit');
+uses(TestCase::class)->group('core')->in('Unit/Core');
+uses(TestCase::class)->group('cash')->in('Unit/Drivers/Cash');
+uses(TestCase::class)->group('outside')->in('Unit/Drivers/Outside');
+uses(TestCase::class)->group('tinkoff-auth')->in('Unit/Drivers/TinkoffAuth');
+uses(TestCase::class)->group('tinkoff-credit')->in('Unit/Drivers/TinkoffCredit');
 
 /*
 |--------------------------------------------------------------------------
