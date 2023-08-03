@@ -15,63 +15,41 @@
 
 namespace Cashbox\Tinkoff\QrCode;
 
-use Cashbox\Core\Facades\Helpers\Model;
+use Cashbox\Core\Http\Response as BaseResponse;
 use Cashbox\Core\Services\Driver as BaseDriver;
-use Cashbox\Tinkoff\QrCode\Exceptions\Manager;
-use Cashbox\Tinkoff\QrCode\Helpers\Statuses;
-use Cashbox\Tinkoff\QrCode\Requests\Cancel;
-use Cashbox\Tinkoff\QrCode\Requests\GetQR;
-use Cashbox\Tinkoff\QrCode\Requests\GetState;
-use Cashbox\Tinkoff\QrCode\Requests\Init;
-use Cashbox\Tinkoff\QrCode\Resources\Details;
-use Cashbox\Tinkoff\QrCode\Responses\QrCode;
-use Cashbox\Tinkoff\QrCode\Responses\Refund;
-use Cashbox\Tinkoff\QrCode\Responses\State;
-use DragonCode\Contracts\Cashier\Http\Response;
+use Cashbox\Tinkoff\QrCode\Http\Requests\CancelRequest;
+use Cashbox\Tinkoff\QrCode\Http\Requests\CreateRequest;
+use Cashbox\Tinkoff\QrCode\Http\Requests\GetQrRequest;
+use Cashbox\Tinkoff\QrCode\Http\Requests\GetStateRequest;
+use Cashbox\Tinkoff\QrCode\Http\Responses\Response;
+use Cashbox\Tinkoff\QrCode\Services\Exception;
+use Cashbox\Tinkoff\QrCode\Services\Statuses;
 
+/**
+ * @see https://www.tinkoff.ru/kassa/develop/api/payments/
+ */
 class Driver extends BaseDriver
 {
-    protected $exception = Manager::class;
+    protected string $statuses = Statuses::class;
 
-    protected $statuses = Statuses::class;
+    protected string $exception = Exception::class;
 
-    protected $details = Details::class;
+    protected string $response = Response::class;
 
-    public function start(): Response
+    public function start(): BaseResponse
     {
-        $this->init();
+        $response = $this->request(CreateRequest::class);
 
-        $request = GetQR::make($this->model);
-
-        return $this->request($request, QrCode::class);
+        return $this->request(GetQrRequest::class, externalId: $response->getExternalId());
     }
 
-    public function check(): Response
+    public function verify(): BaseResponse
     {
-        $request = GetState::make($this->model);
-
-        return $this->request($request, State::class);
+        return $this->request(GetStateRequest::class);
     }
 
-    public function refund(): Response
+    public function refund(): BaseResponse
     {
-        $request = Cancel::make($this->model);
-
-        return $this->request($request, Refund::class);
-    }
-
-    protected function init(): void
-    {
-        $request = Init::make($this->model);
-
-        $response = $this->request($request, Responses\Init::class);
-
-        $external_id = $response->getExternalId();
-
-        $details = $this->details($response->toArray());
-
-        Model::updateOrCreate($this->payment, compact('external_id', 'details'));
-
-        $this->payment->refresh();
+        return $this->request(CancelRequest::class);
     }
 }

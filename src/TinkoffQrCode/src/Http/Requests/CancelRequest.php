@@ -15,20 +15,17 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\QrCode\Responses;
+namespace Cashbox\Tinkoff\QrCode\Http\Requests;
 
-use Cashbox\Core\Http\Response;
-
-class State extends Response
+class CancelRequest extends BaseRequest
 {
-    protected $map = [
-        self::KEY_EXTERNAL_ID => 'PaymentId',
+    protected string $productionUri = '/v2/Cancel';
 
-        self::KEY_STATUS => 'Status',
-    ];
-
-    public function isEmpty(): bool
+    public function body(): array
     {
-        return empty($this->getExternalId()) || empty($this->getStatus());
+        return [
+            'PaymentId' => $this->resource->payment->cashbox->external_id,
+            'Amount'    => $this->resource->sum(),
+        ];
     }
 }

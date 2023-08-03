@@ -24,6 +24,7 @@ use Cashbox\Core\Providers\RateLimiterServiceProvider;
 use Cashbox\Core\Providers\ServiceProvider;
 use Cashbox\Tinkoff\Credit\Driver as TinkoffCreditDriver;
 use Cashbox\Tinkoff\Online\Driver as TinkoffOnlineDriver;
+use Cashbox\Tinkoff\QrCode\Driver as TinkoffQrCodeDriver;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -34,6 +35,7 @@ use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Payments\Cash;
 use Tests\Fixtures\Payments\TinkoffCredit;
 use Tests\Fixtures\Payments\TinkoffOnline;
+use Tests\Fixtures\Payments\TinkoffQrCode;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -88,6 +90,7 @@ abstract class TestCase extends BaseTestCase
         $this->setUpCashDriver($app);
         $this->setUpTinkoffCreditDriver($app);
         $this->setUpTinkoffOnlineDriver($app);
+        $this->setUpTinkoffQrCodeDriver($app);
     }
 
     protected function setUpCashDriver(Application $app): void
@@ -128,6 +131,20 @@ abstract class TestCase extends BaseTestCase
         $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffOnline(), [
             'driver'      => TinkoffOnlineDriver::class,
             'resource'    => TinkoffOnline::class,
+            'credentials' => [
+                'client_id'     => fake()->randomLetter,
+                'client_secret' => fake()->password,
+            ],
+        ]);
+    }
+
+    protected function setUpTinkoffQrCodeDriver(Application $app): void
+    {
+        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::tinkoffQrCode(), TypeEnum::tinkoffQrCode);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffQrCode(), [
+            'driver'      => TinkoffQrCodeDriver::class,
+            'resource'    => TinkoffQrCode::class,
             'credentials' => [
                 'client_id'     => fake()->randomLetter,
                 'client_secret' => fake()->password,

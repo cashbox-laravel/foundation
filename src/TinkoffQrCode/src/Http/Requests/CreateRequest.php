@@ -15,18 +15,20 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\QrCode\Requests;
+namespace Cashbox\Tinkoff\QrCode\Http\Requests;
 
-class Cancel extends BaseRequest
+class CreateRequest extends BaseRequest
 {
-    protected $path = '/v2/Cancel';
+    protected string $productionUri = '/v2/Init';
 
-    public function getRawBody(): array
+    protected bool $secure = false;
+
+    public function body(): array
     {
         return [
-            'PaymentId' => $this->model->getExternalId(),
-
-            'Amount' => $this->model->getSum(),
+            'OrderId'  => $this->resource->paymentId(),
+            'Amount'   => $this->resource->sum(),
+            'Currency' => $this->resource->currency(),
         ];
     }
 }

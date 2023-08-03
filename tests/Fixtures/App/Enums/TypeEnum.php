@@ -24,6 +24,7 @@ use ArchTech\Enums\InvokableCases;
  * @method static string outside()
  * @method static string tinkoffCredit()
  * @method static string tinkoffOnline()
+ * @method static string tinkoffQrCode()
  */
 enum TypeEnum: string
 {
@@ -33,4 +34,5 @@ enum TypeEnum: string
     case outside       = 'outside';
     case tinkoffCredit = 'tinkoff_credit';
     case tinkoffOnline = 'tinkoff_online';
+    case tinkoffQrCode = 'tinkoff_qr';
 }

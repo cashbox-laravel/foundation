@@ -15,28 +15,25 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\QrCode\Requests;
+namespace Cashbox\Tinkoff\QrCode\Http\Requests;
 
 use Cashbox\Core\Http\Request;
-use Cashbox\Core\Support\URI;
-use Cashbox\Tinkoff\Auth\Auth;
+use Cashbox\Core\Services\Sign as BaseSign;
+use Cashbox\Tinkoff\Auth\Sign;
 
 abstract class BaseRequest extends Request
 {
-    protected $host = 'https://securepay.tinkoff.ru';
+    protected string $productionHost = 'https://securepay.tinkoff.ru';
 
-    protected $auth = Auth::class;
+    protected BaseSign|string|null $auth = Sign::class;
 
-    public function getRawHeaders(): array
+    protected function clientId(): string
     {
-        return [
-            'Accept'       => 'application/json',
-            'Content-Type' => 'application/json',
-        ];
+        return $this->resource->config->credentials->clientId;
     }
 
-    protected function getUriBuilder(): URI
+    protected function clientSecret(): string
     {
-        return URI::make($this->host, null);
+        return $this->resource->config->credentials->clientSecret;
     }
 }

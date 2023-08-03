@@ -64,6 +64,7 @@ it('checks the payment block', function () {
         TypeEnum::cash()          => TypeEnum::cash,
         TypeEnum::tinkoffCredit() => TypeEnum::tinkoffCredit,
         TypeEnum::tinkoffOnline() => TypeEnum::tinkoffOnline,
+        TypeEnum::tinkoffQrCode() => TypeEnum::tinkoffQrCode,
     ]);
 });
 

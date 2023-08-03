@@ -15,16 +15,18 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\QrCode\Requests;
+namespace Cashbox\Tinkoff\QrCode\Http\Requests;
 
-class GetQR extends BaseRequest
+class GetQrRequest extends BaseRequest
 {
-    protected $path = '/v2/GetQr';
+    protected string $productionUri = '/v2/GetQr';
 
-    public function getRawBody(): array
+    public function body(): array
     {
         return [
-            'PaymentId' => $this->model->getExternalId(),
+            'PaymentId' => $this->externalId,
+
+            'DataType' => 'PAYLOAD',
         ];
     }
 }
