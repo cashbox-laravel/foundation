@@ -37,7 +37,7 @@ class TinkoffOnline extends TinkoffOnlineResource
     public function contact(): ?ContactData
     {
         return ContactData::from([
-            'fio'         => [
+            'fio' => [
                 'firstName'  => fake()->firstName,
                 'middleName' => fake()->firstName,
                 'lastName'   => fake()->lastName,

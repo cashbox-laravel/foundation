@@ -113,7 +113,7 @@ abstract class TestCase extends BaseTestCase
             'resource'    => TinkoffCredit::class,
             'credentials' => [
                 // shopId
-                'client_id'     => fake()->randomLetter,
+                'client_id' => fake()->randomLetter,
 
                 // password
                 'client_secret' => fake()->password,

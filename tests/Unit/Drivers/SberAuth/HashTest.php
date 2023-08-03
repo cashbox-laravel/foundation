@@ -46,7 +46,7 @@ it('validates the authorization request', function () {
             && $request->hasHeader('RqUID')
             && $request->hasHeader('Accept', 'application/json')
             && $request->hasHeader('Content-Type', 'application/x-www-form-urlencoded')
-            && $request->data() === $data
+            && $data === $request->data()
             && Str::is('*/ru/prod/tokens/v2/oauth', $request->url());
     });
 });
