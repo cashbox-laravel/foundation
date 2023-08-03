@@ -15,32 +15,29 @@
 
 declare(strict_types=1);
 
-use Cashbox\Core\Enums\StatusEnum;
 use Cashbox\Core\Events\PaymentCreatedEvent;
 use Cashbox\Core\Events\PaymentFailedEvent;
 use Cashbox\Core\Events\PaymentRefundedEvent;
 use Cashbox\Core\Events\PaymentSuccessEvent;
 use Cashbox\Core\Events\PaymentWaitRefundEvent;
 use Illuminate\Support\Facades\Event;
-use Tests\Fixtures\App\Enums\StatusEnum as AppStatusEnum;
+use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('checks the progress', function () {
     fakeEvents();
-    fakeTinkoffOnlineHttp('new');
+    fakeTinkoffOnlineHttp('NEW');
 
     $payment = createPayment(TypeEnum::tinkoffOnline);
 
     expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
-    expect($payment->status)->toBe(AppStatusEnum::new);
+    expect($payment->status)->toBe(StatusEnum::new);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect(StatusEnum::new)->toBe(
-        $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)
-    );
+    expect($payment)->toBeStatus(StatusEnum::new);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -59,15 +56,13 @@ it('checks the success', function () {
     $payment = createPayment(TypeEnum::tinkoffOnline);
 
     expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
-    expect($payment->status)->toBe(AppStatusEnum::new);
+    expect($payment->status)->toBe(StatusEnum::new);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect(StatusEnum::success)->toBe(
-        $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)
-    );
+    expect($payment)->toBeStatus(StatusEnum::success);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 

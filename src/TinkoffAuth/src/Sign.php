@@ -17,7 +17,6 @@ declare(strict_types=1);
 
 namespace Cashbox\Tinkoff\Auth;
 
-use Cashbox\Core\Data\Config\Drivers\CredentialsData;
 use Cashbox\Core\Data\Signing\Token;
 use Cashbox\Core\Services\Sign as BaseSign;
 use Cashbox\Tinkoff\Auth\Constants\Keys;
@@ -47,16 +46,11 @@ class Sign extends BaseSign
 
     protected function clientId(): string
     {
-        return $this->credentials()->clientId;
+        return $this->config->credentials->clientId;
     }
 
     protected function clientSecret(): string
     {
-        return $this->credentials()->clientSecret;
-    }
-
-    protected function credentials(): CredentialsData
-    {
-        return $this->request->resource->payment->cashboxDriver()->config->credentials;
+        return $this->config->credentials->clientSecret;
     }
 }

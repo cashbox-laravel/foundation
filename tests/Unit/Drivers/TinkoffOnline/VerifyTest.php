@@ -24,7 +24,7 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('verify for new', function () {
     fakeEvents();
-    fakeTinkoffOnlineHttp('new');
+    fakeTinkoffOnlineHttp('NEW');
 
     $payment = createPayment(TypeEnum::tinkoffOnline);
 

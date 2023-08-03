@@ -17,30 +17,41 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Http;
 
-function fakeTinkoffOnlineHttp(string $info = 'signed'): void
+function fakeTinkoffOnlineHttp(string $info = 'CONFIRMED'): void
 {
     Http::fake([
-        'https://forma.tinkoff.ru/api/partners/v2/orders/create-demo' => Http::response([
-            'id'   => fake()->uuid,
-            'link' => fake()->imageUrl,
+        'https://securepay.tinkoff.ru/v2/Init' => Http::response([
+            'Success'     => true,
+            'ErrorCode'   => 0,
+            'TerminalKey' => fake()->word,
+            'Status'      => 'NEW',
+            'PaymentId'   => fake()->randomNumber(),
+            'OrderId'     => fake()->randomNumber(),
+            'Amount'      => fake()->randomNumber(),
+            'PaymentURL'  => fake()->imageUrl,
         ]),
 
-        'https://forma.tinkoff.ru/api/partners/v2/orders/*/info' => Http::response([
-            'id'         => fake()->uuid,
-            'status'     => $info,
-            'created_at' => fake()->unixTime,
+        'https://securepay.tinkoff.ru/v2/GetState' => Http::response([
+            'Success'     => true,
+            'ErrorCode'   => 0,
+            'Message'     => 'OK',
+            'TerminalKey' => fake()->word,
+            'Status'      => $info,
+            'PaymentId'   => fake()->randomNumber(),
+            'OrderId'     => fake()->randomNumber(),
+            'Amount'      => fake()->randomNumber(),
         ]),
 
-        'https://forma.tinkoff.ru/api/partners/v2/orders/*/commit' => Http::response([
-            'id'         => fake()->uuid,
-            'status'     => 'approved',
-            'created_at' => fake()->unixTime,
-        ]),
-
-        'https://forma.tinkoff.ru/api/partners/v2/orders/*/cancel' => Http::response([
-            'id'         => fake()->uuid,
-            'status'     => 'canceled',
-            'created_at' => fake()->unixTime,
+        'https://securepay.tinkoff.ru/v2/Cancel' => Http::response([
+            'Success'        => true,
+            'ErrorCode'      => 0,
+            'Message'        => 'OK',
+            'TerminalKey'    => fake()->word,
+            'Status'         => 'REFUNDED',
+            'PaymentId'      => fake()->randomNumber(),
+            'OrderId'        => fake()->randomNumber(),
+            'OriginalAmount' => fake()->randomNumber(),
+            'NewAmount'      => 0,
         ]),
     ]);
 }
