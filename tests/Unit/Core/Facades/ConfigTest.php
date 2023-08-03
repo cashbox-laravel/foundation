@@ -63,6 +63,7 @@ it('checks the payment block', function () {
     expect($data->drivers)->toBe([
         TypeEnum::cash()          => TypeEnum::cash,
         TypeEnum::tinkoffCredit() => TypeEnum::tinkoffCredit,
+        TypeEnum::tinkoffOnline() => TypeEnum::tinkoffOnline,
     ]);
 });
 
@@ -164,12 +165,12 @@ it(
         expect($item->getQueue()->refund)->toBe($expected['refund']);
     }
 )->with([
-    'filled' => [
+    'filled'       => [
         driverData('q1', 'q2', 'q3'),
         driverData('q4', 'q5', 'q6'),
         driverData('q4', 'q5', 'q6'),
     ],
-    'partial' => [
+    'partial'      => [
         driverData('q1', 'q2', 'q3'),
         driverData('q4', null, null),
         driverData('q4', null, null),
@@ -179,12 +180,12 @@ it(
         [],
         driverData(null, null, null),
     ],
-    'main empty' => [
+    'main empty'   => [
         [],
         driverData('q4', 'q5', 'q6'),
         driverData('q4', 'q5', 'q6'),
     ],
-    'full empty' => [
+    'full empty'   => [
         [],
         [],
         driverData(null, null, null),

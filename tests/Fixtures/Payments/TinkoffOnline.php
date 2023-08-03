@@ -24,9 +24,9 @@ use Cashbox\Tinkoff\Online\Resources\TinkoffOnlineResource;
 
 class TinkoffOnline extends TinkoffOnlineResource
 {
-    public function currency(): CurrencyEnum
+    public function currency(): int
     {
-        return CurrencyEnum::USD;
+        return CurrencyEnum::USD->value;
     }
 
     public function sum(): int

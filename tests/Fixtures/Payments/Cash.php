@@ -22,9 +22,9 @@ use Cashbox\Core\Enums\CurrencyEnum;
 
 class Cash extends CashResource
 {
-    public function currency(): CurrencyEnum
+    public function currency(): int
     {
-        return CurrencyEnum::USD;
+        return CurrencyEnum::USD->value;
     }
 
     public function sum(): int
