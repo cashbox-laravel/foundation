@@ -91,6 +91,7 @@ abstract class TestCase extends BaseTestCase
         $this->setUpTinkoffCreditDriver($app);
         $this->setUpTinkoffOnlineDriver($app);
         $this->setUpTinkoffQrCodeDriver($app);
+        $this->setUpSberQrCodeDriver($app);
     }
 
     protected function setUpCashDriver(Application $app): void
@@ -148,6 +149,20 @@ abstract class TestCase extends BaseTestCase
             'credentials' => [
                 'client_id'     => fake()->randomLetter,
                 'client_secret' => fake()->password,
+            ],
+        ]);
+    }
+
+    protected function setUpSberQrCodeDriver(Application $app): void
+    {
+        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::sberQrCode(), TypeEnum::sberQrCode);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::sberQrCode(), [
+            'driver'      => TinkoffQrCodeDriver::class,
+            'resource'    => TinkoffQrCode::class,
+            'credentials' => [
+                'client_id'     => 'qwerty',
+                'client_secret' => 'qwerty123',
             ],
         ]);
     }

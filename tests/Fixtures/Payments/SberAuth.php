@@ -15,11 +15,20 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Sber\Auth\Constants;
+namespace Tests\Fixtures\Payments;
 
-class Keys
+use Cashbox\Core\Enums\CurrencyEnum;
+use Cashbox\Core\Resources\Resource;
+
+class SberAuth extends Resource
 {
-    public const CLIENT_ID  = 'client_id';
-    public const TOKEN      = 'access_token';
-    public const EXPIRES_IN = 'expires_in';
+    public function currency(): int
+    {
+        return CurrencyEnum::USD->value;
+    }
+
+    public function sum(): int
+    {
+        return 1000;
+    }
 }
