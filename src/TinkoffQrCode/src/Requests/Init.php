@@ -21,7 +21,7 @@ class Init extends BaseRequest
 {
     protected $path = '/v2/Init';
 
-    protected $hash = false;
+    protected $secure = false;
 
     public function getRawBody(): array
     {

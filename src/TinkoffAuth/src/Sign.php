@@ -28,7 +28,7 @@ class Sign extends BaseSign
             $this->clientId(),
             $this->clientSecret(),
             $this->request->body(),
-            $this->hash
+            $this->secure
         );
     }
 

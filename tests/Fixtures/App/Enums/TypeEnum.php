@@ -10,6 +10,7 @@ use ArchTech\Enums\InvokableCases;
  * @method static string cash()
  * @method static string outside()
  * @method static string tinkoffCredit()
+ * @method static string tinkoffOnline()
  */
 enum TypeEnum: string
 {
@@ -18,4 +19,5 @@ enum TypeEnum: string
     case cash          = 'cash';
     case outside       = 'outside';
     case tinkoffCredit = 'tinkoff_credit';
+    case tinkoffOnline = 'tinkoff_online';
 }

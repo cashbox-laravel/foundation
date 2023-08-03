@@ -7,9 +7,9 @@ namespace Tests\Fixtures\Payments;
 use Cashbox\Core\Enums\CurrencyEnum;
 use Cashbox\Tinkoff\Credit\Data\ContactData;
 use Cashbox\Tinkoff\Credit\Data\ProductData;
-use Cashbox\Tinkoff\Credit\Resources\TinkoffCreditResource;
+use Cashbox\Tinkoff\Online\Resources\TinkoffOnlineResource;
 
-class Tinkoff extends TinkoffCreditResource
+class TinkoffOnline extends TinkoffOnlineResource
 {
     public function currency(): CurrencyEnum
     {
@@ -24,7 +24,7 @@ class Tinkoff extends TinkoffCreditResource
     public function contact(): ?ContactData
     {
         return ContactData::from([
-            'fio' => [
+            'fio'         => [
                 'firstName'  => fake()->firstName,
                 'middleName' => fake()->firstName,
                 'lastName'   => fake()->lastName,

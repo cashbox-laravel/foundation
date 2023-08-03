@@ -21,7 +21,7 @@ class Init extends BaseRequest
 {
     protected $path = '/api/create';
 
-    protected $hash = false;
+    protected $secure = false;
 
     protected $auth_extra = [
         'scope' => 'scope-if-needed',

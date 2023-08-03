@@ -19,6 +19,7 @@ uses(TestCase::class)->group('cash')->in('Unit/Drivers/Cash');
 uses(TestCase::class)->group('outside')->in('Unit/Drivers/Outside');
 uses(TestCase::class)->group('tinkoff-auth')->in('Unit/Drivers/TinkoffAuth');
 uses(TestCase::class)->group('tinkoff-credit')->in('Unit/Drivers/TinkoffCredit');
+uses(TestCase::class)->group('tinkoff-online')->in('Unit/Drivers/TinkoffOnline');
 
 /*
 |--------------------------------------------------------------------------

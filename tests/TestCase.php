@@ -10,6 +10,7 @@ use Cashbox\Core\Providers\ObserverServiceProvider;
 use Cashbox\Core\Providers\RateLimiterServiceProvider;
 use Cashbox\Core\Providers\ServiceProvider;
 use Cashbox\Tinkoff\Credit\Driver as TinkoffCreditDriver;
+use Cashbox\Tinkoff\Online\Driver as TinkoffOnlineDriver;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -18,7 +19,8 @@ use Tests\Fixtures\App\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Payments\Cash;
-use Tests\Fixtures\Payments\Tinkoff;
+use Tests\Fixtures\Payments\TinkoffCredit;
+use Tests\Fixtures\Payments\TinkoffOnline;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -72,6 +74,7 @@ abstract class TestCase extends BaseTestCase
     {
         $this->setUpCashDriver($app);
         $this->setUpTinkoffCreditDriver($app);
+        $this->setUpTinkoffOnlineDriver($app);
     }
 
     protected function setUpCashDriver(Application $app): void
@@ -90,10 +93,10 @@ abstract class TestCase extends BaseTestCase
 
         $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffCredit(), [
             'driver'      => TinkoffCreditDriver::class,
-            'resource'    => Tinkoff::class,
+            'resource'    => TinkoffCredit::class,
             'credentials' => [
                 // shopId
-                'client_id' => fake()->randomLetter,
+                'client_id'     => fake()->randomLetter,
 
                 // password
                 'client_secret' => fake()->password,
@@ -101,6 +104,20 @@ abstract class TestCase extends BaseTestCase
                 'showcase_id' => fake()->randomLetter,
 
                 'promo_code' => 'default',
+            ],
+        ]);
+    }
+
+    protected function setUpTinkoffOnlineDriver(Application $app): void
+    {
+        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::tinkoffOnline(), TypeEnum::tinkoffOnline);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffOnline(), [
+            'driver'      => TinkoffOnlineDriver::class,
+            'resource'    => TinkoffOnline::class,
+            'credentials' => [
+                'client_id'     => fake()->randomLetter,
+                'client_secret' => fake()->password,
             ],
         ]);
     }
