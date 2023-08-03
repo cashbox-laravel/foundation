@@ -52,6 +52,7 @@
         "archtechx/enums": "^0.3.2",
         "doctrine/dbal": "^3.6",
         "dragon-code/contracts": "^2.20",
+        "dragon-code/laravel-cache": "^3.9",
         "dragon-code/laravel-support": "^3.6",
         "dragon-code/simple-dto": "^2.7.1",
         "dragon-code/support": "^6.11.2",

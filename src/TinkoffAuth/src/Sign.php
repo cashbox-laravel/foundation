@@ -26,7 +26,7 @@ class Sign extends BaseSign
 {
     public function body(): array
     {
-        $token = $this->hash();
+        $token = $this->token();
 
         return array_merge($this->request->body(), [
             Keys::TERMINAL => $token->clientId,
@@ -34,7 +34,7 @@ class Sign extends BaseSign
         ]);
     }
 
-    protected function hash(): Token
+    protected function token(): Token
     {
         return Hash::get(
             $this->clientId(),
