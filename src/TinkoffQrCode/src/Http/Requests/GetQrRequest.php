@@ -24,7 +24,7 @@ class GetQrRequest extends BaseRequest
     public function body(): array
     {
         return [
-            'PaymentId' => $this->externalId,
+            'PaymentId' => $this->response->getExternalId(),
 
             'DataType' => 'PAYLOAD',
         ];

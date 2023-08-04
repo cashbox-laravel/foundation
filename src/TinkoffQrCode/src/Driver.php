@@ -40,7 +40,7 @@ class Driver extends BaseDriver
     {
         $response = $this->request(CreateRequest::class);
 
-        return $this->request(GetQrRequest::class, externalId: $response->getExternalId());
+        return $this->request(GetQrRequest::class, prev: $response);
     }
 
     public function verify(): BaseResponse

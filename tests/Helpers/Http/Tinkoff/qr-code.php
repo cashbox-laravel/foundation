@@ -45,12 +45,10 @@ function fakeTinkoffQrCodeHttp(string $info = 'CONFIRMED'): void
         'https://securepay.tinkoff.ru/v2/GetQr' => Http::response([
             'Success'     => true,
             'ErrorCode'   => 0,
-            'Message'     => 'OK',
             'TerminalKey' => fake()->word,
-            'Status'      => $info,
-            'PaymentId'   => fake()->randomNumber(),
             'OrderId'     => fake()->randomNumber(),
-            'Amount'      => fake()->randomNumber(),
+            'PaymentId'   => fake()->randomNumber(),
+            'Data'        => fake()->imageUrl,
         ]),
 
         'https://securepay.tinkoff.ru/v2/Cancel' => Http::response([
