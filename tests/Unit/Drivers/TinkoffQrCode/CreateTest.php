@@ -20,7 +20,7 @@ use Cashbox\Core\Events\PaymentFailedEvent;
 use Cashbox\Core\Events\PaymentRefundedEvent;
 use Cashbox\Core\Events\PaymentSuccessEvent;
 use Cashbox\Core\Events\PaymentWaitRefundEvent;
-use Cashbox\Core\Exceptions\External\BadRequestClientException;
+use Cashbox\Core\Exceptions\External\BadRequestHttpException;
 use Illuminate\Support\Facades\Event;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
@@ -80,4 +80,4 @@ it('checks for invalid parameters being passed', function () {
     fakeTinkoffQrCodeInvalidHttp();
 
     createPayment(TypeEnum::tinkoffQrCode);
-})->expectException(BadRequestClientException::class);
+})->expectException(BadRequestHttpException::class);

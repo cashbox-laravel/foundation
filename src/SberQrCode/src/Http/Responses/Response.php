@@ -15,37 +15,19 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\Online\Http\Responses;
+namespace Cashbox\Sber\QrCode\Http\Responses;
 
 use Cashbox\Core\Http\Response as BaseResponse;
 use Spatie\LaravelData\Attributes\MapInputName;
 
 class Response extends BaseResponse
 {
-    #[MapInputName('Status')]
+    #[MapInputName('status.order_state')]
     public ?string $status;
 
-    #[MapInputName('PaymentURL')]
-    public ?string $url;
-
-    #[MapInputName('PaymentId')]
+    #[MapInputName('status.order_id')]
     public string $externalId;
 
-    public function getExternalId(): ?string
-    {
-        return $this->externalId;
-    }
-
-    protected function getExtra(): array
-    {
-        return [
-            'status' => $this->status,
-            'url'    => $this->url,
-        ];
-    }
-
-    protected function getStatus(): ?string
-    {
-        return $this->status;
-    }
+    #[MapInputName('status.order_operation_params.0.operation_id')]
+    public string $operationId;
 }

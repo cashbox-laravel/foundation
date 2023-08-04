@@ -18,11 +18,11 @@ declare(strict_types=1);
 namespace Cashbox\Tinkoff\Auth;
 
 use Cashbox\Core\Data\Signing\Token;
-use Cashbox\Core\Services\Sign as BaseSign;
+use Cashbox\Core\Services\Auth as BaseSign;
 use Cashbox\Tinkoff\Auth\Constants\Keys;
 use Cashbox\Tinkoff\Auth\Services\Hash;
 
-class Sign extends BaseSign
+class Auth extends BaseSign
 {
     public function body(): array
     {

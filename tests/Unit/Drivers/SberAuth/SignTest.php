@@ -22,7 +22,7 @@ it('should check authorization', function () {
 
     $payment = createPayment(TypeEnum::sberQrCode);
 
-    $sign = sberSign($payment);
+    $sign = sberAuth($payment);
 
     expect($sign->headers())->toBe([
         'X-IBM-Client-Id'    => 'qwerty',

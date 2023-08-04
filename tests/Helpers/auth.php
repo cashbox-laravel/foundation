@@ -15,16 +15,16 @@
 
 declare(strict_types=1);
 
-use Cashbox\Sber\Auth\Sign;
+use Cashbox\Sber\Auth\Auth;
 use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Payments\SberAuth;
 use Tests\Fixtures\Requests\SberAuthRequest;
 
-function sberSign(PaymentModel $payment): Sign
+function sberAuth(PaymentModel $payment): Auth
 {
     $config = $payment->cashboxDriver()->config;
 
-    return new Sign(
+    return new Auth(
         request: new SberAuthRequest(new SberAuth($payment, $config)),
         config : $config,
         extra  : [

@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Sber\Auth\Services;
+namespace Cashbox\Core\Services;
 
 use DragonCode\Cache\Services\Cache;
 use Illuminate\Support\Str;
