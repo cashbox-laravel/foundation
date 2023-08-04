@@ -15,21 +15,26 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\Requests;
+namespace Tests\Fixtures\Http\Requests;
 
-use Cashbox\Core\Http\Request;
+use Cashbox\BankName\Auth\Auth as TemplateAuth;
+use Cashbox\Core\Http\Request as BaseRequest;
+use Cashbox\Core\Services\Auth;
 
-class SberAuthRequest extends Request
+class TemplateAuthRequest extends BaseRequest
 {
     protected string $productionHost = 'https://example.com';
 
-    protected string $productionUri = 'ru/prod/tokens/v2/oauth';
+    protected string $productionUri = '/foo';
+
+    protected Auth|string|null $auth = TemplateAuth::class;
 
     public function body(): array
     {
         return [
-            'OrderId' => '1234567890',
-            'Amount'  => 1000,
+            'paymentId' => $this->resource->paymentId(),
+            'sum'       => $this->resource->sum(),
+            'currency'  => $this->resource->currency(),
         ];
     }
 }

@@ -92,7 +92,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Cashbox\\BankName\\Auth\\": "src/TemplateDriverAuth/src/",
+            "Cashbox\\BankName\\Auth\\": "src/TemplateAuth/src/",
             "Cashbox\\BankName\\PaymentType\\": "src/TemplateDriver/src/",
             "Cashbox\\Cash\\": "src/Cash/src/",
             "Cashbox\\Core\\": "src/Core/src/",

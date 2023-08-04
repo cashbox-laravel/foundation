@@ -20,9 +20,9 @@ use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
 
-function createPayment(TypeEnum $type): PaymentModel
+function createPayment(TypeEnum $type, ?int $price = null): PaymentModel
 {
-    return PaymentModel::factory()->create(compact('type'));
+    return PaymentModel::factory()->create(compact('type', 'price'));
 }
 
 function subHour(Model ...$payments): void

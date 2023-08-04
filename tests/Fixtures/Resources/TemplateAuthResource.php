@@ -15,19 +15,20 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Core\Data\Signing;
+namespace Tests\Fixtures\Resources;
 
-use DateTimeInterface;
-use Spatie\LaravelData\Attributes\MapInputName;
-use Spatie\LaravelData\Data;
-use Spatie\LaravelData\Mappers\SnakeCaseMapper;
+use Cashbox\Core\Enums\CurrencyEnum;
+use Cashbox\Core\Resources\Resource as BaseResource;
 
-#[MapInputName(SnakeCaseMapper::class)]
-class Token extends Data
+class TemplateAuthResource extends BaseResource
 {
-    public ?string $clientId;
+    public function currency(): int
+    {
+        return CurrencyEnum::USD->value;
+    }
 
-    public ?string $clientSecret;
-
-    public ?DateTimeInterface $expiresIn;
+    public function sum(): int
+    {
+        return $this->payment->price;
+    }
 }

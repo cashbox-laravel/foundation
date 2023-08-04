@@ -30,7 +30,8 @@
         {
             "name": "sber-qr",
             "directory": "src/SberQrCode",
-            "target": "git@github.com:cashbox-laravel/sber-qr.git"
+            "target": "git@github.com:cashbox-laravel/sber-qr.git",
+            "release": false
         },
         {
             "name": "tinkoff-auth",
@@ -60,7 +61,7 @@
         },
         {
             "name": "driver-auth",
-            "directory": "src/TemplateDriverAuth",
+            "directory": "src/TemplateAuth",
             "target": "git@github.com:cashbox-laravel/driver-auth.git",
             "release": false
         }

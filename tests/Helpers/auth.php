@@ -17,8 +17,8 @@ declare(strict_types=1);
 
 use Cashbox\Sber\Auth\Auth;
 use Tests\Fixtures\App\Models\PaymentModel;
+use Tests\Fixtures\Http\Requests\SberAuthRequest;
 use Tests\Fixtures\Payments\SberAuth;
-use Tests\Fixtures\Requests\SberAuthRequest;
 
 function sberAuth(PaymentModel $payment): Auth
 {
