@@ -42,6 +42,17 @@ function fakeTinkoffQrCodeHttp(string $info = 'CONFIRMED'): void
             'Amount'      => fake()->randomNumber(),
         ]),
 
+        'https://securepay.tinkoff.ru/v2/GetQr' => Http::response([
+            'Success'     => true,
+            'ErrorCode'   => 0,
+            'Message'     => 'OK',
+            'TerminalKey' => fake()->word,
+            'Status'      => $info,
+            'PaymentId'   => fake()->randomNumber(),
+            'OrderId'     => fake()->randomNumber(),
+            'Amount'      => fake()->randomNumber(),
+        ]),
+
         'https://securepay.tinkoff.ru/v2/Cancel' => Http::response([
             'Success'        => true,
             'ErrorCode'      => 0,
@@ -52,6 +63,32 @@ function fakeTinkoffQrCodeHttp(string $info = 'CONFIRMED'): void
             'OrderId'        => fake()->randomNumber(),
             'OriginalAmount' => fake()->randomNumber(),
             'NewAmount'      => 0,
+        ]),
+    ]);
+}
+
+function fakeTinkoffQrCodeInvalidHttp(): void
+{
+    Http::fake([
+        'https://securepay.tinkoff.ru/v2/Init' => Http::response([
+            'Success'   => false,
+            'ErrorCode' => '501',
+            'Message'   => 'Неверные параметры.',
+            'Details'   => 'Терминал не найден.',
+        ]),
+
+        'https://securepay.tinkoff.ru/v2/GetState' => Http::response([
+            'Success'   => false,
+            'ErrorCode' => '501',
+            'Message'   => 'Неверные параметры.',
+            'Details'   => 'Терминал не найден.',
+        ]),
+
+        'https://securepay.tinkoff.ru/v2/Cancel' => Http::response([
+            'Success'   => false,
+            'ErrorCode' => '501',
+            'Message'   => 'Неверные параметры.',
+            'Details'   => 'Терминал не найден.',
         ]),
     ]);
 }

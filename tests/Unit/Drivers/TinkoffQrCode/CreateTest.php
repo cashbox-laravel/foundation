@@ -20,6 +20,7 @@ use Cashbox\Core\Events\PaymentFailedEvent;
 use Cashbox\Core\Events\PaymentRefundedEvent;
 use Cashbox\Core\Events\PaymentSuccessEvent;
 use Cashbox\Core\Events\PaymentWaitRefundEvent;
+use Cashbox\Core\Exceptions\External\BadRequestClientException;
 use Illuminate\Support\Facades\Event;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
@@ -28,9 +29,9 @@ it('checks the progress', function () {
     fakeEvents();
     fakeTinkoffQrCodeHttp('NEW');
 
-    $payment = createPayment(TypeEnum::tinkoffOnline);
+    $payment = createPayment(TypeEnum::tinkoffQrCode);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
+    expect($payment->type)->toBe(TypeEnum::tinkoffQrCode);
     expect($payment->status)->toBe(StatusEnum::new);
 
     expect($payment)->toBeHasCashbox();
@@ -53,9 +54,9 @@ it('checks the success', function () {
     fakeEvents();
     fakeTinkoffQrCodeHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffOnline);
+    $payment = createPayment(TypeEnum::tinkoffQrCode);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
+    expect($payment->type)->toBe(TypeEnum::tinkoffQrCode);
     expect($payment->status)->toBe(StatusEnum::new);
 
     expect($payment)->toBeHasCashbox();
@@ -73,3 +74,10 @@ it('checks the success', function () {
     Event::assertNotDispatched(PaymentRefundedEvent::class);
     Event::assertNotDispatched(PaymentWaitRefundEvent::class);
 });
+
+it('checks for invalid parameters being passed', function () {
+    fakeEvents();
+    fakeTinkoffQrCodeInvalidHttp();
+
+    createPayment(TypeEnum::tinkoffQrCode);
+})->expectException(BadRequestClientException::class);

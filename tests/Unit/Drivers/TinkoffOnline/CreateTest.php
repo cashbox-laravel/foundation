@@ -20,6 +20,7 @@ use Cashbox\Core\Events\PaymentFailedEvent;
 use Cashbox\Core\Events\PaymentRefundedEvent;
 use Cashbox\Core\Events\PaymentSuccessEvent;
 use Cashbox\Core\Events\PaymentWaitRefundEvent;
+use Cashbox\Core\Exceptions\External\BadRequestClientException;
 use Illuminate\Support\Facades\Event;
 use Tests\Fixtures\App\Enums\StatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
@@ -73,3 +74,10 @@ it('checks the success', function () {
     Event::assertNotDispatched(PaymentRefundedEvent::class);
     Event::assertNotDispatched(PaymentWaitRefundEvent::class);
 });
+
+it('checks for invalid parameters being passed', function () {
+    fakeEvents();
+    fakeTinkoffOnlineInvalidHttp();
+
+    createPayment(TypeEnum::tinkoffOnline);
+})->expectException(BadRequestClientException::class);

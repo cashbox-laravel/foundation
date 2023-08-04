@@ -55,3 +55,29 @@ function fakeTinkoffOnlineHttp(string $info = 'CONFIRMED'): void
         ]),
     ]);
 }
+
+function fakeTinkoffOnlineInvalidHttp(): void
+{
+    Http::fake([
+        'https://securepay.tinkoff.ru/v2/Init' => Http::response([
+            'Success'   => false,
+            'ErrorCode' => '501',
+            'Message'   => 'Неверные параметры.',
+            'Details'   => 'Терминал не найден.',
+        ]),
+
+        'https://securepay.tinkoff.ru/v2/GetState' => Http::response([
+            'Success'   => false,
+            'ErrorCode' => '501',
+            'Message'   => 'Неверные параметры.',
+            'Details'   => 'Терминал не найден.',
+        ]),
+
+        'https://securepay.tinkoff.ru/v2/Cancel' => Http::response([
+            'Success'   => false,
+            'ErrorCode' => '501',
+            'Message'   => 'Неверные параметры.',
+            'Details'   => 'Терминал не найден.',
+        ]),
+    ]);
+}
