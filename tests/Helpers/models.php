@@ -22,6 +22,8 @@ use Tests\Fixtures\App\Models\PaymentModel;
 
 function createPayment(TypeEnum $type, ?int $price = null): PaymentModel
 {
+    $price ??= fake()->randomNumber(4);
+
     return PaymentModel::factory()->create(compact('type', 'price'));
 }
 
