@@ -30,7 +30,7 @@ it('basic data', function () {
 
     expect($hashed->clientId)->toBe($clientId);
     expect($hashed->clientSecret)->toBe($clientSecret);
-    expect($hashed->expiresIn->toIso8601String())->toBe(Carbon::now()->addDay()->toIso8601String());
+    expect($hashed->expiresIn->timestamp)->toBe(Carbon::now()->addDay()->timestamp);
 });
 
 it('hashed data', function (array $data) {
@@ -42,7 +42,7 @@ it('hashed data', function (array $data) {
 
     expect($hashed->clientId)->toBe($clientId);
     expect($hashed->clientSecret)->toBe($hash);
-    expect($hashed->expiresIn->toIso8601String())->toBe(Carbon::now()->addDay()->toIso8601String());
+    expect($hashed->expiresIn->timestamp)->toBe(Carbon::now()->addDay()->timestamp);
 })->with([
     [['field1' => 'qwe', 'field2' => 'rty', 'field3' => 'asd']],
     [['field1' => 'qwe', 'field3' => 'asd', 'field2' => 'rty']],
