@@ -167,34 +167,34 @@ it(
         expect($item->getQueue()->refund)->toBe($expected['refund']);
     }
 )->with([
-    'filled' => [
-        driverData('q1', 'q2', 'q3'),
-        driverData('q4', 'q5', 'q6'),
-        driverData('q4', 'q5', 'q6'),
+    'filled'       => [
+        queueData('q1', 'q2', 'q3'),
+        queueData('q4', 'q5', 'q6'),
+        queueData('q4', 'q5', 'q6'),
     ],
-    'partial' => [
-        driverData('q1', 'q2', 'q3'),
-        driverData('q4', null, null),
-        driverData('q4', null, null),
+    'partial'      => [
+        queueData('q1', 'q2', 'q3'),
+        queueData('q4', null, null),
+        queueData('q4', null, null),
     ],
     'driver empty' => [
-        driverData('q1', 'q2', 'q3'),
+        queueData('q1', 'q2', 'q3'),
         [],
-        driverData(null, null, null),
+        queueData(null, null, null),
     ],
-    'main empty' => [
+    'main empty'   => [
         [],
-        driverData('q4', 'q5', 'q6'),
-        driverData('q4', 'q5', 'q6'),
+        queueData('q4', 'q5', 'q6'),
+        queueData('q4', 'q5', 'q6'),
     ],
-    'full empty' => [
+    'full empty'   => [
         [],
         [],
-        driverData(null, null, null),
+        queueData(null, null, null),
     ],
 ]);
 
-function driverData(?string $start, ?string $verify, ?string $refund): array
+function queueData(?string $start, ?string $verify, ?string $refund): array
 {
     return compact('start', 'verify', 'refund');
 }
