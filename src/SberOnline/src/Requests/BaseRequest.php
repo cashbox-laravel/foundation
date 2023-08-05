@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Requests;
+namespace Cashbox\Sber\Online\Requests;
 
 use Cashbox\BankName\Auth\Auth;
 use Cashbox\Core\Facades\Config\Main;

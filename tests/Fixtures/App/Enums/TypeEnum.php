@@ -27,16 +27,18 @@ use ArchTech\Enums\InvokableCases;
  * @method static string tinkoffQrCode()
  * @method static string sberQrCode()
  * @method static string templateAuth()
+ * @method static string templateDriver()
  */
 enum TypeEnum: string
 {
     use InvokableCases;
 
-    case cash          = 'cash';
-    case outside       = 'outside';
-    case tinkoffCredit = 'tinkoff_credit';
-    case tinkoffOnline = 'tinkoff_online';
-    case tinkoffQrCode = 'tinkoff_qr';
-    case sberQrCode    = 'sber_qr';
-    case templateAuth  = 'template_auth';
+    case cash           = 'cash';
+    case outside        = 'outside';
+    case tinkoffCredit  = 'tinkoff_credit';
+    case tinkoffOnline  = 'tinkoff_online';
+    case tinkoffQrCode  = 'tinkoff_qr';
+    case sberQrCode     = 'sber_qr';
+    case templateAuth   = 'template_auth';
+    case templateDriver = 'template_driver';
 }

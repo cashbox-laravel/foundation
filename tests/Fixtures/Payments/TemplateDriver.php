@@ -15,20 +15,20 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Responses;
+namespace Tests\Fixtures\Payments;
 
-use Cashbox\Core\Http\Response;
+use Cashbox\BankName\Technology\Resources\TemplateDriverResource;
+use Cashbox\Core\Enums\CurrencyEnum;
 
-class State extends Response
+class TemplateDriver extends TemplateDriverResource
 {
-    protected $map = [
-        self::KEY_EXTERNAL_ID => 'PaymentId',
-
-        self::KEY_STATUS => 'Status',
-    ];
-
-    public function isEmpty(): bool
+    public function currency(): int
     {
-        return empty($this->getExternalId()) || empty($this->getStatus());
+        return CurrencyEnum::USD->value;
+    }
+
+    public function sum(): int
+    {
+        return $this->payment->price;
     }
 }

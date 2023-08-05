@@ -13,7 +13,7 @@
  * @see https://cashbox.city
  */
 
-namespace Cashbox\BankName\Technology\Exceptions;
+namespace Cashbox\Sber\Online\Exceptions;
 
 use Cashbox\Core\Exceptions\Http\BankInternalErrorException;
 use Cashbox\Core\Exceptions\Http\BuyerNotFoundClientException;

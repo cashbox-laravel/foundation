@@ -15,6 +15,7 @@
 
 namespace Tests;
 
+use Cashbox\BankName\Technology\Driver as TemplateDriver;
 use Cashbox\Cash\Driver as CashDriver;
 use Cashbox\Core\Enums\AttributeEnum;
 use Cashbox\Core\Enums\StatusEnum;
@@ -33,6 +34,7 @@ use Tests\Fixtures\App\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Payments\Cash;
+use Tests\Fixtures\Payments\TemplateDriver as TemplateDriverResource;
 use Tests\Fixtures\Payments\TinkoffCredit;
 use Tests\Fixtures\Payments\TinkoffOnline;
 use Tests\Fixtures\Payments\TinkoffQrCode;
@@ -92,6 +94,7 @@ abstract class TestCase extends BaseTestCase
         $this->setUpTinkoffOnlineDriver($app);
         $this->setUpTinkoffQrCodeDriver($app);
         $this->setUpSberQrCodeDriver($app);
+        $this->setUpTemplateDriver($app);
     }
 
     protected function setUpCashDriver(Application $app): void
@@ -113,7 +116,7 @@ abstract class TestCase extends BaseTestCase
             'resource'    => TinkoffCredit::class,
             'credentials' => [
                 // shopId
-                'client_id' => fake()->randomLetter,
+                'client_id'     => fake()->randomLetter,
 
                 // password
                 'client_secret' => fake()->password,
@@ -163,6 +166,24 @@ abstract class TestCase extends BaseTestCase
             'credentials' => [
                 'client_id'     => 'qwerty',
                 'client_secret' => 'qwerty123',
+            ],
+        ]);
+    }
+
+    protected function setUpTemplateDriver(Application $app): void
+    {
+        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::templateDriver(), TypeEnum::templateDriver);
+
+        $app['config']->set('cashbox.drivers.' . TypeEnum::templateDriver(), [
+            'driver'      => TemplateDriver::class,
+            'resource'    => TemplateDriverResource::class,
+            'credentials' => [
+                'client_id'     => 'qwerty',
+                'client_secret' => 'qwerty123',
+
+                'extra' => [
+                    'some_id' => 12345,
+                ],
             ],
         ]);
     }

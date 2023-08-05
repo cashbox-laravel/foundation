@@ -15,16 +15,16 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Requests;
+namespace Cashbox\BankName\Technology\Http\Requests;
 
-class GetState extends BaseRequest
+class GetStateRequest extends BaseRequest
 {
-    protected $path = '/api/status';
+    protected string $productionUri = '/v1/state';
 
-    public function getRawBody(): array
+    public function body(): array
     {
         return [
-            'PaymentId' => $this->model->getExternalId(),
+            'PaymentId' => $this->resource->payment->cashbox->external_id,
         ];
     }
 }

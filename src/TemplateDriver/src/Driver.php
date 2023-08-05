@@ -15,44 +15,35 @@
 
 namespace Cashbox\BankName\Technology;
 
-use Cashbox\BankName\Technology\Exceptions\Manager;
-use Cashbox\BankName\Technology\Helpers\Statuses;
-use Cashbox\BankName\Technology\Requests\Cancel;
-use Cashbox\BankName\Technology\Requests\GetState;
-use Cashbox\BankName\Technology\Requests\Init;
-use Cashbox\BankName\Technology\Resources\Details;
-use Cashbox\BankName\Technology\Responses\Created;
-use Cashbox\BankName\Technology\Responses\Refund;
-use Cashbox\BankName\Technology\Responses\State;
+use Cashbox\BankName\Technology\Http\Requests\CancelRequest;
+use Cashbox\BankName\Technology\Http\Requests\CreateRequest;
+use Cashbox\BankName\Technology\Http\Requests\GetStateRequest;
+use Cashbox\BankName\Technology\Http\Responses\Response;
+use Cashbox\BankName\Technology\Services\Exception;
+use Cashbox\BankName\Technology\Services\Statuses;
+use Cashbox\Core\Http\Response as BaseResponse;
 use Cashbox\Core\Services\Driver as BaseDriver;
-use DragonCode\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver
 {
-    protected $exception = Manager::class;
+    protected string $statuses = Statuses::class;
 
-    protected $statuses = Statuses::class;
+    protected string $exception = Exception::class;
 
-    protected $details = Details::class;
+    protected string $response = Response::class;
 
-    public function start(): Response
+    public function start(): BaseResponse
     {
-        $request = Init::make($this->model);
-
-        return $this->request($request, Created::class);
+        return $this->request(CreateRequest::class);
     }
 
-    public function check(): Response
+    public function verify(): BaseResponse
     {
-        $request = GetState::make($this->model);
-
-        return $this->request($request, State::class);
+        return $this->request(GetStateRequest::class);
     }
 
-    public function refund(): Response
+    public function refund(): BaseResponse
     {
-        $request = Cancel::make($this->model);
-
-        return $this->request($request, Refund::class);
+        return $this->request(CancelRequest::class);
     }
 }

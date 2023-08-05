@@ -13,17 +13,17 @@
  * @see https://cashbox.city
  */
 
-namespace Cashbox\BankName\Technology;
+namespace Cashbox\Sber\Online;
 
-use Cashbox\BankName\Technology\Exceptions\Manager;
-use Cashbox\BankName\Technology\Helpers\Statuses;
-use Cashbox\BankName\Technology\Requests\Cancel;
-use Cashbox\BankName\Technology\Requests\GetState;
-use Cashbox\BankName\Technology\Requests\Init;
-use Cashbox\BankName\Technology\Resources\Details;
-use Cashbox\BankName\Technology\Responses\Created;
-use Cashbox\BankName\Technology\Responses\Refund;
-use Cashbox\BankName\Technology\Responses\State;
+use Cashbox\Sber\Online\Exceptions\Manager;
+use Cashbox\Sber\Online\Helpers\Statuses;
+use Cashbox\Sber\Online\Requests\Cancel;
+use Cashbox\Sber\Online\Requests\GetState;
+use Cashbox\Sber\Online\Requests\Init;
+use Cashbox\Sber\Online\Resources\Details;
+use Cashbox\Sber\Online\Responses\Created;
+use Cashbox\Sber\Online\Responses\Refund;
+use Cashbox\Sber\Online\Responses\State;
 use Cashbox\Core\Services\Driver as BaseDriver;
 use DragonCode\Contracts\Cashier\Http\Response;
 

@@ -13,7 +13,7 @@
  * @see https://cashbox.city
  */
 
-namespace Cashbox\BankName\Technology\Helpers;
+namespace Cashbox\Sber\Online\Helpers;
 
 use Cashbox\Core\Services\Statuses as BaseStatus;
 

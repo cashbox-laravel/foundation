@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Responses;
+namespace Cashbox\Sber\Online\Responses;
 
 use Cashbox\Core\Http\Response;
 

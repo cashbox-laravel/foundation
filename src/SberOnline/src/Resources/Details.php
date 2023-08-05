@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Resources;
+namespace Cashbox\Sber\Online\Resources;
 
 use Cashbox\Core\Resources\Details as BaseDetails;
 

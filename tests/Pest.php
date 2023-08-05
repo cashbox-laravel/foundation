@@ -39,6 +39,7 @@ uses(TestCase::class)->group('tinkoff-qr')->in('Unit/Drivers/TinkoffQrCode');
 uses(TestCase::class)->group('sber-auth')->in('Unit/Drivers/SberAuth');
 
 uses(TestCase::class)->group('template-auth')->in('Unit/Drivers/TemplateAuth');
+uses(TestCase::class)->group('template-driver')->in('Unit/Drivers/TemplateDriver');
 
 /*
 |--------------------------------------------------------------------------

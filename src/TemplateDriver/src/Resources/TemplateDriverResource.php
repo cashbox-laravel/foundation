@@ -15,15 +15,14 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Responses;
+namespace Cashbox\BankName\Technology\Resources;
 
-use Cashbox\Core\Http\Response;
+use Cashbox\Core\Resources\Resource;
 
-class Created extends Response
+abstract class TemplateDriverResource extends Resource
 {
-    protected $map = [
-        self::KEY_EXTERNAL_ID => 'PaymentId',
-
-        self::KEY_STATUS => 'Status',
-    ];
+    public function someIdentifier(): ?string
+    {
+        return $this->config->credentials->extra['some_id'] ?? null;
+    }
 }

@@ -27,10 +27,8 @@ it('clean data', function () {
 
     $payment = createPayment(TypeEnum::templateAuth, 1234);
 
-    $config = driverData();
-
     $request = new TemplateAuthRequest(
-        new TemplateAuthResource($payment, $config)
+        new TemplateAuthResource($payment, $payment->cashboxDriver()->config)
     );
 
     expect($request->headers())->toBeEmpty();
@@ -48,10 +46,8 @@ it('signed data', function () {
 
     $payment = createPayment(TypeEnum::templateAuth, 1234);
 
-    $config = driverData();
-
     $request = new TemplateAuthRequest(
-        new TemplateAuthResource($payment, $config)
+        new TemplateAuthResource($payment, $payment->cashboxDriver()->config)
     );
 
     expect($request->sign()->headers())->toBeEmpty();
