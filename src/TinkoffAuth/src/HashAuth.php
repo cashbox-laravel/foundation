@@ -20,9 +20,9 @@ namespace Cashbox\Tinkoff\Auth;
 use Cashbox\Core\Data\Signing\Token;
 use Cashbox\Core\Services\Auth as BaseSign;
 use Cashbox\Tinkoff\Auth\Constants\Keys;
-use Cashbox\Tinkoff\Auth\Services\Hash;
+use Cashbox\Tinkoff\Auth\Tokens\HashToken;
 
-class Auth extends BaseSign
+class HashAuth extends BaseSign
 {
     public function body(): array
     {
@@ -36,12 +36,7 @@ class Auth extends BaseSign
 
     protected function token(): Token
     {
-        return Hash::get(
-            $this->clientId(),
-            $this->clientSecret(),
-            $this->request->body(),
-            $this->secure
-        );
+        return HashToken::get($this->clientId(), $this->clientSecret(), $this->request->body());
     }
 
     protected function clientId(): string

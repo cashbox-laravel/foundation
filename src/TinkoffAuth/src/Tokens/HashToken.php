@@ -15,33 +15,19 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\Auth\Services;
+namespace Cashbox\Tinkoff\Auth\Tokens;
 
-use Carbon\Carbon;
 use Cashbox\Core\Data\Signing\Token;
 use Cashbox\Tinkoff\Auth\Constants\Keys;
-use DateTimeInterface;
 use DragonCode\Support\Facades\Helpers\Arr;
 
-class Hash
+class HashToken extends Base
 {
-    public static function get(string $clientId, string $clientSecret, array $data, bool $hash): Token
-    {
-        return $hash
-            ? static::hashed($clientId, $clientSecret, $data)
-            : static::basic($clientId, $clientSecret);
-    }
-
-    protected static function basic(string $clientId, string $clientSecret): Token
-    {
-        return static::data($clientId, $clientSecret);
-    }
-
-    protected static function hashed(string $clientId, string $clientSecret, array $data): Token
+    public static function get(string $clientId, string $clientSecret, array $data): Token
     {
         $hash = static::make($clientId, $clientSecret, $data);
 
-        return static::data($clientId, $hash);
+        return static::token($clientId, $hash);
     }
 
     protected static function make(string $clientId, string $clientSecret, array $data): string
@@ -60,12 +46,5 @@ class Hash
             ->values()
             ->implode('')
             ->toString();
-    }
-
-    protected static function data(string $clientId, string $clientSecret, ?DateTimeInterface $expiresIn = null): Token
-    {
-        $expiresIn ??= Carbon::now()->addDay();
-
-        return Token::from(compact('clientId', 'clientSecret', 'expiresIn'));
     }
 }

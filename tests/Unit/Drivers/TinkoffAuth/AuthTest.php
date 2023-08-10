@@ -15,20 +15,32 @@
 
 declare(strict_types=1);
 
-use Cashbox\Tinkoff\Auth\Services\Hash;
+use Cashbox\Tinkoff\Auth\BasicAuth;
+use Cashbox\Tinkoff\Auth\Constants\Keys;
+use Cashbox\Tinkoff\Auth\Tokens\HashToken;
 
 it('basic data', function () {
+    $request = 'some';
+
     $clientId     = 'foo';
     $clientSecret = 'bar';
 
-    $hashed = Hash::get($clientId, $clientSecret, [
-        'field1' => 'qwe',
-        'field2' => 'rty',
-        'field3' => 'asd',
-    ], false);
+    $data = [
+        'some1' => 'foo1',
+        'some2' => 'foo2',
+    ];
 
-    expect($hashed->clientId)->toBe($clientId);
-    expect($hashed->clientSecret)->toBe($clientSecret);
+    $auth = new BasicAuth($request);
+
+    expect($auth->headers())->toBeArray()->toBeEmpty();
+    expect($auth->options())->toBeArray()->toBeEmpty();
+
+    expect($auth->body())->toBeArray()->toBe([
+        'some1'        => 'foo1',
+        'some2'        => 'foo2',
+        Keys::TERMINAL => $clientId,
+        Keys::TOKEN    => $clientSecret,
+    ]);
 });
 
 it('hashed data', function (array $data) {
@@ -36,7 +48,7 @@ it('hashed data', function (array $data) {
     $clientSecret = 'bar';
     $hash         = '7959ae1ec20a02490d8d2f01d3704a2543e70c43cbe0c672209741263ef8048f';
 
-    $hashed = Hash::get($clientId, $clientSecret, $data, true);
+    $hashed = HashToken::get($clientId, $clientSecret, $data, true);
 
     expect($hashed->clientId)->toBe($clientId);
     expect($hashed->clientSecret)->toBe($hash);
