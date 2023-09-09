@@ -17,9 +17,14 @@ declare(strict_types=1);
 
 namespace Cashbox\Tinkoff\QrCode\Http\Requests;
 
+use Cashbox\Core\Services\Auth;
+use Cashbox\Tinkoff\Auth\HashAuth;
+
 class GetQrRequest extends BaseRequest
 {
     protected string $productionUri = '/v2/GetQr';
+
+    protected Auth|string|null $auth = HashAuth::class;
 
     public function body(): array
     {
