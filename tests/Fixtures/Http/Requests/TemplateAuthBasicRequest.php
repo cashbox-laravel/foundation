@@ -17,17 +17,17 @@ declare(strict_types=1);
 
 namespace Tests\Fixtures\Http\Requests;
 
-use Cashbox\BankName\Auth\Auth as TemplateAuth;
+use Cashbox\BankName\Auth\Basic;
 use Cashbox\Core\Http\Request as BaseRequest;
 use Cashbox\Core\Services\Auth;
 
-class TemplateAuthRequest extends BaseRequest
+class TemplateAuthBasicRequest extends BaseRequest
 {
     protected string $productionHost = 'https://example.com';
 
     protected string $productionUri = '/foo';
 
-    protected Auth|string|null $auth = TemplateAuth::class;
+    protected Auth|string|null $auth = Basic::class;
 
     public function body(): array
     {

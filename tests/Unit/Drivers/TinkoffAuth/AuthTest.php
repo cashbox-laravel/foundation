@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-use Cashbox\Tinkoff\Auth\BasicAuth;
+use Cashbox\Tinkoff\Auth\Basic;
 use Cashbox\Tinkoff\Auth\Constants\Keys;
 use Cashbox\Tinkoff\Auth\Tokens\HashToken;
 
@@ -30,7 +30,7 @@ it('basic data', function () {
         'some2' => 'foo2',
     ];
 
-    $auth = new BasicAuth($request);
+    $auth = new Basic($request);
 
     expect($auth->headers())->toBeArray()->toBeEmpty();
     expect($auth->options())->toBeArray()->toBeEmpty();

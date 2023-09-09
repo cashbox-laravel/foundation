@@ -22,7 +22,7 @@ use Cashbox\Core\Services\Auth as BaseSign;
 use Cashbox\Tinkoff\Auth\Constants\Keys;
 use Cashbox\Tinkoff\Auth\Tokens\HashToken;
 
-class HashAuth extends BaseSign
+class Hash extends BaseSign
 {
     public function body(): array
     {

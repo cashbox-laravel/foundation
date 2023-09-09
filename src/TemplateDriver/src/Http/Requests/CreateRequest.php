@@ -17,11 +17,14 @@ declare(strict_types=1);
 
 namespace Cashbox\BankName\Technology\Http\Requests;
 
+use Cashbox\BankName\Auth\Basic;
+use Cashbox\Core\Services\Auth;
+
 class CreateRequest extends BaseRequest
 {
     protected string $productionUri = '/v1/init';
 
-    protected bool $secure = false;
+    protected Auth|string|null $auth = Basic::class;
 
     public function body(): array
     {

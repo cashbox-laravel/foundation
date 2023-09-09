@@ -17,9 +17,14 @@ declare(strict_types=1);
 
 namespace Cashbox\BankName\Technology\Http\Requests;
 
+use Cashbox\BankName\Auth\Hash;
+use Cashbox\Core\Services\Auth;
+
 class GetStateRequest extends BaseRequest
 {
     protected string $productionUri = '/v1/state';
+
+    protected Auth|string|null $auth = Hash::class;
 
     public function body(): array
     {

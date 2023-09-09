@@ -103,9 +103,7 @@ abstract class TestCase extends BaseTestCase
         $this->setUpDriver($app, TypeEnum::sberQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
 
         $this->setUpDriver($app, TypeEnum::templateDriver, TemplateDriver::class, TemplateDriverResource::class, [
-            'extra' => [
-                'some_id' => 12345,
-            ],
+            'extra' => ['some_id' => 12345],
         ]);
     }
 

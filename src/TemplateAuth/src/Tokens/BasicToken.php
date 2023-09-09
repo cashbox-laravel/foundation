@@ -15,11 +15,14 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Core\Exceptions\Internal;
+namespace Cashbox\BankName\Auth\Tokens;
 
-use Cashbox\Core\Exceptions\BaseException;
+use Cashbox\Core\Data\Signing\Token;
 
-class UnknownDriverConfigException extends BaseException
+class BasicToken extends Base
 {
-    protected string $reason = 'Driver configuration "%s" for payment ID %s not found.';
+    public static function get(string $clientId, string $clientSecret, array $data): Token
+    {
+        return static::token($clientId, $clientSecret);
+    }
 }

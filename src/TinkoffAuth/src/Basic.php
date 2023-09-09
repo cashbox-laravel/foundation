@@ -15,14 +15,14 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Auth;
+namespace Cashbox\Tinkoff\Auth;
 
-use Cashbox\BankName\Auth\Constants\Keys;
-use Cashbox\BankName\Auth\Services\Hash;
 use Cashbox\Core\Data\Signing\Token;
 use Cashbox\Core\Services\Auth as BaseSign;
+use Cashbox\Tinkoff\Auth\Constants\Keys;
+use Cashbox\Tinkoff\Auth\Tokens\BasicToken;
 
-class Auth extends BaseSign
+class Basic extends BaseSign
 {
     public function body(): array
     {
@@ -36,7 +36,7 @@ class Auth extends BaseSign
 
     protected function token(): Token
     {
-        return Hash::get($this->clientId(), $this->clientSecret(), $this->request->body());
+        return BasicToken::get($this->clientId(), $this->clientSecret(), $this->request->body());
     }
 
     protected function clientId(): string

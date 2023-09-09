@@ -15,51 +15,23 @@
 
 declare(strict_types=1);
 
-use Cashbox\BankName\Auth\Auth;
+use Cashbox\BankName\Auth\Basic;
 use Cashbox\BankName\Auth\Constants\Keys;
-use Cashbox\Core\Enums\CurrencyEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
-use Tests\Fixtures\Http\Requests\TemplateAuthRequest;
-use Tests\Fixtures\Resources\TemplateAuthResource;
+use Tests\Fixtures\Http\Requests\TemplateAuthBasicRequest;
 
-it('clean data', function () {
+it('basic authorization', function () {
     fakeEvents();
+    fakeTemplateHttp();
 
-    $payment = createPayment(TypeEnum::templateAuth, 1234);
+    $payment = createPayment(TypeEnum::templateDriver, 1234);
 
-    $request = new TemplateAuthRequest(
-        new TemplateAuthResource($payment, $payment->cashboxDriver()->config)
-    );
+    $auth = templateAuth($payment, Basic::class, TemplateAuthBasicRequest::class);
 
-    expect($request->headers())->toBeEmpty();
-    expect($request->options())->toBeEmpty();
+    expect($auth->headers())->toBeArray()->toBeEmpty();
+    expect($auth->options())->toBeArray()->toBeEmpty();
 
-    expect($request->body())->toBe([
-        'paymentId' => (string) $payment->id,
-        'sum'       => $payment->price,
-        'currency'  => CurrencyEnum::USD->value,
-    ]);
-});
-
-it('signed data', function () {
-    fakeEvents();
-
-    $payment = createPayment(TypeEnum::templateAuth, 1234);
-
-    $request = new TemplateAuthRequest(
-        new TemplateAuthResource($payment, $payment->cashboxDriver()->config)
-    );
-
-    expect($request->sign()->headers())->toBeEmpty();
-    expect($request->sign()->options())->toBeEmpty();
-
-    expect($request->sign())->toBeInstanceOf(Auth::class);
-
-    expect($request->sign()->body())->toBe([
-        'paymentId'    => (string) $payment->id,
-        'sum'          => $payment->price,
-        'currency'     => CurrencyEnum::USD->value,
-        Keys::TERMINAL => 'qwerty',
-        Keys::TOKEN    => '57f7acb468d49f49dcaf10c0b193ef8303c84ce5fb35c40b53fea58ed877cb4f',
+    expect($auth->body())->toBeArray()->toBe([
+        Keys::TOKEN => 123,
     ]);
 });

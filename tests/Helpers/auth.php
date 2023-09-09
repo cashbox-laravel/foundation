@@ -15,10 +15,12 @@
 
 declare(strict_types=1);
 
+use Cashbox\Core\Http\Request;
 use Cashbox\Sber\Auth\Auth;
 use Tests\Fixtures\App\Models\PaymentModel;
 use Tests\Fixtures\Http\Requests\SberAuthRequest;
 use Tests\Fixtures\Payments\SberAuth;
+use Tests\Fixtures\Payments\TemplateDriver;
 
 function sberAuth(PaymentModel $payment): Auth
 {
@@ -31,5 +33,15 @@ function sberAuth(PaymentModel $payment): Auth
             'url'   => 'https://via.placeholder.com/640x480.png/00eecc?text=consequatur',
             'scope' => 'https://api.sberbank.ru/order.create',
         ]
+    );
+}
+
+function templateAuth(PaymentModel $payment, Auth|string $auth, Request|string $request): Auth
+{
+    $config = $payment->cashboxDriver()->config;
+
+    return new $auth(
+        request: new $request(new TemplateDriver($payment, $config)),
+        config : $config
     );
 }

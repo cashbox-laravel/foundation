@@ -15,14 +15,11 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\BankName\Technology\Resources;
+namespace Cashbox\Core\Exceptions\Internal;
 
-use Cashbox\Core\Resources\Resource;
+use Cashbox\Core\Exceptions\BaseException;
 
-abstract class TemplateDriverResource extends Resource
+class ConfigException extends BaseException
 {
-    public function someIdentifier(): ?string
-    {
-        return (string) $this->config->credentials->extra['some_id'] ?? null;
-    }
+    protected string $reason = 'Driver configuration "%s" for payment ID %s not found.';
 }

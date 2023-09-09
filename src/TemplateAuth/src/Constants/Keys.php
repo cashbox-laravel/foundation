@@ -19,7 +19,7 @@ namespace Cashbox\BankName\Auth\Constants;
 
 class Keys
 {
-    public const PASSWORD = 'password';
-    public const TERMINAL = 'terminalId';
-    public const TOKEN    = 'token';
+    public const PASSWORD = 'Password';
+    public const TERMINAL = 'TerminalKey';
+    public const TOKEN    = 'Token';
 }

@@ -15,14 +15,14 @@
 
 declare(strict_types=1);
 
-namespace Cashbox\Tinkoff\Auth;
+namespace Cashbox\BankName\Auth;
 
+use Cashbox\BankName\Auth\Constants\Keys;
+use Cashbox\BankName\Auth\Tokens\BasicToken;
 use Cashbox\Core\Data\Signing\Token;
 use Cashbox\Core\Services\Auth as BaseSign;
-use Cashbox\Tinkoff\Auth\Constants\Keys;
-use Cashbox\Tinkoff\Auth\Tokens\BasicToken;
 
-class BasicAuth extends BaseSign
+class Basic extends BaseSign
 {
     public function body(): array
     {
