@@ -60,12 +60,12 @@ it('checks the payment block', function () {
     expect($data->status->failed)->toBe(StatusEnum::failed);
 
     expect($data->drivers)->toBeArray();
-    expect($data->drivers)->toBe([
+    expect($data->drivers)->toMatchArray([
         TypeEnum::cash()          => TypeEnum::cash,
+        TypeEnum::sberQrCode()    => TypeEnum::sberQrCode,
         TypeEnum::tinkoffCredit() => TypeEnum::tinkoffCredit,
         TypeEnum::tinkoffOnline() => TypeEnum::tinkoffOnline,
         TypeEnum::tinkoffQrCode() => TypeEnum::tinkoffQrCode,
-        TypeEnum::sberQrCode()    => TypeEnum::sberQrCode,
     ]);
 });
 

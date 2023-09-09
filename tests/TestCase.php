@@ -91,7 +91,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUpDrivers(Application $app): void
     {
-        $this->setUpDriver($app, TypeEnum::cash, CashDriver::class, Cash::class);
+        $this->setUpDriver($app, TypeEnum::cash, CashDriver::class, Cash::class, null);
 
         $this->setUpDriver($app, TypeEnum::tinkoffOnline, TinkoffOnlineDriver::class, TinkoffOnline::class);
         $this->setUpDriver($app, TypeEnum::tinkoffQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
@@ -112,17 +112,16 @@ abstract class TestCase extends BaseTestCase
         TypeEnum $type,
         string $driver,
         string $resource,
-        array $credentials = []
+        ?array $credentials = []
     ): void {
-        $app['config']->set('cashbox.payment.drivers.' . $type->value, $type);
-
-        $app['config']->set('cashbox.drivers.' . $type->value, [
-            'driver'      => $driver,
-            'resource'    => $resource,
-            'credentials' => array_merge([
+        if (! is_null($credentials)) {
+            $credentials = array_merge([
                 'client_id'     => 'qwerty',
                 'client_secret' => 'qwerty123',
-            ], $credentials),
-        ]);
+            ], $credentials);
+        }
+
+        $app['config']->set('cashbox.payment.drivers.' . $type->value, $type);
+        $app['config']->set('cashbox.drivers.' . $type->value, compact('driver', 'resource', 'credentials'));
     }
 }
