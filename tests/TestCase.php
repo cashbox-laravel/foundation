@@ -91,102 +91,40 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUpDrivers(Application $app): void
     {
-        $this->setUpCashDriver($app);
-        $this->setUpTinkoffCreditDriver($app);
-        $this->setUpTinkoffOnlineDriver($app);
-        $this->setUpTinkoffQrCodeDriver($app);
-        $this->setUpSberQrCodeDriver($app);
-        $this->setUpTemplateDriver($app);
-    }
+        $this->setUpDriver($app, TypeEnum::cash, CashDriver::class, Cash::class);
 
-    protected function setUpCashDriver(Application $app): void
-    {
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::cash(), TypeEnum::cash);
-
-        $app['config']->set('cashbox.drivers.' . TypeEnum::cash(), [
-            'driver'   => CashDriver::class,
-            'resource' => Cash::class,
+        $this->setUpDriver($app, TypeEnum::tinkoffOnline, TinkoffOnlineDriver::class, TinkoffOnline::class);
+        $this->setUpDriver($app, TypeEnum::tinkoffQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
+        $this->setUpDriver($app, TypeEnum::tinkoffCredit, TinkoffCreditDriver::class, TinkoffCredit::class, [
+            'showcase_id' => fake()->randomLetter,
+            'promo_code'  => 'default',
         ]);
-    }
 
-    protected function setUpTinkoffCreditDriver(Application $app): void
-    {
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::tinkoffCredit(), TypeEnum::tinkoffCredit);
+        $this->setUpDriver($app, TypeEnum::sberQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
 
-        $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffCredit(), [
-            'driver'      => TinkoffCreditDriver::class,
-            'resource'    => TinkoffCredit::class,
-            'credentials' => [
-                // shopId
-                'client_id'     => fake()->randomLetter,
-
-                // password
-                'client_secret' => fake()->password,
-
-                'showcase_id' => fake()->randomLetter,
-
-                'promo_code' => 'default',
+        $this->setUpDriver($app, TypeEnum::templateDriver, TemplateDriver::class, TemplateDriverResource::class, [
+            'extra' => [
+                'some_id' => 12345,
             ],
         ]);
     }
 
-    protected function setUpTinkoffOnlineDriver(Application $app): void
-    {
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::tinkoffOnline(), TypeEnum::tinkoffOnline);
+    protected function setUpDriver(
+        Application $app,
+        TypeEnum $type,
+        string $driver,
+        string $resource,
+        array $credentials = []
+    ): void {
+        $app['config']->set('cashbox.payment.drivers.' . $type->value, $type);
 
-        $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffOnline(), [
-            'driver'      => TinkoffOnlineDriver::class,
-            'resource'    => TinkoffOnline::class,
-            'credentials' => [
-                'client_id'     => fake()->randomLetter,
-                'client_secret' => fake()->password,
-            ],
-        ]);
-    }
-
-    protected function setUpTinkoffQrCodeDriver(Application $app): void
-    {
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::tinkoffQrCode(), TypeEnum::tinkoffQrCode);
-
-        $app['config']->set('cashbox.drivers.' . TypeEnum::tinkoffQrCode(), [
-            'driver'      => TinkoffQrCodeDriver::class,
-            'resource'    => TinkoffQrCode::class,
-            'credentials' => [
-                'client_id'     => fake()->randomLetter,
-                'client_secret' => fake()->password,
-            ],
-        ]);
-    }
-
-    protected function setUpSberQrCodeDriver(Application $app): void
-    {
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::sberQrCode(), TypeEnum::sberQrCode);
-
-        $app['config']->set('cashbox.drivers.' . TypeEnum::sberQrCode(), [
-            'driver'      => TinkoffQrCodeDriver::class,
-            'resource'    => TinkoffQrCode::class,
-            'credentials' => [
+        $app['config']->set('cashbox.drivers.' . $type->value, [
+            'driver'      => $driver,
+            'resource'    => $resource,
+            'credentials' => array_merge([
                 'client_id'     => 'qwerty',
                 'client_secret' => 'qwerty123',
-            ],
-        ]);
-    }
-
-    protected function setUpTemplateDriver(Application $app): void
-    {
-        $app['config']->set('cashbox.payment.drivers.' . TypeEnum::templateDriver(), TypeEnum::templateDriver);
-
-        $app['config']->set('cashbox.drivers.' . TypeEnum::templateDriver(), [
-            'driver'      => TemplateDriver::class,
-            'resource'    => TemplateDriverResource::class,
-            'credentials' => [
-                'client_id'     => 'qwerty',
-                'client_secret' => 'qwerty123',
-
-                'extra' => [
-                    'some_id' => 12345,
-                ],
-            ],
+            ], $credentials),
         ]);
     }
 }
