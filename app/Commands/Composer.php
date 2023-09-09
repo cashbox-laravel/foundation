@@ -32,7 +32,8 @@ class Composer extends Command
     protected string $exclude = 'cashbox/';
 
     protected array $thanks = [
-        'illuminate/' => 'laravel/framework',
+        "name" => "cashbox-laravel/foundation",
+        "url"  => "https://github.com/cashbox-laravel/foundation",
     ];
 
     protected function handle(string $source, string $target): void
@@ -54,6 +55,8 @@ class Composer extends Command
         $this->copyToMain($composer, 'keywords');
         $this->copyToMain($composer, 'require');
 
+        $this->setThanks($this->main);
+
         $this->store($target, $composer);
     }
 
@@ -64,8 +67,6 @@ class Composer extends Command
 
     protected function finish(): void
     {
-        $this->sortMainThanks($this->main, 'extra.thanks');
-
         $this->store($this->basePath(), $this->main);
     }
 
@@ -94,7 +95,7 @@ class Composer extends Command
 
     protected function copyToMain($array, string $key): void
     {
-        $main   = Arr::get($this->main, $key);
+        $main = Arr::get($this->main, $key);
         $driver = Arr::get($array, $key);
 
         $items = Arr::of($driver)
@@ -109,13 +110,9 @@ class Composer extends Command
         IA::set($this->main, $key, $items);
     }
 
-    protected function sortMainThanks(array &$array, string $key): void
+    protected function setThanks(array &$array): void
     {
-        $thanks = Arr::get($array, $key, []);
-
-        $items = collect($thanks)->sortBy('name')->values()->all();
-
-        IA::set($array, $key, $items);
+        IA::set($array, 'extra.thanks', $this->thanks);
     }
 
     protected function fromMain(string $key, mixed $default = null): mixed
