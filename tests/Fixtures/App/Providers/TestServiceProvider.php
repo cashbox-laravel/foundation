@@ -15,21 +15,16 @@
 
 declare(strict_types=1);
 
-namespace Tests\Fixtures\App\Models\Factories;
+namespace Tests\Fixtures\App\Providers;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Tests\Fixtures\App\Enums\TypeEnum;
+use Illuminate\Support\ServiceProvider;
 use Tests\Fixtures\App\Models\PaymentModel;
+use Tests\Fixtures\App\Observers\PaymentObserver;
 
-class PaymentModelFactory extends Factory
+class TestServiceProvider extends ServiceProvider
 {
-    protected $model = PaymentModel::class;
-
-    public function definition(): array
+    public function boot(): void
     {
-        return [
-            'type'  => TypeEnum::outside,
-            'price' => $this->faker->randomNumber(4),
-        ];
+        PaymentModel::observe(PaymentObserver::class);
     }
 }

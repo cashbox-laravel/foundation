@@ -33,6 +33,7 @@ use Spatie\LaravelData\LaravelDataServiceProvider;
 use Tests\Fixtures\App\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
+use Tests\Fixtures\App\Providers\TestServiceProvider;
 use Tests\Fixtures\Payments\Cash;
 use Tests\Fixtures\Payments\TemplateDriver as TemplateDriverResource;
 use Tests\Fixtures\Payments\TinkoffCredit;
@@ -51,6 +52,7 @@ abstract class TestCase extends BaseTestCase
             BindingServiceProvider::class,
             ObserverServiceProvider::class,
             RateLimiterServiceProvider::class,
+            TestServiceProvider::class,
         ];
     }
 
