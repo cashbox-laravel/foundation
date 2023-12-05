@@ -28,7 +28,7 @@
         <!--             favicon.svg,favicon.svg,favicon.svg,favicon.svg -->
         <!--         </custom-favicons> -->
         <versions-switcher>
-            https://raw.githubusercontent.com/cashbox-laravel/docs/main/versions.json
+            https://raw.githubusercontent.com/cashbox-laravel/foundation/4.x/docs/versions.json
         </versions-switcher>
     </variables>
     <build-profile instance="cashbox">
