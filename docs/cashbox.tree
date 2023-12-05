@@ -7,7 +7,6 @@
         name="Cashbox for Laravel"
         start-page="introduction.topic"
 >
-
     <toc-element topic="introduction.topic" />
     <toc-element topic="license.topic" toc-title="License" />
 </instance-profile>
