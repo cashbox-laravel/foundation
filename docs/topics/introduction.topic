@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!---
+  - This file is part of the "cashbox/foundation" project.
+  -
+  - For the full copyright and license information, please view the LICENSE
+  - file that was distributed with this source code.
+  -
+  - @author Andrey Helldar <helldar@dragon-code.pro>
+  - @copyright 2023 Andrey Helldar
+  - @license MIT
+  -
+  - @see https://cashbox.city
+  -->
+
+<!DOCTYPE topic
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Introduction" id="introduction">
+
+    <p>
+        <img
+            src="https://preview.dragon-code.pro/cashbox/accept-payments.svg?brand=laravel&amp;preposition=with"
+            alt="%instance%"
+        />
+    </p>
+    <p>
+        <img src="https://img.shields.io/packagist/dt/cashbox/cash.svg?style=flat-square" alt="Downloads" />
+        <img
+            src="https://img.shields.io/github/v/release/cashbox/foundation?label=stable&amp;style=flat-square"
+            alt="Stable" />
+        <img src="https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square" alt="Unstable" />
+        <img src="https://img.shields.io/packagist/l/cashbox/foundation.svg?style=flat-square" alt="License" />
+    </p>
+    <note title="Under Construction 👷‍♂️">
+        <p>
+            The project is undergoing a global upgrade.
+        </p>
+        <p>
+            We will soon release version 4.0 for all our products 💪
+        </p>
+    </note>
+    <p>
+        <format style="bold">%instance%</format>
+        provides an expressive and user-friendly interface for managing billing and payment verification services.
+        We believe that development should be an enjoyable, creative experience to be truly rewarding.
+        <format style="bold">%instance%</format>
+        tries to ease development by simplifying the tasks of adding payment systems to a web application.
+    </p>
+    <p>
+        This project contains some ready-made solutions of payment systems, but you can offer your own.
+    </p>
+    <include from="snippets-library.topic" element-id="snippet-projects-list" />
+</topic>

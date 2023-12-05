@@ -1,0 +1,138 @@
+name: Documentation
+
+on:
+    push:
+        branches:
+            - main
+            - 4.x
+    workflow_dispatch:
+
+permissions:
+    id-token: write
+    pages: write
+
+env:
+    ARTIFACT: webHelpCASHBOX2-all.zip
+    CONFIG_JSON_PRODUCT: CASHBOX
+    CONFIG_JSON_VERSION: 4.x
+    INSTANCE: docs/cashbox
+    DOMAIN_NAME: cashbox.city
+    BUILDER_VERSION: 232.10275
+
+jobs:
+    build:
+        name: Build Application
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, simplexml
+                    coverage: xdebug
+
+            -   name: Configure git
+                run: git config --global --add safe.directory /github/workspace
+
+            -   name: Install dependencies
+                run: composer update --no-progress --no-interaction
+
+            -   name: Build documentation
+                uses: JetBrains/writerside-github-action@v4
+                with:
+                    instance: ${{ env.INSTANCE }}
+                    artifact: ${{ env.ARTIFACT }}
+                    docker-version: ${{ env.BUILDER_VERSION }}
+
+            -   name: Upload artifacts
+                uses: actions/upload-artifact@v3
+                with:
+                    name: docs
+                    path: |
+                        artifacts/${{ env.ARTIFACT }}
+                        artifacts/report.json
+                    retention-days: 7
+
+    test:
+        needs: build
+        name: Testing
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Download docs artifact
+                uses: actions/download-artifact@v3
+                with:
+                    name: docs
+                    path: artifacts
+
+            -   name: Test documentation
+                uses: JetBrains/writerside-checker-action@v1
+                with:
+                    instance: ${{ env.INSTANCE }}
+    
+    robots:
+        needs: build
+        name: Generate robots.txt
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Create robots.txt
+                run: |
+                    touch robots.txt
+                    echo "User-Agent: *" >> robots.txt
+                    echo "Disallow: " >> robots.txt
+                    echo "Host: https://${{ env.DOMAIN_NAME }}" >> robots.txt
+
+            -   name: Upload artifacts
+                uses: actions/upload-artifact@v3
+                with:
+                    name: robots
+                    path: robots.txt
+                    retention-days: 7
+
+    deploy-pages:
+        environment:
+            name: deploy
+            url: ${{ steps.deployment.outputs.page_url }}
+
+        needs:
+            - test
+            - robots
+
+        name: Deploy to Pages
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Download docs artifact
+                uses: actions/download-artifact@v3
+                with:
+                    name: docs
+
+            -   name: Download robots artifact
+                uses: actions/download-artifact@v3
+                with:
+                    name: robots
+
+            -   name: Unzip artifact
+                uses: montudor/action-zip@v1
+                with:
+                    args: unzip -qq ${{ env.ARTIFACT }} -d dir
+
+            -   name: Move robots
+                run: |
+                    sudo mv robots.txt dir/robots.txt
+
+            -   name: Setup Pages
+                uses: actions/configure-pages@v3
+
+            -   name: Upload artifact
+                uses: actions/upload-pages-artifact@v2
+                with:
+                    path: dir
+
+            -   name: Deploy to GitHub Pages
+                id: deployment
+                uses: actions/deploy-pages@v2

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+    title="Snippets library"
+    is-library="true"
+>
+    <snippet id="snippet-projects-list">
+        <list>
+            <li>✅ <a href="https://github.com/cashbox-laravel/cash">Cash</a></li>
+            <li>◻️ <a href="https://github.com/cashbox-laravel/sber-auth">Sber Auth</a></li>
+            <li>◻️ <a href="https://github.com/cashbox-laravel/sber-qr">Sber QR</a></li>
+            <li>✅ <a href="https://github.com/cashbox-laravel/tinkoff-qr">Tinkoff QR</a></li>
+            <li>✅ <a href="https://github.com/cashbox-laravel/tinkoff-online">Tinkoff Online</a></li>
+            <li>✅ <a href="https://github.com/cashbox-laravel/tinkoff-credit">Tinkoff Credit</a></li>
+            <li>✅ <a href="https://github.com/cashbox-laravel/tinkoff-auth">Tinkoff Auth</a></li>
+            <li>◻️ <a href="https://github.com/cashbox-laravel/driver">Template Driver</a></li>
+            <li>✅ <a href="https://github.com/cashbox-laravel/driver-auth">Template Driver Auth</a></li>
+        </list>
+    </snippet>
+</topic>

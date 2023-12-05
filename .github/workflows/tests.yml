@@ -2,6 +2,13 @@ name: Tests
 
 on: [ push, pull_request ]
 
+permissions: read-all
+
+env:
+    INSTANCE: docs/cashbox
+    ARTIFACT: webHelpCASHBOX2-all.zip
+    BUILDER_VERSION: 232.10275
+
 jobs:
     linux:
         runs-on: ubuntu-latest
@@ -91,3 +98,53 @@ jobs:
                     DB_CONNECTION: mysql
                     DB_USERNAME: root
                     DB_PORT: ${{ job.services.mysql.ports[3306] }}
+
+    documentation_build:
+        name: Build Documentation
+        runs-on: ubuntu-latest
+
+        steps:
+            -   uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: ${{ matrix.php }}
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, simplexml
+                    coverage: xdebug
+
+            -   name: Configure git
+                run: git config --global --add safe.directory /github/workspace
+
+            -   name: Build documentation
+                uses: JetBrains/writerside-github-action@v4
+                with:
+                    instance: ${{ env.INSTANCE }}
+                    artifact: ${{ env.ARTIFACT }}
+                    docker-version: ${{ env.BUILDER_VERSION }}
+
+            -   name: Upload artifacts
+                uses: actions/upload-artifact@v3
+                with:
+                    name: docs
+                    path: |
+                        artifacts/${{ env.ARTIFACT }}
+                        artifacts/report.json
+                    retention-days: 7
+
+    documentation_test:
+        needs: build
+        name: Test Documentation
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Download docs artifact
+                uses: actions/download-artifact@v3
+                with:
+                    name: docs
+                    path: artifacts
+
+            -   name: Test documentation
+                uses: JetBrains/writerside-checker-action@v1
+                with:
+                    instance: ${{ env.INSTANCE }}

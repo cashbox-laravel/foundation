@@ -5,6 +5,7 @@
 .requests/ export-ignore
 .run/ export-ignore
 
+docs/ export-ignore
 tests/ export-ignore
 
 .gitattributes export-ignore

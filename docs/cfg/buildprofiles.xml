@@ -1,0 +1,50 @@
+<!--~
+  ~ This file is part of the "cashbox/foundation" project.
+  ~
+  ~ For the full copyright and license information, please view the LICENSE
+  ~ file that was distributed with this source code.
+  ~
+  ~ @author Andrey Helldar <helldar@dragon-code.pro>
+  ~ @copyright 2023 Andrey Helldar
+  ~ @license MIT
+  ~
+  ~ @see https://cashbox.city
+  -->
+
+<buildprofiles xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <variables>
+        <generate-canonicals>true</generate-canonicals>
+        <!--         <header-logo>logo.svg</header-logo> -->
+        <locale-code>en_US</locale-code>
+        <!--         <og-image></og-image> -->
+        <primary-color>frozen</primary-color>
+        <web-root>https://cashbox.city</web-root>
+        <enable-browser-edits>true</enable-browser-edits>
+        <browser-edits-url>
+            https://github.com/cashbox-laravel/docs/edit/main/docs/
+        </browser-edits-url>
+        <!--         <custom-favicons> -->
+        <!--             favicon.svg,favicon.svg,favicon.svg,favicon.svg -->
+        <!--         </custom-favicons> -->
+        <versions-switcher>
+            https://raw.githubusercontent.com/cashbox-laravel/docs/main/versions.json
+        </versions-switcher>
+    </variables>
+    <build-profile instance="cashbox">
+        <variables>
+            <noindex-content>false</noindex-content>
+        </variables>
+    </build-profile>
+    <footer>
+        <link href="https://github.com/cashbox-laravel">
+            GitHub
+        </link>
+        <link href="https://github.com/cashbox-laravel/foundation/issues">
+            Issues
+        </link>
+        <link href="https://github.com/orgs/cashbox-laravel/discussions">
+            Discussions
+        </link>
+    </footer>
+</buildprofiles>

@@ -1,12 +1,6 @@
 {
     "sub-splits": [
         {
-            "name": "docs",
-            "directory": "docs",
-            "target": "git@github.com:cashbox-laravel/docs.git",
-            "release": false
-        },
-        {
             "name": "core",
             "directory": "src/Core",
             "target": "git@github.com:cashbox-laravel/core.git"

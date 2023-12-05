@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE vars SYSTEM "https://resources.jetbrains.com/writerside/1.0/vars.dtd">
+<vars>
+    <var name="author-name" value="Andrey Helldar" />
+    <var name="config-filename" value="config/cashbox.php" />
+    <var name="security-email" value="helldar@dragon-code.pro" />
+    <var name="security-name" value="Andrey Helldar" />
+    <var name="security-subject" value="Security%20error%20detected" />
+    <var name="year" value="2023" />
+</vars>
