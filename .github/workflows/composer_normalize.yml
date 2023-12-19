@@ -1,0 +1,62 @@
+name: Normalize composer.json
+
+on: [ push, pull_request ]
+
+permissions: write-all
+
+jobs:
+    normalize:
+        needs: style
+        
+        runs-on: ubuntu-latest
+        
+        strategy:
+            fail-fast: true
+            matrix:
+                package:
+                    - Core
+                    - Cash
+                    - SberAuth
+                    - SberOnline
+                    - SberQrCode
+                    - TinkoffAuth
+                    - TinkoffCredit
+                    - TinkoffOnline
+                    - TinkoffQrCode
+                    - TemplateDriver
+                    - TemplateDriverAuth
+        
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    extensions: curl, mbstring, zip, pcntl, pdo, pdo_sqlite, iconv, json
+                    coverage: none
+
+            -   name: Git setup
+                if: success()
+                run: |
+                    git config --local user.email "action@github.com"
+                    git config --local user.name "GitHub Action"
+
+            -   name: Install dependency
+                run: composer global require ergebnis/composer-normalize
+
+            -   name: Normalize composer.json
+                id: normalizer
+                run: composer normalize src/${{ matrix.package }}/composer.json
+                    
+                    { git add . && git commit -a -m "Normalized \`composer.json\` files"; }
+
+            -   name: Create a Pull Request
+                uses: peter-evans/create-pull-request@v5
+                with:
+                    branch: normalize/package
+                    branch-suffix: random
+                    delete-branch: true
+                    add-paths: src/${{ matrix.package }}/composer.json
+                    title: "[${{ matrix.package }}]: Normalized \`composer.json\`"
+                    commit-message: Normalized \`composer.json\`

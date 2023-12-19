@@ -9,7 +9,7 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                db: [ "5.7", "8" ]
+                db: [ "8" ]
         
         name: MySQL ${{ matrix.db }}
         
@@ -41,7 +41,7 @@ jobs:
                     command: composer update --prefer-stable --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
             -   name: Execute tests
-                run: vendor/bin/pest  --colors=always
+                run: vendor/bin/pest --colors=always
                 env:
                     DB_CONNECTION: mysql
                     DB_USERNAME: root
@@ -95,7 +95,7 @@ jobs:
         strategy:
             fail-fast: true
             matrix:
-                db: [ "14", "15" ]
+                db: [ "14", "15", "16" ]
 
         name: PostgreSQL ${{ matrix.db }}
 
