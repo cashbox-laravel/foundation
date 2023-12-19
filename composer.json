@@ -34,14 +34,6 @@
             "url": "https://yoomoney.ru/to/410012608840929"
         },
         {
-            "type": "github",
-            "url": "https://github.com/sponsors/TheDragonCode"
-        },
-        {
-            "type": "open_collective",
-            "url": "https://opencollective.com/dragon-code"
-        },
-        {
             "type": "donationalerts",
             "url": "https://www.donationalerts.com/r/dragon_code"
         }
@@ -50,33 +42,28 @@
         "php": "^8.1",
         "ext-json": "*",
         "archtechx/enums": "^0.3.2",
-        "doctrine/dbal": "^3.6",
-        "dragon-code/contracts": "^2.20",
-        "dragon-code/laravel-cache": "^3.9",
+        "doctrine/dbal": "^3.7.2",
+        "dragon-code/contracts": "^2.22",
+        "dragon-code/laravel-cache": "^3.10.1",
         "dragon-code/laravel-support": "^3.6",
         "dragon-code/simple-dto": "^2.7.1",
-        "dragon-code/support": "^6.11.2",
-        "guzzlehttp/guzzle": "^7.7",
-        "illuminate/bus": "^10.15",
-        "illuminate/console": "^10.15",
-        "illuminate/contracts": "^10.15",
-        "illuminate/database": "^10.15",
-        "illuminate/queue": "^10.15",
-        "illuminate/support": "^10.15",
-        "nesbot/carbon": "^2.68.1",
+        "dragon-code/support": "^6.12.0",
+        "guzzlehttp/guzzle": "^7.8.1",
+        "laravel/framework": "^10.38",
+        "nesbot/carbon": "^2.72.1",
         "psr/http-message": "^2.0",
         "psr/log": "^3.0",
-        "spatie/laravel-data": "^3.7",
-        "symfony/console": "^6.3"
+        "spatie/laravel-data": "^3.10.1",
+        "symfony/console": "^6.4.1"
     },
     "require-dev": {
-        "cerbero/json-parser": "^1.0",
-        "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^8.5.10",
-        "pestphp/pest": "^2.8.3",
+        "cerbero/json-parser": "^1.1",
+        "mockery/mockery": "^1.6.7",
+        "orchestra/testbench": "^8.18.0",
+        "pestphp/pest": "^2.28.1",
         "pestphp/pest-plugin-faker": "^2.0",
-        "pestphp/pest-plugin-laravel": "^2.1",
-        "symfony/var-dumper": "^6.3.1"
+        "pestphp/pest-plugin-laravel": "^2.2",
+        "symfony/var-dumper": "^6.4.0"
     },
     "replace": {
         "cashbox/cash": "self.version",
