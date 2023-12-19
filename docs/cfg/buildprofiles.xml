@@ -15,21 +15,20 @@
                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <variables>
         <generate-canonicals>true</generate-canonicals>
-        <!--         <header-logo>logo.svg</header-logo> -->
+        <header-logo>logo.png</header-logo>
         <locale-code>en_US</locale-code>
-        <!--         <og-image></og-image> -->
+        <og-image>
+            https://raw.githubusercontent.com/cashbox-laravel/foundation/main/docs/images/social-logo.png
+        </og-image>
         <primary-color>frozen</primary-color>
         <web-root>https://cashbox.city</web-root>
         <enable-browser-edits>true</enable-browser-edits>
         <browser-edits-url>
-            https://github.com/cashbox-laravel/docs/edit/main/docs/
+            https://github.com/cashbox-laravel/foundation/edit/main/docs/
         </browser-edits-url>
-        <!--         <custom-favicons> -->
-        <!--             favicon.svg,favicon.svg,favicon.svg,favicon.svg -->
-        <!--         </custom-favicons> -->
-        <versions-switcher>
-            https://raw.githubusercontent.com/cashbox-laravel/foundation/4.x/docs/versions.json
-        </versions-switcher>
+        <custom-favicons>
+            logo.png,logo.png,logo.png,logo.png
+        </custom-favicons>
     </variables>
     <build-profile instance="cashbox">
         <variables>

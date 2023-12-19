@@ -34,6 +34,7 @@
         <img src="https://img.shields.io/badge/unstable-dev--main-orange?style=flat-square" alt="Unstable" />
         <img src="https://img.shields.io/packagist/l/cashbox/foundation.svg?style=flat-square" alt="License" />
     </p>
+
     <note title="Under Construction 👷‍♂️">
         <p>
             The project is undergoing a global upgrade.
@@ -42,6 +43,7 @@
             We will soon release version 4.0 for all our products 💪
         </p>
     </note>
+
     <p>
         <format style="bold">%instance%</format>
         provides an expressive and user-friendly interface for managing billing and payment verification services.
@@ -52,5 +54,6 @@
     <p>
         This project contains some ready-made solutions of payment systems, but you can offer your own.
     </p>
+
     <include from="snippets-library.topic" element-id="snippet-projects-list" />
 </topic>

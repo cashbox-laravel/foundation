@@ -3,6 +3,9 @@
 <vars>
     <var name="author-name" value="Andrey Helldar" />
     <var name="config-filename" value="config/cashbox.php" />
+    <var name="abuse-email" value="helldar@dragon-code.pro" />
+    <var name="abuse-name" value="Andrey Helldar" />
+    <var name="abuse-subject" value="Abuse%20detected" />
     <var name="security-email" value="helldar@dragon-code.pro" />
     <var name="security-name" value="Andrey Helldar" />
     <var name="security-subject" value="Security%20error%20detected" />
