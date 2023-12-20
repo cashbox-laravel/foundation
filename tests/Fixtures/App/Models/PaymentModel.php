@@ -44,6 +44,10 @@ class PaymentModel extends Model
         'price' => 'int',
     ];
 
+    protected $attributes = [
+        'status' => StatusEnum::New,
+    ];
+
     protected static function newFactory(): PaymentModelFactory
     {
         return PaymentModelFactory::new();

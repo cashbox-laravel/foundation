@@ -24,7 +24,7 @@ it('basic authorization', function () {
     fakeEvents();
     fakeTemplateHttp();
 
-    $payment = createPayment(TypeEnum::templateDriver, 1234);
+    $payment = createPayment(TypeEnum::TemplateDriver, 1234);
 
     $auth = templateAuth($payment, Basic::class, TemplateAuthBasicRequest::class);
 

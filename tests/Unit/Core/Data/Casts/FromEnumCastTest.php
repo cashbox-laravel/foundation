@@ -20,12 +20,12 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 
 it('must be a enum', function () {
     expect(
-        dataCast(FromEnumCast::class, TypeEnum::cash)
-    )->toBe(TypeEnum::cash->value)->toBeString();
+        dataCast(FromEnumCast::class, TypeEnum::Cash)
+    )->toBe(TypeEnum::Cash->value)->toBeString();
 
     expect(
-        dataCast(FromEnumCast::class, TypeEnum::outside)
-    )->toBe(TypeEnum::outside->value)->toBeString();
+        dataCast(FromEnumCast::class, TypeEnum::Outside)
+    )->toBe(TypeEnum::Outside->value)->toBeString();
 });
 
 it('must be a empty', function () {

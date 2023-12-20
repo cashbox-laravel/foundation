@@ -25,10 +25,10 @@ return new class extends Migration {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
 
-            $table->integer('price');
+            $table->unsignedInteger('price');
 
             $table->string('type');
-            $table->tinyInteger('status');
+            $table->unsignedTinyInteger('status');
 
             $table->timestamps();
         });

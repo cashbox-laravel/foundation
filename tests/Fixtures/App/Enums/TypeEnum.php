@@ -20,25 +20,25 @@ namespace Tests\Fixtures\App\Enums;
 use ArchTech\Enums\InvokableCases;
 
 /**
- * @method static string cash()
- * @method static string outside()
- * @method static string tinkoffCredit()
- * @method static string tinkoffOnline()
- * @method static string tinkoffQrCode()
- * @method static string sberQrCode()
- * @method static string templateAuth()
- * @method static string templateDriver()
+ * @method static string Cash()
+ * @method static string Outside()
+ * @method static string TinkoffCredit()
+ * @method static string TinkoffOnline()
+ * @method static string TinkoffQrCode()
+ * @method static string SberQrCode()
+ * @method static string TemplateAuth()
+ * @method static string TemplateDriver()
  */
 enum TypeEnum: string
 {
     use InvokableCases;
 
-    case cash           = 'cash';
-    case outside        = 'outside';
-    case tinkoffCredit  = 'tinkoff_credit';
-    case tinkoffOnline  = 'tinkoff_online';
-    case tinkoffQrCode  = 'tinkoff_qr';
-    case sberQrCode     = 'sber_qr';
-    case templateAuth   = 'template_auth';
-    case templateDriver = 'template_driver';
+    case Cash           = 'cash';
+    case Outside        = 'outside';
+    case TinkoffCredit  = 'tinkoff_credit';
+    case TinkoffOnline  = 'tinkoff_online';
+    case TinkoffQrCode  = 'tinkoff_qr';
+    case SberQrCode     = 'sber_qr';
+    case TemplateAuth   = 'template_auth';
+    case TemplateDriver = 'template_driver';
 }

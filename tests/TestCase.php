@@ -33,7 +33,6 @@ use Spatie\LaravelData\LaravelDataServiceProvider;
 use Tests\Fixtures\App\Enums\StatusEnum as TestStatusEnum;
 use Tests\Fixtures\App\Enums\TypeEnum;
 use Tests\Fixtures\App\Models\PaymentModel;
-use Tests\Fixtures\App\Providers\TestServiceProvider;
 use Tests\Fixtures\Payments\Cash;
 use Tests\Fixtures\Payments\TemplateDriver as TemplateDriverResource;
 use Tests\Fixtures\Payments\TinkoffCredit;
@@ -52,7 +51,6 @@ abstract class TestCase extends BaseTestCase
             BindingServiceProvider::class,
             ObserverServiceProvider::class,
             RateLimiterServiceProvider::class,
-            TestServiceProvider::class,
         ];
     }
 
@@ -82,27 +80,27 @@ abstract class TestCase extends BaseTestCase
 
     protected function setUpStatuses(Application $app): void
     {
-        $app['config']->set('cashbox.payment.status.' . StatusEnum::new(), TestStatusEnum::new);
-        $app['config']->set('cashbox.payment.status.' . StatusEnum::success(), TestStatusEnum::success);
-        $app['config']->set('cashbox.payment.status.' . StatusEnum::waitRefund(), TestStatusEnum::waitRefund);
-        $app['config']->set('cashbox.payment.status.' . StatusEnum::refund(), TestStatusEnum::refund);
-        $app['config']->set('cashbox.payment.status.' . StatusEnum::failed(), TestStatusEnum::failed);
+        $app['config']->set('cashbox.payment.status.' . StatusEnum::new(), TestStatusEnum::New);
+        $app['config']->set('cashbox.payment.status.' . StatusEnum::success(), TestStatusEnum::Success);
+        $app['config']->set('cashbox.payment.status.' . StatusEnum::waitRefund(), TestStatusEnum::WaitRefund);
+        $app['config']->set('cashbox.payment.status.' . StatusEnum::refund(), TestStatusEnum::Refund);
+        $app['config']->set('cashbox.payment.status.' . StatusEnum::failed(), TestStatusEnum::Failed);
     }
 
     protected function setUpDrivers(Application $app): void
     {
-        $this->setUpDriver($app, TypeEnum::cash, CashDriver::class, Cash::class, null);
+        $this->setUpDriver($app, TypeEnum::Cash, CashDriver::class, Cash::class, null);
 
-        $this->setUpDriver($app, TypeEnum::tinkoffOnline, TinkoffOnlineDriver::class, TinkoffOnline::class);
-        $this->setUpDriver($app, TypeEnum::tinkoffQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
-        $this->setUpDriver($app, TypeEnum::tinkoffCredit, TinkoffCreditDriver::class, TinkoffCredit::class, [
+        $this->setUpDriver($app, TypeEnum::TinkoffOnline, TinkoffOnlineDriver::class, TinkoffOnline::class);
+        $this->setUpDriver($app, TypeEnum::TinkoffQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
+        $this->setUpDriver($app, TypeEnum::TinkoffCredit, TinkoffCreditDriver::class, TinkoffCredit::class, [
             'showcase_id' => fake()->randomLetter,
             'promo_code'  => 'default',
         ]);
 
-        $this->setUpDriver($app, TypeEnum::sberQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
+        $this->setUpDriver($app, TypeEnum::SberQrCode, TinkoffQrCodeDriver::class, TinkoffQrCode::class);
 
-        $this->setUpDriver($app, TypeEnum::templateDriver, TemplateDriver::class, TemplateDriverResource::class, [
+        $this->setUpDriver($app, TypeEnum::TemplateDriver, TemplateDriver::class, TemplateDriverResource::class, [
             'extra' => ['some_id' => 12345],
         ]);
     }

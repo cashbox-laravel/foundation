@@ -20,7 +20,7 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('should check authorization', function () {
     fakeSberAuth();
 
-    $payment = createPayment(TypeEnum::sberQrCode);
+    $payment = createPayment(TypeEnum::SberQrCode);
 
     $sign = sberAuth($payment);
 

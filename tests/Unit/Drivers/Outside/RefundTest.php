@@ -27,18 +27,18 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the wait to refund', function () {
     fakeEvents();
 
-    $payment = createPayment(TypeEnum::outside);
+    $payment = createPayment(TypeEnum::Outside);
 
-    expect($payment->type)->toBe(TypeEnum::outside);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Outside);
+    expect($payment->status)->toBe(StatusEnum::New);
 
-    $payment->update(['status' => StatusEnum::waitRefund]);
+    $payment->update(['status' => StatusEnum::WaitRefund]);
 
-    expect($payment->status)->toBe(StatusEnum::waitRefund);
+    expect($payment->status)->toBe(StatusEnum::WaitRefund);
 
-    $payment->update(['status' => StatusEnum::refund]);
+    $payment->update(['status' => StatusEnum::Refund]);
 
-    expect($payment->status)->toBe(StatusEnum::refund);
+    expect($payment->status)->toBe(StatusEnum::Refund);
 
     expect($payment)->toBeDoesntHaveCashbox();
 
@@ -52,14 +52,14 @@ it('checks the wait to refund', function () {
 it('checks the refund', function () {
     fakeEvents();
 
-    $payment = createPayment(TypeEnum::outside);
+    $payment = createPayment(TypeEnum::Outside);
 
-    expect($payment->type)->toBe(TypeEnum::outside);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Outside);
+    expect($payment->status)->toBe(StatusEnum::New);
 
-    $payment->update(['status' => StatusEnum::refund]);
+    $payment->update(['status' => StatusEnum::Refund]);
 
-    expect($payment->status)->toBe(StatusEnum::refund);
+    expect($payment->status)->toBe(StatusEnum::Refund);
 
     expect($payment)->toBeDoesntHaveCashbox();
 

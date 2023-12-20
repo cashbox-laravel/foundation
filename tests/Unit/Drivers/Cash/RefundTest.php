@@ -28,22 +28,22 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the manual refund', function () {
     fakeEvents();
 
-    $payment = createPayment(TypeEnum::cash);
+    $payment = createPayment(TypeEnum::Cash);
 
-    expect($payment->type)->toBe(TypeEnum::cash);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Cash);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
-    expect($payment->status)->toBe(StatusEnum::success);
+    expect($payment->status)->toBe(StatusEnum::Success);
 
     // refund
     $payment->refresh();
     $payment->cashboxJob()->refund();
 
     $payment->refresh();
-    expect($payment->status)->toBe(StatusEnum::refund);
+    expect($payment->status)->toBe(StatusEnum::Refund);
 
     Event::assertDispatchedTimes(PaymentCreatedEvent::class);
     Event::assertDispatchedTimes(PaymentSuccessEvent::class);
@@ -61,15 +61,15 @@ it('checks the auto refund', function () {
 
     config(['cashbox.auto_refund.enabled' => true]);
 
-    $payment = createPayment(TypeEnum::cash);
+    $payment = createPayment(TypeEnum::Cash);
 
-    expect($payment->type)->toBe(TypeEnum::cash);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Cash);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
-    expect($payment->status)->toBe(StatusEnum::refund);
+    expect($payment->status)->toBe(StatusEnum::Refund);
 
     Event::assertDispatchedTimes(PaymentCreatedEvent::class);
     Event::assertDispatchedTimes(PaymentSuccessEvent::class);

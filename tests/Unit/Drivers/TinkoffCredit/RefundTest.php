@@ -27,10 +27,10 @@ it('refund for new', function () {
     fakeEvents();
     fakeTinkoffCreditHttp('new');
 
-    $payment = createPayment(TypeEnum::tinkoffCredit);
+    $payment = createPayment(TypeEnum::TinkoffCredit);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffCredit);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
@@ -42,7 +42,7 @@ it('refund for new', function () {
     artisan(Refund::class);
 
     // time has not yet come to refund.
-    expect($payment)->toBeStatus(StatusEnum::new);
+    expect($payment)->toBeStatus(StatusEnum::New);
 
     Event::assertNothingDispatched();
 
@@ -52,7 +52,7 @@ it('refund for new', function () {
 
     artisan(Refund::class);
 
-    expect($payment)->toBeStatus(StatusEnum::refund);
+    expect($payment)->toBeStatus(StatusEnum::Refund);
 
     Event::assertDispatchedTimes(PaymentRefundedEvent::class);
 });
@@ -61,10 +61,10 @@ it('refund for success', function () {
     fakeEvents();
     fakeTinkoffCreditHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffCredit);
+    $payment = createPayment(TypeEnum::TinkoffCredit);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffCredit);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
@@ -76,7 +76,7 @@ it('refund for success', function () {
     artisan(Refund::class);
 
     // time has not yet come to refund.
-    expect($payment)->toBeStatus(StatusEnum::success);
+    expect($payment)->toBeStatus(StatusEnum::Success);
 
     Event::assertNothingDispatched();
 
@@ -86,7 +86,7 @@ it('refund for success', function () {
 
     artisan(Refund::class);
 
-    expect($payment)->toBeStatus(StatusEnum::refund);
+    expect($payment)->toBeStatus(StatusEnum::Refund);
 
     Event::assertDispatchedTimes(PaymentRefundedEvent::class);
 });

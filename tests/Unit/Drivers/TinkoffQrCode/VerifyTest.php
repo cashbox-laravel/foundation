@@ -26,10 +26,10 @@ it('verify for new', function () {
     fakeEvents();
     fakeTinkoffQrCodeHttp('NEW');
 
-    $payment = createPayment(TypeEnum::tinkoffQrCode);
+    $payment = createPayment(TypeEnum::TinkoffQrCode);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffQrCode);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffQrCode);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
@@ -40,7 +40,7 @@ it('verify for new', function () {
 
     artisan(Verify::class);
 
-    expect($payment)->toBeStatus(StatusEnum::new);
+    expect($payment)->toBeStatus(StatusEnum::New);
 
     Event::assertNothingDispatched();
 });
@@ -49,10 +49,10 @@ it('refund for success', function () {
     fakeEvents();
     fakeTinkoffQrCodeHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffQrCode);
+    $payment = createPayment(TypeEnum::TinkoffQrCode);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffQrCode);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffQrCode);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 

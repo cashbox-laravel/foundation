@@ -23,7 +23,7 @@ use Cashbox\Tinkoff\Auth\Basic;
 class CreateRequest extends BaseRequest
 {
     protected string $productionUri = '/v2/Init';
-    
+
     protected Auth|string|null $auth = Basic::class;
 
     public function body(): array

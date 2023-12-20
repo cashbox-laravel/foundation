@@ -21,7 +21,7 @@ use Cashbox\BankName\Technology\Resources\TemplateDriverResource;
 use Cashbox\Core\Http\Request;
 
 /**
- * @property-read TemplateDriverResource $resource
+ * @property TemplateDriverResource $resource
  */
 abstract class BaseRequest extends Request
 {

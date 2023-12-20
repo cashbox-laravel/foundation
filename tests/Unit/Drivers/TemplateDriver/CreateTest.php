@@ -32,7 +32,7 @@ it('request data', function () {
     fakeEvents();
     fakeTemplateHttp();
 
-    $payment = createPayment(TypeEnum::templateDriver, 1234);
+    $payment = createPayment(TypeEnum::TemplateDriver, 1234);
 
     $data = [
         'OrderId'  => $payment->id,
@@ -43,7 +43,7 @@ it('request data', function () {
     // Init
     Http::assertSent(function (Request $request) use ($data) {
         return $request->hasHeader('X-Some-ID', 12345)
-            && $request->data() === $data;
+            && $data === $request->data();
     });
 
     // Verify
@@ -56,16 +56,16 @@ it('new payment', function () {
     fakeEvents();
     fakeTemplateHttp('NEW');
 
-    $payment = createPayment(TypeEnum::templateDriver);
+    $payment = createPayment(TypeEnum::TemplateDriver);
 
-    expect($payment->type)->toBe(TypeEnum::templateDriver);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TemplateDriver);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect($payment)->toBeStatus(StatusEnum::new);
+    expect($payment)->toBeStatus(StatusEnum::New);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -81,16 +81,16 @@ it('confirmed payment', function () {
     fakeEvents();
     fakeTemplateHttp();
 
-    $payment = createPayment(TypeEnum::templateDriver);
+    $payment = createPayment(TypeEnum::TemplateDriver);
 
-    expect($payment->type)->toBe(TypeEnum::templateDriver);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TemplateDriver);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect($payment)->toBeStatus(StatusEnum::success);
+    expect($payment)->toBeStatus(StatusEnum::Success);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -106,5 +106,5 @@ it('unauthorized request', function () {
     fakeEvents();
     fakeTemplateInvalidHttp();
 
-    createPayment(TypeEnum::templateDriver);
+    createPayment(TypeEnum::TemplateDriver);
 })->expectException(BadRequestHttpException::class);

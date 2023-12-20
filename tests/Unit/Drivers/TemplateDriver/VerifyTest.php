@@ -26,10 +26,10 @@ it('verify for new', function () {
     fakeEvents();
     fakeTinkoffOnlineHttp('NEW');
 
-    $payment = createPayment(TypeEnum::tinkoffOnline);
+    $payment = createPayment(TypeEnum::TinkoffOnline);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffOnline);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
@@ -40,7 +40,7 @@ it('verify for new', function () {
 
     artisan(Verify::class);
 
-    expect($payment)->toBeStatus(StatusEnum::new);
+    expect($payment)->toBeStatus(StatusEnum::New);
 
     Event::assertNothingDispatched();
 });
@@ -49,10 +49,10 @@ it('refund for success', function () {
     fakeEvents();
     fakeTinkoffOnlineHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffOnline);
+    $payment = createPayment(TypeEnum::TinkoffOnline);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffOnline);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 

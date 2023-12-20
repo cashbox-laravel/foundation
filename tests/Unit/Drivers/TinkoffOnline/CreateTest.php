@@ -29,16 +29,16 @@ it('checks the progress', function () {
     fakeEvents();
     fakeTinkoffOnlineHttp('NEW');
 
-    $payment = createPayment(TypeEnum::tinkoffOnline);
+    $payment = createPayment(TypeEnum::TinkoffOnline);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffOnline);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect($payment)->toBeStatus(StatusEnum::new);
+    expect($payment)->toBeStatus(StatusEnum::New);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -54,16 +54,16 @@ it('checks the success', function () {
     fakeEvents();
     fakeTinkoffOnlineHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffOnline);
+    $payment = createPayment(TypeEnum::TinkoffOnline);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffOnline);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffOnline);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect($payment)->toBeStatus(StatusEnum::success);
+    expect($payment)->toBeStatus(StatusEnum::Success);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -79,5 +79,5 @@ it('checks for invalid parameters being passed', function () {
     fakeEvents();
     fakeTinkoffOnlineInvalidHttp();
 
-    createPayment(TypeEnum::tinkoffOnline);
+    createPayment(TypeEnum::TinkoffOnline);
 })->expectException(BadRequestHttpException::class);

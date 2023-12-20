@@ -27,10 +27,10 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the create', function () {
     fakeEvents();
 
-    $payment = createPayment(TypeEnum::outside);
+    $payment = createPayment(TypeEnum::Outside);
 
-    expect($payment->type)->toBe(TypeEnum::outside);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Outside);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeDoesntHaveCashbox();
 

@@ -29,16 +29,16 @@ it('checks the progress', function () {
     fakeEvents();
     fakeTinkoffCreditHttp('new');
 
-    $payment = createPayment(TypeEnum::tinkoffCredit);
+    $payment = createPayment(TypeEnum::TinkoffCredit);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
-    expect($payment->status)->toBe(AppStatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffCredit);
+    expect($payment->status)->toBe(AppStatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect(StatusEnum::new)->toBe(
+    expect(StatusEnum::New)->toBe(
         $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)
     );
 
@@ -56,16 +56,16 @@ it('checks the success', function () {
     fakeEvents();
     fakeTinkoffCreditHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffCredit);
+    $payment = createPayment(TypeEnum::TinkoffCredit);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffCredit);
-    expect($payment->status)->toBe(AppStatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffCredit);
+    expect($payment->status)->toBe(AppStatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect(StatusEnum::success)->toBe(
+    expect(StatusEnum::Success)->toBe(
         $payment->cashboxDriver()->statuses()->detect($payment->cashbox->info->status)
     );
 

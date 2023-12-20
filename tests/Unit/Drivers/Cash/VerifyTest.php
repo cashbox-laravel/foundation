@@ -28,22 +28,22 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the verify', function () {
     fakeEvents();
 
-    $payment = createPayment(TypeEnum::cash);
+    $payment = createPayment(TypeEnum::Cash);
 
-    expect($payment->type)->toBe(TypeEnum::cash);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Cash);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     // verify
     $payment->refresh()->updateQuietly([
-        'status' => StatusEnum::new,
+        'status' => StatusEnum::New,
     ]);
 
     $payment->cashboxJob()->verify();
 
     $payment->refresh();
-    expect($payment->status)->toBe(StatusEnum::success);
+    expect($payment->status)->toBe(StatusEnum::Success);
 
     Event::assertDispatchedTimes(PaymentCreatedEvent::class);
     Event::assertDispatchedTimes(PaymentSuccessEvent::class, 2);

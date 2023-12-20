@@ -29,16 +29,16 @@ it('checks the progress', function () {
     fakeEvents();
     fakeTinkoffQrCodeHttp('NEW');
 
-    $payment = createPayment(TypeEnum::tinkoffQrCode);
+    $payment = createPayment(TypeEnum::TinkoffQrCode);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffQrCode);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffQrCode);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect($payment)->toBeStatus(StatusEnum::new);
+    expect($payment)->toBeStatus(StatusEnum::New);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -54,16 +54,16 @@ it('checks the success', function () {
     fakeEvents();
     fakeTinkoffQrCodeHttp();
 
-    $payment = createPayment(TypeEnum::tinkoffQrCode);
+    $payment = createPayment(TypeEnum::TinkoffQrCode);
 
-    expect($payment->type)->toBe(TypeEnum::tinkoffQrCode);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::TinkoffQrCode);
+    expect($payment->status)->toBe(StatusEnum::New);
 
     expect($payment)->toBeHasCashbox();
 
     $payment->refresh();
 
-    expect($payment)->toBeStatus(StatusEnum::success);
+    expect($payment)->toBeStatus(StatusEnum::Success);
 
     expect($payment->cashbox->info->extra['url'])->toBeUrl();
 
@@ -79,5 +79,5 @@ it('checks for invalid parameters being passed', function () {
     fakeEvents();
     fakeTinkoffQrCodeInvalidHttp();
 
-    createPayment(TypeEnum::tinkoffQrCode);
+    createPayment(TypeEnum::TinkoffQrCode);
 })->expectException(BadRequestHttpException::class);

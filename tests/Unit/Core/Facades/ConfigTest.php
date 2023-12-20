@@ -53,19 +53,19 @@ it('checks the payment block', function () {
     expect($data->attribute->status)->toBe('status');
     expect($data->attribute->createdAt)->toBe('created_at');
 
-    expect($data->status->new)->toBe(StatusEnum::new);
-    expect($data->status->success)->toBe(StatusEnum::success);
-    expect($data->status->waitRefund)->toBe(StatusEnum::waitRefund);
-    expect($data->status->refund)->toBe(StatusEnum::refund);
-    expect($data->status->failed)->toBe(StatusEnum::failed);
+    expect($data->status->new)->toBe(StatusEnum::New);
+    expect($data->status->success)->toBe(StatusEnum::Success);
+    expect($data->status->waitRefund)->toBe(StatusEnum::WaitRefund);
+    expect($data->status->refund)->toBe(StatusEnum::Refund);
+    expect($data->status->failed)->toBe(StatusEnum::Failed);
 
     expect($data->drivers)->toBeArray();
     expect($data->drivers)->toMatchArray([
-        TypeEnum::cash()          => TypeEnum::cash,
-        TypeEnum::sberQrCode()    => TypeEnum::sberQrCode,
-        TypeEnum::tinkoffCredit() => TypeEnum::tinkoffCredit,
-        TypeEnum::tinkoffOnline() => TypeEnum::tinkoffOnline,
-        TypeEnum::tinkoffQrCode() => TypeEnum::tinkoffQrCode,
+        TypeEnum::cash()          => TypeEnum::Cash,
+        TypeEnum::sberQrCode()    => TypeEnum::SberQrCode,
+        TypeEnum::tinkoffCredit() => TypeEnum::TinkoffCredit,
+        TypeEnum::tinkoffOnline() => TypeEnum::TinkoffOnline,
+        TypeEnum::tinkoffQrCode() => TypeEnum::TinkoffQrCode,
     ]);
 });
 
@@ -167,12 +167,12 @@ it(
         expect($item->getQueue()->refund)->toBe($expected['refund']);
     }
 )->with([
-    'filled'       => [
+    'filled' => [
         queueData('q1', 'q2', 'q3'),
         queueData('q4', 'q5', 'q6'),
         queueData('q4', 'q5', 'q6'),
     ],
-    'partial'      => [
+    'partial' => [
         queueData('q1', 'q2', 'q3'),
         queueData('q4', null, null),
         queueData('q4', null, null),
@@ -182,12 +182,12 @@ it(
         [],
         queueData(null, null, null),
     ],
-    'main empty'   => [
+    'main empty' => [
         [],
         queueData('q4', 'q5', 'q6'),
         queueData('q4', 'q5', 'q6'),
     ],
-    'full empty'   => [
+    'full empty' => [
         [],
         [],
         queueData(null, null, null),

@@ -15,6 +15,7 @@
 
 namespace Cashbox\Sber\Online;
 
+use Cashbox\Core\Services\Driver as BaseDriver;
 use Cashbox\Sber\Online\Exceptions\Manager;
 use Cashbox\Sber\Online\Helpers\Statuses;
 use Cashbox\Sber\Online\Requests\Cancel;
@@ -24,7 +25,6 @@ use Cashbox\Sber\Online\Resources\Details;
 use Cashbox\Sber\Online\Responses\Created;
 use Cashbox\Sber\Online\Responses\Refund;
 use Cashbox\Sber\Online\Responses\State;
-use Cashbox\Core\Services\Driver as BaseDriver;
 use DragonCode\Contracts\Cashier\Http\Response;
 
 class Driver extends BaseDriver

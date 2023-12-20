@@ -28,7 +28,7 @@ class PaymentModelFactory extends Factory
     public function definition(): array
     {
         return [
-            'type'  => TypeEnum::outside,
+            'type'  => TypeEnum::Outside,
             'price' => $this->faker->randomNumber(4),
         ];
     }

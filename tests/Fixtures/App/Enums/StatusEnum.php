@@ -19,9 +19,9 @@ namespace Tests\Fixtures\App\Enums;
 
 enum StatusEnum: int
 {
-    case new        = 0;
-    case success    = 1;
-    case waitRefund = 2;
-    case refund     = 3;
-    case failed     = 4;
+    case New        = 0;
+    case Success    = 1;
+    case WaitRefund = 2;
+    case Refund     = 3;
+    case Failed     = 4;
 }

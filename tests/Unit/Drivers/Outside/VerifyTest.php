@@ -27,14 +27,14 @@ use Tests\Fixtures\App\Enums\TypeEnum;
 it('checks the verify', function () {
     fakeEvents();
 
-    $payment = createPayment(TypeEnum::outside);
+    $payment = createPayment(TypeEnum::Outside);
 
-    expect($payment->type)->toBe(TypeEnum::outside);
-    expect($payment->status)->toBe(StatusEnum::new);
+    expect($payment->type)->toBe(TypeEnum::Outside);
+    expect($payment->status)->toBe(StatusEnum::New);
 
-    $payment->update(['status' => StatusEnum::failed]);
+    $payment->update(['status' => StatusEnum::Failed]);
 
-    expect($payment->status)->toBe(StatusEnum::failed);
+    expect($payment->status)->toBe(StatusEnum::Failed);
 
     expect($payment)->toBeDoesntHaveCashbox();
 
