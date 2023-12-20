@@ -93,7 +93,7 @@ jobs:
                     command: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --optimize-autoloader
 
             -   name: Execute tests
-                run: vendor/bin/pest  --colors=always
+                run: composer test
                 env:
                     DB_CONNECTION: mysql
                     DB_USERNAME: root
