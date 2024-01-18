@@ -31,10 +31,10 @@ class Auth implements AuthContract
 {
     use Makeable;
 
-    /** @var \DragonCode\Contracts\Cashier\Resources\Model */
+    /** @var Model */
     protected $model;
 
-    /** @var \DragonCode\Contracts\Cashier\Http\Request */
+    /** @var Request */
     protected $request;
 
     /** @var string */

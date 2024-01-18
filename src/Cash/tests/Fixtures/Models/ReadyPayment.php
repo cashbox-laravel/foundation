@@ -23,7 +23,7 @@ use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 /**
- * @property \Illuminate\Support\Carbon $created_at
+ * @property Carbon $created_at
  * @property float $sum
  * @property int $currency
  * @property int $status_id

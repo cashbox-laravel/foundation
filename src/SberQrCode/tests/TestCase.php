@@ -89,7 +89,7 @@ abstract class TestCase extends BaseTestCase
     {
         $model = PaymentConfig::getModel();
 
-        /** @var \Illuminate\Database\Eloquent\Model $payment */
+        /** @var EloquentModel $payment */
         $payment = new $model();
 
         $cashier = $this->detailsRelation($payment, $details);
