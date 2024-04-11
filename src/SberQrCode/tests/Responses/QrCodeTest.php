@@ -61,7 +61,7 @@ class QrCodeTest extends TestCase
     }
 
     /**
-     * @return \CashierProvider\Sber\QrCode\Responses\QrCode|\DragonCode\Contracts\Cashier\Http\Response
+     * @return QrCode|Response
      */
     protected function response(): Response
     {

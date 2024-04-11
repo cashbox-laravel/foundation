@@ -26,7 +26,7 @@ trait Database
 {
     use RefreshDatabase;
 
-    /** @var \Illuminate\Database\Eloquent\Model|string */
+    /** @var Model|string */
     protected $model = ReadyPayment::class;
 
     protected function payment(): Model
