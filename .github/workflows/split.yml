@@ -37,7 +37,7 @@ jobs:
                     key: '${{ runner.os }}-splitsh-d-101'
 
             -   name: Extract components
-                uses: frankdejonge/use-subsplit-publish@1.0.0-beta.7
+                uses: frankdejonge/use-subsplit-publish@1.1.0
                 with:
                     source-branch: ${{ steps.extract_branch.outputs.branch }}
                     splitsh-path: './.splitsh/splitsh-lite'
